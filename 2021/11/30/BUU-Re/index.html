@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>BUU-Re</title>
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/post.css">
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/normal.css">
+    
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/jquery-3.4.1.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <a id="cover"></a>
+    <div id="header">
+    <div class="header">
+        <div class="vertical">
+            <div class="inner">
+                <h1 class="header-subtitle">BUU-Re</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2021-11-30
+                        </span>
+                        
+                            <span id="/2021/11/30/BUU-Re/" class="leancloud_visitors" data-flag-title="BUU-Re">
+                                <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                            </span>
+                        
+                        <span>
+                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2021/11/30/BUU-Re/"></span>
+                        </span>  
+                    </p>                 
+                </div>
+            </div>
+        </div>
+        <canvas id="articleHeaderCanvas"></canvas>
+    </div>
+</div>
+    <div id="container">
+    <div id="content">
+        <div id="article">
+    <div class="toc"></div>
+    <div class="article-body">
+        <h1 id="BUU-RE"><a href="#BUU-RE" class="headerlink" title="BUU-RE"></a>BUU-RE</h1><p>所有题目均来自<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges">https://buuoj.cn/challenges</a></p>
+<h2 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h2><p>没啥好说，将文件拖进IDA找到main函数F5反编译得到flag</p>
+<h2 id="reverse1"><a href="#reverse1" class="headerlink" title="reverse1"></a>reverse1</h2><p>先将文件拖进IDA，找了一下发现没有main函数，shift+f12查一下字符串，发现一个字符串可能有问题</p>
+<p><img src="https://i.loli.net/2021/11/30/GHWSIrqXTyjn1Ax.png" alt="image-20211104152105305.png">)</p>
+<p>双击进去看到程序框图，然后F5反编译一下，得到代码</p>
+<p><img src="https://i.loli.net/2021/11/30/LT1rljKapbQZePE.png" alt="image-20211104152208497.png"></p>
+<p>审计之后发现意思是将str2中的”o”换成”0”，所以双击str2，将”o”换成”0”，套上flag{}就得到了flag</p>
+<p><img src="https://i.loli.net/2021/12/01/cOXIJqE4we3H2WC.png" alt="image-20211104152414954.png"></p>
+<h2 id="reverse2"><a href="#reverse2" class="headerlink" title="reverse2"></a>reverse2</h2><p>将文件拖进IDA，找到main函数F5反编译后进行审计，发现和上一题一样是要替换flag字符串里的字符</p>
+<p><img src="https://i.loli.net/2021/11/30/lG2YsPqQNoecfpX.png" alt="image-20211104153352009.png"></p>
+<p>shift+f12查找字符串，发现可疑字符串，不出意外就是flag</p>
+<p><img src="https://i.loli.net/2021/11/30/B42rMThezmskF9K.png" alt="image-20211104153455237.png"></p>
+<p>将105、114和49转换为字符，得知是将i、r替换成1，于是替换后套上flag{}壳得到flag</p>
+<h2 id="内涵的软件"><a href="#内涵的软件" class="headerlink" title="内涵的软件"></a>内涵的软件</h2><p>将文件拖进IDA，shift+f12查找字符串，就能找到flag了</p>
+<h2 id="新年快乐"><a href="#新年快乐" class="headerlink" title="新年快乐"></a>新年快乐</h2><p>将文件拖进IDA，发现不能用，那就查个壳吧</p>
+<p><img src="https://i.loli.net/2021/11/30/fvaTOdPmwRrWzSB.png" alt="image-20211104160150603.png"></p>
+<p>确实有壳，所以用upx脱个壳 然后再拖进IDA，找到main函数F5反编译</p>
+<p><img src="https://i.loli.net/2021/11/30/OKf1qgivY6XAS3r.png" alt="image-20211104160353692.png"></p>
+<p>大致意思是将输入内容和v4比较，一致就得到flag，所以得到flag</p>
+<h2 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h2><p>题目叫xor，所以这是道异或题</p>
+<p>将文件拖进IDA，F5反编译main函数</p>
+<p><img src="https://i.loli.net/2021/11/30/GDQwrv139p7MqFZ.png" alt="image-20211104190817488.png"></p>
+<p>然后就是找要异或的内容，shift+F12搜索字符串然后找到要异或的内容</p>
+<p><img src="https://i.loli.net/2021/11/30/lpRqB4EtoAe53J6.png" alt="image-20211104191024844.png"></p>
+<p>根据主程序编写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="string">&#x27;f&#x27;</span>,<span class="number">0xA</span>,<span class="string">&#x27;k&#x27;</span>,<span class="number">0xC</span>,<span class="string">&#x27;w&#x27;</span>,<span class="string">&#x27;&amp;&#x27;</span>,<span class="string">&#x27;O&#x27;</span>,<span class="string">&#x27;.&#x27;</span>,<span class="string">&#x27;@&#x27;</span>,<span class="number">0x11</span>,<span class="string">&#x27;x&#x27;</span>,<span class="number">0xD</span>,<span class="string">&#x27;Z&#x27;</span>,<span class="string">&#x27;;&#x27;</span>,<span class="string">&#x27;U&#x27;</span>,<span class="number">0x11</span>,<span class="string">&#x27;p&#x27;</span>,<span class="number">0x19</span>,<span class="string">&#x27;F&#x27;</span>,<span class="number">0x1F</span>,<span class="string">&#x27;v&#x27;</span>,<span class="string">&#x27;&quot;&#x27;</span>,<span class="string">&#x27;M&#x27;</span>,<span class="string">&#x27;#&#x27;</span>,<span class="string">&#x27;D&#x27;</span>,<span class="number">0xE</span>,<span class="string">&#x27;g&#x27;</span>,<span class="number">6</span>,<span class="string">&#x27;h&#x27;</span>,<span class="number">0xF</span>,<span class="string">&#x27;G&#x27;</span>,<span class="string">&#x27;2&#x27;</span>,<span class="string">&#x27;O&#x27;</span>]</span><br><span class="line">flag=<span class="string">&#x27;f&#x27;</span>						//第一个f不用异或</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(s)):</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">isinstance</span>(s[i],<span class="built_in">int</span>)):  //<span class="built_in">isinstance</span>函数可以将数字转化为字符</span><br><span class="line">        s[i]=<span class="built_in">chr</span>(s[i])</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">1</span>,<span class="built_in">len</span>(s)):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(s[i])^<span class="built_in">ord</span>(s[i-<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>写完之后发现IDA有个功能是shift+E可以直接将所有字符转化为数字</p>
+<p><img src="https://i.loli.net/2021/11/30/tsSoRHN3vhwpTOg.png" alt="image-20211104191403193.png"></p>
+<p>得到flag</p>
+<h2 id="helloword（apk）"><a href="#helloword（apk）" class="headerlink" title="helloword（apk）"></a>helloword（apk）</h2><p>这题不难，但是我第一次接触apkide（apk改之理）</p>
+<p>直接把文件拖入apkide中进行反编译</p>
+<p>然后在，目录下找到一个名为helloworld的文件夹，在里面找到反编译的代码即可得到flag</p>
+<p><img src="https://i.loli.net/2021/11/30/wKTSEeIzBHPq9dC.png" alt="image-20211104204112533.png"></p>
+<h2 id="reverse3"><a href="#reverse3" class="headerlink" title="reverse3"></a>reverse3</h2><p>将文件拖进IDA，找到main函数F5反编译</p>
+<p><img src="https://i.loli.net/2021/11/30/eY5TmZ2vbOVxWol.png" alt="image-20211104203014423.png"></p>
+<p>大概看一下，重要的部分是加密函数sub_4110BE以及Dest和Str2的比较，所以我们先查看一下Str2</p>
+<p><img src="https://i.loli.net/2021/11/30/glSBGbw8uV7iTCk.png" alt="image-20211104203257863.png">-user-images\image-20211104203257863.png)</p>
+<p>不知道这是什么，然后回头看一下sub_4110BE，非常的长，甚至看得不是很明白在讲什么</p>
+<p><img src="https://i.loli.net/2021/11/30/lQcqU3SIPpBsHmk.png" alt="image-20211104203445515.png"></p>
+<p>但是我们看到这边有一段aAbcdefghijklmn反复出现多次，点进去看看</p>
+<p><img src="https://i.loli.net/2021/11/30/BoXZf874xnSjIK5.png" alt="image-20211104203539345.png"></p>
+<p>判断这是题base64加密逆运算的题目，所以我们用Str2的字符减去i后进行逆运算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="built_in">str</span> = <span class="string">&quot;e3nifIH9b_C@n@dH&quot;</span></span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="built_in">str</span>[i])-i)</span><br><span class="line"><span class="built_in">print</span>(base64.b64decode(flag))</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h2 id="不一样的flag"><a href="#不一样的flag" class="headerlink" title="不一样的flag"></a>不一样的flag</h2><p>将文件拖进IDA，找到main函数F5反编译</p>
+<p><img src="https://i.loli.net/2021/11/30/ZMJdgEzIeXuF2G5.png" alt="image-20211105191348561.png"></p>
+<p>看一下代码，发现说有个上下左右，感觉像是个迷宫题，同时只要值是#就能得到flag，所以shift+f12查一下看看有没有可疑字符串</p>
+<p><img src="https://i.loli.net/2021/11/30/MVLiB4ASRvJbODu.png" alt="image-20211105191204790.png"></p>
+<p>还真有一个，25个字符，正好能化成5*5的形式，然后按main函数里的上下左右所代表的数字，走一下迷宫</p>
+<p><img src="https://i.loli.net/2021/11/30/PEpcTWjyrbfail3.png" alt="image-20211105191508042.png"></p>
+<p>得到flag</p>
+<h2 id="SimpleRev"><a href="#SimpleRev" class="headerlink" title="SimpleRev"></a>SimpleRev</h2><p>将文件拖入IDA，F5反编译查看main函数</p>
+<p><img src="https://i.loli.net/2021/11/30/jymkdXYgo42rfK9.png" alt="image-20211105204006995.png"></p>
+<p>刚开始没发现啥有用的信息，后来看到了Decry()函数，所以双击追踪一下</p>
+<p><img src="https://i.loli.net/2021/11/30/rRPOVzofyxwcltD.png" alt="image-20211105204109472.png"></p>
+<p>分析代码，看一下key1和key3</p>
+<p><img src="https://i.loli.net/2021/11/30/rYZzq2ImbaUVeGB.png" alt="image-20211105204252860.png"></p>
+<p>join函数将key3和v9拼在一起，因为数据在内存中是以十六进制小端序存储，高位在高地址处，低位在低地址处，所以我们将它转换为大端序变成实际的字符顺序再转换为字符再进行拼接，strcat(key, src)同理</p>
+<p><img src="https://i.loli.net/2021/11/30/sePxmnpSvuHZwhJ.png" alt="image-20211105204940418.png"></p>
+<p>然后我们得到了text和key，所以我判断flag就是str2，接着对str2[v2] &#x3D; (v1 - 39 - key[v3++ % v5] + 97) % 26 + 97进行逆运算求出str2</p>
+<p>编写脚本</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">char</span> text[]=<span class="string">&quot;killshadow&quot;</span>;</span><br><span class="line">	<span class="type">char</span> key[]=<span class="string">&quot;adsfkndcls&quot;</span>;</span><br><span class="line">	<span class="type">int</span> v5=<span class="built_in">strlen</span>(key);</span><br><span class="line">	<span class="type">int</span> lentext=<span class="built_in">strlen</span>(text);</span><br><span class="line">	<span class="type">char</span> str2[<span class="number">20</span>]=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;lentext;i++)</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>;;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			str2[i]=text[i]<span class="number">-97</span>+<span class="number">39</span>+key[i]<span class="number">-97</span>+<span class="number">26</span>*j;</span><br><span class="line">			<span class="keyword">if</span> ( str2[i] &gt; <span class="number">64</span> &amp;&amp;  str2[i]&lt;=<span class="number">90</span> )</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	cout&lt;&lt;str2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h2 id="Java逆向解密（java）"><a href="#Java逆向解密（java）" class="headerlink" title="Java逆向解密（java）"></a>Java逆向解密（java）</h2><p>下载后发现是个class文件，所以将文件拖入jd-gui，反编译查看代码</p>
+<p><img src="https://i.loli.net/2021/12/01/UDnmp8a3LSQbKE1.png" alt="image-20211105211030070.png"></p>
+<p>因为不怎么会java只能边分析边理解，大概意思是输入一串字符，用一个for循环进行异或，然后和KEY进行比较，如果两个值一样就得到flag，所以开始编写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">KEY = [ <span class="number">180</span>, <span class="number">136</span>, <span class="number">137</span>, <span class="number">147</span>, <span class="number">191</span>, <span class="number">137</span>, <span class="number">147</span>, <span class="number">191</span>, <span class="number">148</span>, <span class="number">136</span>, <span class="number">133</span>, <span class="number">191</span>, <span class="number">134</span>, <span class="number">140</span>, <span class="number">129</span>, <span class="number">135</span>, <span class="number">191</span>, <span class="number">65</span>]</span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="number">0</span>,<span class="built_in">len</span>(KEY)):</span><br><span class="line">    flag+=<span class="built_in">chr</span>(KEY[i]-<span class="built_in">ord</span>(<span class="string">&#x27;@&#x27;</span>)^ <span class="number">0x20</span>)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h2 id="GXYCTF2019-luck-guy"><a href="#GXYCTF2019-luck-guy" class="headerlink" title="[GXYCTF2019]luck_guy"></a>[GXYCTF2019]luck_guy</h2><p>将文件拖进IDA，F5反编译查看main函数，发现可以函数patch_me()，追踪一下</p>
+<p><img src="https://i.loli.net/2021/12/01/jIkfwgWzRPQnAuZ.png" alt="image-20211105212920329.png"></p>
+<p>然后又发现了get_flag()函数继续追踪</p>
+<p><img src="https://i.loli.net/2021/12/01/Fxnla2N8VU7uwzS.png" alt="image-20211105212937640.png"></p>
+<p>不出意外找到了关键函数</p>
+<p><img src="https://i.loli.net/2021/12/01/MGgFcs5ZoYeOKLq.png" alt="image-20211105213005797.png"></p>
+<p>分析代码，发现flag是由f1和f2组成，追踪f1和f2</p>
+<p><img src="https://i.loli.net/2021/12/01/EuT4S18dQLJKhP5.png" alt="image-20211105213128195.png"></p>
+<p><img src="https://i.loli.net/2021/12/01/dYCQcmI1yVtw5uZ.png" alt="image-20211105213140529.png"></p>
+<p>f2明显不能和f1构成一个完整的flag，所以接着看代码，看到case5的位置，发现它是对长度为8的字符串进行操作，而上方的s正好是长度为8的字符串，所以盲猜是将f2经过case5后再与f1组成flag</p>
+<p>编写脚本进行试验，这里的s和SimpleRev中的值一样是小端序存储所以需要修正为正确的大端序字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">flag=<span class="string">&quot;GXY&#123;do_not_&quot;</span></span><br><span class="line">f2=[<span class="number">0x69</span>,<span class="number">0x63</span>,<span class="number">0x75</span>,<span class="number">0x67</span>,<span class="number">0x60</span>,<span class="number">0x6F</span>,<span class="number">0x66</span>,<span class="number">0x7F</span>]</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">8</span>):</span><br><span class="line">    <span class="keyword">if</span> j%<span class="number">2</span> ==<span class="number">1</span>:</span><br><span class="line">        v1=<span class="built_in">chr</span>(f2[j]-<span class="number">2</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        v1 =<span class="built_in">chr</span>(f2[j]-<span class="number">1</span>)</span><br><span class="line">    flag+=v1</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>猜测正确，得到flag</p>
+<h2 id="刮开有奖-没做明白"><a href="#刮开有奖-没做明白" class="headerlink" title="刮开有奖(没做明白)"></a>刮开有奖(没做明白)</h2><p>wp等我做明白了在补</p>
+<h2 id="findit（apk）"><a href="#findit（apk）" class="headerlink" title="findit（apk）"></a>findit（apk）</h2><p>将文件拖入apk改之理，找到MainActivity，进行阅读，找到两串十六进制的字符串</p>
+<p><img src="https://i.loli.net/2021/12/01/EflFNSWvIGpnHLy.png" alt="image-20211108165421115.png"></p>
+<p>右键转ascii码发现不大行，所以写个脚本转换一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x=[<span class="number">0x70</span>,<span class="number">0x76</span>,<span class="number">0x6b</span>,<span class="number">0x71</span>,<span class="number">0x7b</span>,<span class="number">0x6d</span>,<span class="number">0x31</span>,<span class="number">0x36</span>,<span class="number">0x34</span>,<span class="number">0x36</span>,<span class="number">0x37</span>,<span class="number">0x35</span>,<span class="number">0x32</span>,<span class="number">0x36</span>,<span class="number">0x32</span>,<span class="number">0x30</span>,<span class="number">0x33</span>,<span class="number">0x33</span>,<span class="number">0x6c</span>,<span class="number">0x34</span>,<span class="number">0x6d</span>,<span class="number">0x34</span>,<span class="number">0x39</span>,<span class="number">0x6c</span>,<span class="number">0x6e</span>,<span class="number">0x70</span>,<span class="number">0x37</span>,<span class="number">0x70</span>,<span class="number">0x39</span>,<span class="number">0x6d</span>,<span class="number">0x6e</span>,<span class="number">0x6b</span>,<span class="number">0x32</span>,<span class="number">0x38</span>,<span class="number">0x6b</span>,<span class="number">0x37</span>,<span class="number">0x35</span>,<span class="number">0x7d</span>]</span><br><span class="line">y=[<span class="number">0x54</span>,<span class="number">0x68</span>,<span class="number">0x69</span>,<span class="number">0x73</span>,<span class="number">0x49</span>,<span class="number">0x73</span>,<span class="number">0x54</span>,<span class="number">0x68</span>,<span class="number">0x65</span>,<span class="number">0x46</span>,<span class="number">0x6c</span>,<span class="number">0x61</span>,<span class="number">0x67</span>,<span class="number">0x48</span>,<span class="number">0x6f</span>,<span class="number">0x6d</span>,<span class="number">0x65</span>]</span><br><span class="line">flag1= <span class="string">&quot;&quot;</span></span><br><span class="line">flag2= <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> x:</span><br><span class="line">    flag1+=<span class="built_in">chr</span>(i)</span><br><span class="line"><span class="built_in">print</span>(flag1)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> y:</span><br><span class="line">    flag2+=<span class="built_in">chr</span>(i)</span><br><span class="line"><span class="built_in">print</span>(flag2)</span><br></pre></td></tr></table></figure>
+
+<p>转换出来第一个字符串是告诉我flag在这，第二个字符串给出了一串类似于flag的东西，拿去提交发现不行</p>
+<p><img src="https://i.loli.net/2021/12/01/8XFPbESGw4D3ZNv.png" alt="image-20211108165553558.png"></p>
+<p>上网找找发现说，0x70和0x76差了六位，而’f’和’l’也是相差六位，所以这很有可能是一个凯撒密码，所以找了个解密网站进行解密，得到flag</p>
+<p><img src="https://i.loli.net/2021/12/01/rUDNqYixMbO4uP5.png" alt="image-20211108165929314.png"></p>
+<h2 id="BJDCTF2020-JustRE"><a href="#BJDCTF2020-JustRE" class="headerlink" title="[BJDCTF2020]JustRE"></a>[BJDCTF2020]JustRE</h2><p>将文件拖进IDA，F5反编译查看main函数，发现没找到啥特别有用的信息，所以shift+f12查一下字符串找到一串长得很像flag的字符串</p>
+<p><img src="https://i.loli.net/2021/12/01/9ihcPQuXHepNO8S.png" alt="image-20211109140405532.png"></p>
+<p>Ctrl+x追踪一下这串字符，找到关键代码</p>
+<p><img src="https://i.loli.net/2021/12/01/d1tcvTgmFeJYiBQ.png" alt="image-20211109140520151.png"></p>
+<p>注意到第十四行的输出是输出aBjdDD2069a4579, 19999, 0，回想起上面字符串中含有两个%d替位符，所以把19999和0替换掉%d，得到flag</p>
+<h2 id="GWCTF-2019-pyre"><a href="#GWCTF-2019-pyre" class="headerlink" title="[GWCTF 2019]pyre"></a>[GWCTF 2019]pyre</h2><p>下载下来发现是一个pyc文件，所以找个网站对其反编译一下</p>
+<p><a target="_blank" rel="noopener" href="https://tool.lu/pyc/">https://tool.lu/pyc/</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> <span class="string">&#x27;Welcome to Re World!&#x27;</span></span><br><span class="line"><span class="built_in">print</span> <span class="string">&#x27;Your input1 is your flag~&#x27;</span></span><br><span class="line">l = <span class="built_in">len</span>(input1)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l):</span><br><span class="line">    num = ((input1[i] + i) % <span class="number">128</span> + <span class="number">128</span>) % <span class="number">128</span></span><br><span class="line">    code += num</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l - <span class="number">1</span>):</span><br><span class="line">    code[i] = code[i] ^ code[i + <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> code</span><br><span class="line">code = [</span><br><span class="line">    <span class="string">&#x27;\x1f&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x12&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x1d&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;(&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x01&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x06&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x14&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;,&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x1b&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;U&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;?&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;o&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;6&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;*&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x01&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;D&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;%&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x13&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>然后分析代码，根据代码逆向编写脚本，得到flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">code = [</span><br><span class="line">    <span class="string">&#x27;\x1f&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x12&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x1d&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;(&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x01&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x06&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x14&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;,&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x1b&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;U&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;?&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;o&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;6&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;*&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;:&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x01&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;D&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;;&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;%&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;\x13&#x27;</span></span><br><span class="line">    ]</span><br><span class="line">l=<span class="built_in">len</span>(code)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l - <span class="number">2</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">    code[i] = <span class="built_in">chr</span>(<span class="built_in">ord</span>(code[i]) ^ <span class="built_in">ord</span>(code[i + <span class="number">1</span>]))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l):</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">chr</span>((<span class="built_in">ord</span>(code[i])-i)%<span class="number">128</span>),end=<span class="string">&#x27;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>关于异或：a^0&#x3D;a,a^a&#x3D;0,那么可得：a^b^a&#x3D;b,a^b^b&#x3D;a</strong>，原代码第二个for循环中，使code[i]&#x3D;code[i]^code[i+1]，i从0取到l-1-1。处理后，code[l-1]没有变，那么要逆向，则令x从l-2取到0，使code[x]&#x3D;code[x]^code[x+1]（a^b^b&#x3D;a)</p>
+<p><strong>关于取模，(a%c+b%c)%c&#x3D;(a+b)%c</strong>，所以 ((input1[i] + i) % 128 + 128) % 128等价于(input1[i]+i)%128。</p>
+<h2 id="ACTF新生赛2020-easyre"><a href="#ACTF新生赛2020-easyre" class="headerlink" title="[ACTF新生赛2020]easyre"></a>[ACTF新生赛2020]easyre</h2><p>将文件拖入IDA，发现不大对劲，判断可能有壳。所以用UPX脱壳后重新拖进IDA</p>
+<p>找到main函数F5反编译查看代码</p>
+<p><img src="https://i.loli.net/2021/12/01/EuvFGwAQnj4hC6o.png" alt="image-20211109144326831.png"></p>
+<p>第四十三行已经给出flag的前缀以及花括号，所以判断flag应该是在第48行起的for循环中得到的，同时可以看出，这个flag应该是个长度为12的字符串，是将flag的ASCII值作为下标取值，与v4数组比较</p>
+<p>第五十行中给了一个函数_data_start__，双击跟踪一下，用hex view查看看得相对比较清楚一点</p>
+<p><img src="https://i.loli.net/2021/12/01/qmgAaiuGPZTX7vp.png" alt="image-20211109144730099.png"></p>
+<p>根据这串字符串和上面给到的数值编写脚本(不知道哪一步出问题了自己写的脚本一直在爆错，只好copy一份了)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">key = <span class="string">&#x27;~&#125;|&#123;zyxwvutsrqponmlkjihgfedcba`_^]\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?&gt;=&lt;;:9876543210/.-,+*)(\&#x27;&amp;%$# !&quot;&#x27;</span> <span class="comment">#&#x27;一定要加\</span></span><br><span class="line">encrypt = [<span class="number">42</span>,<span class="number">70</span>,<span class="number">39</span>,<span class="number">34</span>,<span class="number">78</span>,<span class="number">44</span>,<span class="number">34</span>,<span class="number">40</span>,<span class="number">73</span>,<span class="number">63</span>,<span class="number">43</span>,<span class="number">64</span>]</span><br><span class="line">x = []</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> encrypt:</span><br><span class="line">    x.append(key.find(<span class="built_in">chr</span>(i))+<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> x:</span><br><span class="line">    flag += <span class="built_in">chr</span>(i)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h2 id="rsa-rsa"><a href="#rsa-rsa" class="headerlink" title="rsa(rsa)"></a>rsa(rsa)</h2><h2 id="CrackRTF"><a href="#CrackRTF" class="headerlink" title="CrackRTF"></a>CrackRTF</h2><p>将文件拖进IDA，找到main函数F5反编译，分析代码</p>
+<p><img src="https://i.loli.net/2021/12/02/FwIm4ldUDXnrfoc.png" alt="image-20211109180041397.png"></p>
+<p>可以发现，十四行和三十一行分别要求我们输入密码，同时输入的密码都得是六位数。先来看第一次，要求我们输入六位密码后拼接上@DBApp，再通过sub_40100A加密后和”6E32D0943418C2C33385BC35A1470250DD8923A9”进行比较</p>
+<p>跟踪一下sub_40100A函数</p>
+<p><img src="https://i.loli.net/2021/12/02/ktsjUrX4yN63C2v.png" alt="image-20211109180513669.png"></p>
+<p>通过对几个函数的搜索，可以发现，CryptCreateHash是关键函数(windows加密库函数)</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-tw/previous-versions/aa924583(v=msdn.10)">https://docs.microsoft.com/zh-tw/previous-versions/aa924583(v=msdn.10)</a></p>
+<p><img src="https://i.loli.net/2021/12/01/E95kh4SPs7ZYD2j.png" alt="image-20211109180607383.png"></p>
+<p><img src="https://i.loli.net/2021/12/02/Bcl48i5jwJdWh9U.png" alt="image-20211109180621084.png"></p>
+<p>根据大佬的提示知道这是SHA_1加密</p>
+<p><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows/win32/seccrypto/alg-id">https://docs.microsoft.com/en-us/windows/win32/seccrypto/alg-id</a></p>
+<p>根据函数中第二个值在这里面查找</p>
+<p><img src="https://i.loli.net/2021/12/02/GkZ31KHnTzRdFpI.png" alt="image-20211109181701133.png"></p>
+<p>编写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">partflag = <span class="string">&quot;@DBApp&quot;</span></span><br><span class="line">flag=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100000</span>,<span class="number">999999</span>):</span><br><span class="line">    flag = <span class="built_in">str</span>(i)+partflag</span><br><span class="line">    flaghex = hashlib.sha1(flag.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">    flaghex = flaghex.hexdigest()</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;6e32d0943418c2c33385bc35a1470250dd8923a9&quot;</span> == flaghex:</span><br><span class="line">        <span class="built_in">print</span>(flag)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>结果如下</p>
+<p><img src="https://i.loli.net/2021/12/01/sNOYqXfrbCnw8l3.png" alt="image-20211109181152439.png"></p>
+<p>打开程序运行一下试试</p>
+<p><img src="https://i.loli.net/2021/12/01/iFK845TEPG2nocY.png" alt="image-20211109181259189.png"></p>
+<p>是正确的</p>
+<p>接着看第二次输入，跟踪一下sub_401019函数</p>
+<p><img src="https://i.loli.net/2021/12/02/ef8pR2jLsglFmDk.png" alt="image-20211109181457635.png"></p>
+<p>这里用到的加密算法不一样了，同样根据CryptCreateHash函数中第二个值进行查找，发现是MD5加密</p>
+<p><img src="https://i.loli.net/2021/12/01/eEwJ69V73vCiNyY.png" alt="image-20211109181820438.png"></p>
+<p>所以找一个md5解密网站，将main函数中的字符串进行解密</p>
+<p><a target="_blank" rel="noopener" href="https://www.somd5.com/">https://www.somd5.com/</a></p>
+<p><img src="https://i.loli.net/2021/12/02/RMkeWGpg6PdZNvm.png" alt="image-20211109182127354.png"></p>
+<p>答案就是 ~!3a@0</p>
+<p>将答案输入程序中，控制台自动退出，并在原文件夹中生成了一个rtf文件，打开就得到了flag</p>
+<p><img src="https://i.loli.net/2021/12/02/92NpaDLtkjq3BQl.png" alt="image-20211109182424745.png"></p>
+<p>看完大佬的博客才发现，这其实是一个走捷径的方法，我也并不明白rtf是个什么东西</p>
+<p>所以回到主函数，跟踪一下第四十三行的sub_40100F函数</p>
+<p><img src="https://i.loli.net/2021/12/02/pYTu4D685AfnbIw.png" alt="image-20211109184542193.png"></p>
+<p>FindResourceA函数是关键函数，去搜索一下它的定义</p>
+<p><img src="https://i.loli.net/2021/12/02/GDcICOvHLYNQlqF.png" alt="image-20211109184732167.png"></p>
+<p>同时附上SizeofResource和LoadResource的定义</p>
+<p><img src="https://i.loli.net/2021/12/02/YuM6k1tSXimyeND.png" alt="image-20211109185853236.png"></p>
+<p><img src="https://i.loli.net/2021/12/02/oE4kUPXg8DZAqjy.png" alt="image-20211109185833188.png"></p>
+<p>可以知道说，SizeofResource是计算长度的，LoadResource是加载资源的</p>
+<p>跟进一下第二十二行的sub_401005函数(lpString是我们的密码，lpBuffer是资源，nNumberOfBytesToWrite是资源的大小)</p>
+<p><img src="https://i.loli.net/2021/12/02/qUQzeJxwYfSlX3Z.png" alt="image-20211109190236002.png"></p>
+<p>就是将从AAA中取出的值和第二次密码连接后的值进行异或</p>
+<p>用resource hacker打开文件</p>
+<p><img src="https://i.loli.net/2021/12/02/ENZ5syaKoLW3htT.png" alt="image-20211109190426652.png"></p>
+<p>由于我们要得到的是一个rtf文件，所以搜一下rtf文件的文件头{\rtf1，因为密码是六位数，前六位（{\rtf1）直接与AAA中数据异或就能得出第二次加密的密码，所以我们只取前六位参数运算即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">str</span> = [<span class="string">&#x27;&#123;&#x27;</span>,<span class="string">&#x27;\\&#x27;</span>,<span class="string">&#x27;r&#x27;</span>,<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;f&#x27;</span>,<span class="string">&#x27;1&#x27;</span>,]</span><br><span class="line">resource = [<span class="number">0x05</span>,<span class="number">0x7D</span>, <span class="number">0x41</span>, <span class="number">0x15</span>, <span class="number">0x26</span>, <span class="number">0x01</span>]</span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(<span class="built_in">str</span>)):</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">ord</span>(<span class="built_in">str</span>[i]) ^ resource[i])</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>运行得到结果</p>
+<p><img src="https://i.loli.net/2021/12/02/onsc5pxPMQ9DABW.png" alt="image-20211109191048479.png"></p>
+<p>接下来步骤与第一种方法相同</p>
+<p><strong>写在后面，这道题能写明白真的能学到很多东西，一切都是崭新的知识，也是第一次用到微软的库，大有玄机。</strong></p>
+<h2 id="ACTF新生赛2020-rome"><a href="#ACTF新生赛2020-rome" class="headerlink" title="[ACTF新生赛2020]rome"></a>[ACTF新生赛2020]rome</h2><p>将文件拖入IDA，找到main函数F5反编译，跟踪一下func函数</p>
+<p><img src="https://i.loli.net/2021/12/02/P8BtZwEO5K1YWbD.png" alt="image-20211109200301314.png"></p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20211109200337183.png" alt="image-20211109200337183"></p>
+<p>和上面那题easyre差不多的思路，分析代码，是让我们输入一串字符串，判断大小写，进行运算，得到三十七行到五十二行的那个数组，编写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">flag=<span class="string">&#x27;ACTF&#123;&#x27;</span></span><br><span class="line">v15=<span class="string">&#x27;Qsw3sj_lz4_Ujw@l&#x27;</span></span><br><span class="line">a=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span> (<span class="built_in">len</span>(v15)):</span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">128</span>):   <span class="comment">#ascii表上一共127个字符</span></span><br><span class="line">        i=a</span><br><span class="line">        <span class="keyword">if</span> i&gt;<span class="number">64</span> <span class="keyword">and</span> i&lt;=<span class="number">90</span>:</span><br><span class="line">            i = (i-<span class="number">51</span>)%<span class="number">26</span>+<span class="number">65</span></span><br><span class="line">        <span class="keyword">if</span> i&gt;<span class="number">96</span> <span class="keyword">and</span> i&lt;=<span class="number">122</span>:</span><br><span class="line">            i = (i-<span class="number">79</span>)%<span class="number">26</span>+<span class="number">97</span></span><br><span class="line">        <span class="keyword">if</span> i == <span class="built_in">ord</span>(v15[x]):</span><br><span class="line">            flag+=<span class="built_in">chr</span>(a)</span><br><span class="line"><span class="built_in">print</span>(flag+<span class="string">&#x27;&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h2 id="2019红帽杯-easyRE"><a href="#2019红帽杯-easyRE" class="headerlink" title="[2019红帽杯]easyRE"></a>[2019红帽杯]easyRE</h2><p>晚点再做，看得略微头疼…</p>
+<h2 id="FlareOn4-login（HTML）"><a href="#FlareOn4-login（HTML）" class="headerlink" title="[FlareOn4]login（HTML）"></a>[FlareOn4]login（HTML）</h2><p>第一次做HTML格式的题目</p>
+<p>打开网页，F12查看源码，JavaScript不大熟练，查一下几个函数</p>
+<p><img src="https://i.loli.net/2021/12/02/VZWTzdkYn48Xfva.png" alt="image-20211109204553604.png"></p>
+<p><img src="https://i.loli.net/2021/12/02/A5rvMXi74WbNECx.png" alt="image-20211109204509059.png"></p>
+<p>分析代码，大概意思是用</p>
+<p><strong>var rotFlag &#x3D; flag.replace(&#x2F;[a-zA-Z]&#x2F;g, function(c){return String.fromCharCode((c &lt;&#x3D; “Z” ? 90 : 122) &gt;&#x3D; (c &#x3D; c.charCodeAt(0) + 13) ? c : c - 26);});</strong></p>
+<p>进行运算，最后得到</p>
+<p><strong><a href="mailto:&#80;&#121;&#118;&#114;&#x61;&#103;&#x46;&#118;&#113;&#114;&#89;&#98;&#x74;&#118;&#x61;&#102;&#78;&#x65;&#x72;&#x52;&#110;&#102;&#108;&#x40;&#115;&#x79;&#x6e;&#x65;&#114;&#45;&#x62;&#x61;&#x2e;&#112;&#98;&#122;">&#80;&#121;&#118;&#114;&#x61;&#103;&#x46;&#118;&#113;&#114;&#89;&#98;&#x74;&#118;&#x61;&#102;&#78;&#x65;&#x72;&#x52;&#110;&#102;&#108;&#x40;&#115;&#x79;&#x6e;&#x65;&#114;&#45;&#x62;&#x61;&#x2e;&#112;&#98;&#122;</a></strong></p>
+<p>说实话就是这串代码看得不是很懂，但是之前做东秦的招新赛遇到过类似的东西，那时候知道了一种加密方法叫ROT13，所以找一个ROT13的在线解密工具试一下</p>
+<p><a target="_blank" rel="noopener" href="http://www.ab126.com/goju/10818.html">http://www.ab126.com/goju/10818.html</a></p>
+<p><img src="https://i.loli.net/2021/12/02/YmhUx48ctCf1W9z.png" alt="image-20211109205823291.png"></p>
+<p>包上flag{}，得到flag</p>
+<h2 id="GUET-CTF2019-re"><a href="#GUET-CTF2019-re" class="headerlink" title="[GUET-CTF2019]re"></a>[GUET-CTF2019]re</h2><p>将文件拖进IDA，不大对劲，UPX脱个壳，正常了，不过函数好多，只好shift+f12搜一下字符串</p>
+<p><img src="https://i.loli.net/2021/12/02/owDIHPGgjEQBWcb.png" alt="image-20211109212856301.png"></p>
+<p>找到了这个，ctrl+x跟踪一下，找到关键函数</p>
+<p><img src="https://i.loli.net/2021/12/02/PXOxnDlJpCGKbLk.png" alt="image-20211109212936357.png"></p>
+<p>分析代码，大概意思是让我们输入一个字符串，如果满足sub_4009AE函数的判定条件，则输出Correct!</p>
+<p>所以跟踪一下sub_4009AE函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">1629056</span> * *a1 != <span class="number">166163712</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">6771600</span> * a1[<span class="number">1</span>] != <span class="number">731332800</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">3682944</span> * a1[<span class="number">2</span>] != <span class="number">357245568</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">10431000</span> * a1[<span class="number">3</span>] != <span class="number">1074393000</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">3977328</span> * a1[<span class="number">4</span>] != <span class="number">489211344</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">5138336</span> * a1[<span class="number">5</span>] != <span class="number">518971936</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">7532250</span> * a1[<span class="number">7</span>] != <span class="number">406741500</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">5551632</span> * a1[<span class="number">8</span>] != <span class="number">294236496</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">3409728</span> * a1[<span class="number">9</span>] != <span class="number">177305856</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">13013670</span> * a1[<span class="number">10</span>] != <span class="number">650683500</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">6088797</span> * a1[<span class="number">11</span>] != <span class="number">298351053</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">7884663</span> * a1[<span class="number">12</span>] != <span class="number">386348487</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">8944053</span> * a1[<span class="number">13</span>] != <span class="number">438258597</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">5198490</span> * a1[<span class="number">14</span>] != <span class="number">249527520</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">4544518</span> * a1[<span class="number">15</span>] != <span class="number">445362764</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">3645600</span> * a1[<span class="number">17</span>] != <span class="number">174988800</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">10115280</span> * a1[<span class="number">16</span>] != <span class="number">981182160</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">9667504</span> * a1[<span class="number">18</span>] != <span class="number">493042704</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">5364450</span> * a1[<span class="number">19</span>] != <span class="number">257493600</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">13464540</span> * a1[<span class="number">20</span>] != <span class="number">767478780</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">5488432</span> * a1[<span class="number">21</span>] != <span class="number">312840624</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">14479500</span> * a1[<span class="number">22</span>] != <span class="number">1404511500</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">6451830</span> * a1[<span class="number">23</span>] != <span class="number">316139670</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">6252576</span> * a1[<span class="number">24</span>] != <span class="number">619005024</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">7763364</span> * a1[<span class="number">25</span>] != <span class="number">372641472</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">7327320</span> * a1[<span class="number">26</span>] != <span class="number">373693320</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">8741520</span> * a1[<span class="number">27</span>] != <span class="number">498266640</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">8871876</span> * a1[<span class="number">28</span>] != <span class="number">452465676</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">4086720</span> * a1[<span class="number">29</span>] != <span class="number">208422720</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">  <span class="keyword">if</span> ( <span class="number">9374400</span> * a1[<span class="number">30</span>] == <span class="number">515592000</span> )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">5759124</span> * a1[<span class="number">31</span>] == <span class="number">719890500</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到这一步就很简单，直接每一位相除就能得到这个数组</p>
+<p>编写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">a0  = <span class="built_in">chr</span>(<span class="number">166163712</span> // <span class="number">1629056</span>)</span><br><span class="line">a1  = <span class="built_in">chr</span>(<span class="number">731332800</span> // <span class="number">6771600</span>)</span><br><span class="line">a2  = <span class="built_in">chr</span>(<span class="number">357245568</span> // <span class="number">3682944</span>)</span><br><span class="line">a3  = <span class="built_in">chr</span>(<span class="number">1074393000</span> // <span class="number">10431000</span>)</span><br><span class="line">a4  = <span class="built_in">chr</span>(<span class="number">489211344</span> // <span class="number">3977328</span>)</span><br><span class="line">a5  = <span class="built_in">chr</span>(<span class="number">518971936</span> // <span class="number">5138336</span>)</span><br><span class="line">a7  = <span class="built_in">chr</span>(<span class="number">406741500</span> // <span class="number">7532250</span>)</span><br><span class="line">a8  = <span class="built_in">chr</span>(<span class="number">294236496</span> // <span class="number">5551632</span>)</span><br><span class="line">a9 = <span class="built_in">chr</span>(<span class="number">177305856</span> // <span class="number">3409728</span>)</span><br><span class="line">a10 = <span class="built_in">chr</span>(<span class="number">650683500</span> // <span class="number">13013670</span>)</span><br><span class="line">a11 = <span class="built_in">chr</span>(<span class="number">298351053</span> // <span class="number">6088797</span>)</span><br><span class="line">a12 = <span class="built_in">chr</span>(<span class="number">386348487</span> // <span class="number">7884663</span>)</span><br><span class="line">a13 = <span class="built_in">chr</span>(<span class="number">438258597</span> // <span class="number">8944053</span>)</span><br><span class="line">a14 = <span class="built_in">chr</span>(<span class="number">249527520</span> // <span class="number">5198490</span>)</span><br><span class="line">a15 = <span class="built_in">chr</span>(<span class="number">445362764</span> // <span class="number">4544518</span>)</span><br><span class="line">a16 = <span class="built_in">chr</span>(<span class="number">981182160</span> // <span class="number">10115280</span>)</span><br><span class="line">a17 = <span class="built_in">chr</span>(<span class="number">174988800</span> // <span class="number">3645600</span>)</span><br><span class="line">a18 = <span class="built_in">chr</span>(<span class="number">493042704</span> // <span class="number">9667504</span>)</span><br><span class="line">a19 = <span class="built_in">chr</span>(<span class="number">257493600</span> // <span class="number">5364450</span>)</span><br><span class="line">a20 = <span class="built_in">chr</span>(<span class="number">767478780</span> // <span class="number">13464540</span>)</span><br><span class="line">a21 = <span class="built_in">chr</span>(<span class="number">312840624</span> // <span class="number">5488432</span>)</span><br><span class="line">a22 = <span class="built_in">chr</span>(<span class="number">1404511500</span> // <span class="number">14479500</span>)</span><br><span class="line">a23 = <span class="built_in">chr</span>(<span class="number">316139670</span> // <span class="number">6451830</span>)</span><br><span class="line">a24 = <span class="built_in">chr</span>(<span class="number">619005024</span> // <span class="number">6252576</span>)</span><br><span class="line">a25 = <span class="built_in">chr</span>(<span class="number">372641472</span> // <span class="number">7763364</span>)</span><br><span class="line">a26 = <span class="built_in">chr</span>(<span class="number">373693320</span> // <span class="number">7327320</span>)</span><br><span class="line">a27 = <span class="built_in">chr</span>(<span class="number">498266640</span> // <span class="number">8741520</span>)</span><br><span class="line">a28 = <span class="built_in">chr</span>(<span class="number">452465676</span> // <span class="number">8871876</span>)</span><br><span class="line">a29 = <span class="built_in">chr</span>(<span class="number">208422720</span> // <span class="number">4086720</span>)</span><br><span class="line">a30 = <span class="built_in">chr</span>(<span class="number">515592000</span> // <span class="number">9374400</span>)</span><br><span class="line">a31 = <span class="built_in">chr</span>(<span class="number">719890500</span> // <span class="number">5759124</span>)</span><br><span class="line"><span class="built_in">print</span> (a0,a1,a2,a3,a4,a5,a7,a8,a9,a10,a11,a12,a13,a14,a15,a16,a17,a18,a19,a20,a21,a22,a23,a24,a25,a26,a27,a28,a29,a30,a31)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCoa8.png" alt="oNCoa8.png"></p>
+<p>但是数组里少了个a[6]，不知道该怎么办，网上搜都是说爆破，你倒是教教我咋爆破…</p>
+<p>所以只好用苯办法一个一个试，试出来a[6]&#x3D;1,如果有人知道咋爆破能不能来教教我…</p>
+<h2 id="SUCTF2019-SignIn-rsa"><a href="#SUCTF2019-SignIn-rsa" class="headerlink" title="[SUCTF2019]SignIn(rsa)"></a>[SUCTF2019]SignIn(rsa)</h2><p>rsa和gmpy2的库没装好，装好了再搞</p>
+<h2 id="WUSTCTF2020-level1"><a href="#WUSTCTF2020-level1" class="headerlink" title="[WUSTCTF2020]level1"></a>[WUSTCTF2020]level1</h2><p>将文件拖入IDA，F5反编译main函数</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCTIS.png" alt="oNCTIS.png"></p>
+<p>分析代码，可以看到这是一个文件读取的操作，关键点在这个for循环上</p>
+<p>for循环中的if判定是将奇数进行移位，偶数进行一个乘法，联想到文件夹中还给出了一个output.txt的文件，应该是操作过后输出的内容</p>
+<p>所以逆向编写一下这个算法还原原本的flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="number">0</span>,<span class="number">198</span>,<span class="number">232</span>,<span class="number">816</span>,<span class="number">200</span>,<span class="number">1536</span>,<span class="number">300</span>,<span class="number">6144</span>,<span class="number">984</span>,<span class="number">51200</span>,<span class="number">570</span>,<span class="number">92160</span>,<span class="number">1200</span>,<span class="number">565248</span>,<span class="number">756</span>,<span class="number">1474560</span>,<span class="number">800</span>,<span class="number">6291456</span>,<span class="number">1782</span>,<span class="number">65536000</span>]  <span class="comment">#因为题目中数组从1开始，所以添加个0在前面占据a[0]的位置</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="number">20</span>):</span><br><span class="line">    <span class="keyword">if</span> (i &amp; <span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(a[i]&gt;&gt;i),end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">chr</span>(a[i]//i),end=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h2 id="Youngter-drive-多线程"><a href="#Youngter-drive-多线程" class="headerlink" title="Youngter-drive(多线程)"></a>Youngter-drive(多线程)</h2><p>将文件拖进IDA，不大对劲，怀疑有壳，UPX脱个壳，再次拖进IDA，找到_main_0函数，F5反编译</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCq2j.png" alt="oNCq2j.png"></p>
+<p>放眼望去就是一些不大认识的函数，搜一下吧</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCbGQ.png" alt="oNCbGQ.png"></p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCHPg.png" alt="oNCHPg.png"></p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCLxs.png" alt="oNCLxs.png"></p>
+<p>根据这三个函数可以判断，这是个多线程题目</p>
+<p>继续分析代码，大概意思是hObject这个线程会执行StartAddress函数，而v1这个线程会执行sub_41119F这个函数</p>
+<p>逐步分析，先来看StartAddress函数</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCXMn.png" alt="oNCXMn.png"></p>
+<p>这里面有个sub_41112C函数，我们跟踪一下，出现了常见的堆栈不平衡的错误</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCjrq.png" alt="oNCjrq.png"></p>
+<p>先在上方工具栏的在option中开启stack pointer</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCvq0.png" alt="oNCvq0.png"></p>
+<p>然后转回汇编代码，找到这个411A04的位置，点击000的那个位置，再用alt+k将0x4改成0x00</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNCzZV.png" alt="oNCzZV.png"></p>
+<p>再回到刚才打不开的函数那儿，就可以发现能打开了</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNPSaT.png" alt="oNPSaT.png"></p>
+<p>分析代码，可以知道这就是第一个线程对数据的处理，一个很常见的判断大小写然后替换字符的操作，追踪off_418000[0]，也可以发现第一个字符串就是<strong>QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm</strong></p>
+<p>接着返回_main_0函数看第二个线程所调用的函数</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNPpIU.png" alt="oNPpIU.png"></p>
+<p>可以发现说这个线程没有在处理数据，只是对变量dword_418008做了一个-1的操作，再次返回主函数</p>
+<p>还有一个sub_411190的函数，继续跟踪</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNPCiF.png" alt="oNPCiF.png"></p>
+<p>跟踪一下数组off_418004，得到字符串<strong>TOiZiZtOrYaToUwPnToBsOaOapsyS</strong>这应该是对上方字符串进行替换后得到的结果</p>
+<p>条件齐全，我们再回到主函数看一下dword_418008的数据大小是0x1D，换算成十进制就是29，所以编写脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">&#x27;QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm&#x27;</span></span><br><span class="line">b=<span class="string">&#x27;TOiZiZtOrYaToUwPnToBsOaOapsyS&#x27;</span></span><br><span class="line">flag=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(b)):</span><br><span class="line">    <span class="keyword">if</span> i%<span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        flag+=b[i]</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    <span class="keyword">if</span>(b[i].isupper()):</span><br><span class="line">        flag+=<span class="built_in">chr</span>(a.find(b[i])+<span class="number">96</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        flag+=<span class="built_in">chr</span>(a.find(b[i])+<span class="number">38</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;flag&#123;&#x27;</span>+flag+<span class="string">&#x27;&#125;&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNPPG4.png" alt="oNPPG4.png"></p>
+<p>但是这里要注意的点有两个，一个是<strong>数据是从后往前对比的</strong>，还有一个是我们输入的是30个字符，但是flag里只有29个字符，还有最后一位没有对比，所以尝试人工对比一下，发现最后一位是E。</p>
+<h2 id="HDCTF2019-Maze"><a href="#HDCTF2019-Maze" class="headerlink" title="[HDCTF2019]Maze"></a>[HDCTF2019]Maze</h2><p>脱个壳，将文件拖进IDA</p>
+<p>看题目可以知道这是道迷宫题，所以shift+f12查一下字符串，不出所料找到了一串星号，应该就是迷宫了，但是吧，没有main函数，所以回到刚进来的地方</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNiAfg.png" alt="oNiAfg.png"></p>
+<p>这明显是main函数，仔细看一下可以发现，40102C后直接跳到了40102E，同时这个冒红光的地方就很可疑，百度一下发现这叫<strong>花指令</strong>，是用来防止反汇编的一种手段</p>
+<p>所以先把这个jnz指令nop掉，而call指令不能全部nop，因为有可能是有效代码，所以我们将call指令后的东西按d转换为有效代码</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNiPTf.png" alt="oNiPTf.png"></p>
+<p>然后我们对其中的数据进行nop，从第一个开始，直到能转换为代码，可以发现说，将db 0E8h这条指令nop掉之后，他就会变成代码数据</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNiFk8.png" alt="oNiFk8.png"></p>
+<p>而后选中这些红色的数据，按p即可将其声明为函数，然后F5进行反编译，即得到了main函数的伪代码</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNiC0P.png" alt="oNiC0P.png"></p>
+<p>代码审计可以得知，最重要的是<strong>dword_408078</strong>和<strong>dword_40807C</strong>这两个变量的变化，双击可以知道dword_408078初始值为7，而dword_40807C初始值为0，然后经过十四次的移动，同时需要使dword_408078 &#x3D; 5 和dword_40807C &#x3D; -4即为到达终点，所以调出迷宫图，迷宫的字符是70个字节，所以采用7*10的形式进行排列</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNi9mt.png" alt="oNi9mt.png"></p>
+<p>用wasd控制上下左右的方向，即可得到flag</p>
+<h4 id="关于nop"><a href="#关于nop" class="headerlink" title="关于nop"></a>关于nop</h4><p>第一次接触到nop和花指令，ida里使用nop使用到了一个插件<strong>keypatch</strong>，参考网络上其他师傅的题解，用的更多的好像是OD</p>
+<p>附一份keypatch的安装教程和使用教程吧</p>
+<p><strong>安装：</strong></p>
+<p>1.下载keypatch.py复制到<strong>IDA Pro\plugins</strong>路径下</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://github.com/keystone-engine/keypatch">https://github.com/keystone-engine/keypatch</a></p>
+<p>2.下载安装keystone的模块</p>
+<p>（64位的系统下这个就可以了）</p>
+<p>链接：<a target="_blank" rel="noopener" href="https://github.com/keystone-engine/keystone/releases/download/0.9.1/keystone-0.9.1-python-win64.msi">https://github.com/keystone-engine/keystone/releases/download/0.9.1/keystone-0.9.1-python-win64.msi</a></p>
+<p>安装后即可使用</p>
+<p><strong>使用：</strong></p>
+<p>在ida中选中要更改的数据，点击Edit-&gt;Patch program-&gt;change byte….，将数值改为90，即可nop</p>
+<p><img src="https://z3.ax1x.com/2021/12/02/oNiktS.png" alt="oNiktS.png"></p>
+<h2 id="GWCTF-2019-xxor"><a href="#GWCTF-2019-xxor" class="headerlink" title="[GWCTF 2019]xxor"></a>[GWCTF 2019]xxor</h2><p>题目可以很明显看出，这是题异或</p>
+<p>将文件拖进ida，找到main函数，f5反编译[<img src="https://s4.ax1x.com/2022/02/21/HjW7M4.md.png" alt="HjW7M4.md.png"></p>
+<p>进行代码审计，先是要求我们输入6个数据，36行至43行进行第一段处理，每次取两个数据存到dword_601078和dword_60107C中，再由sub_400686对dword_601078和unk_601060进行处理，unk_601060存的数据为2，2，3，4；然后第四十四行对第一次处理之后的数据进行判断，判断是否符合要求</p>
+<p>先看看sub_400770里的内容</p>
+<p><img src="https://s4.ax1x.com/2022/02/21/HjfNSU.png" alt="HjfNSU.png"></p>
+<p>很清晰的可以看出，这六个数就是经过第一次处理后的数据，所以我们可以通过计算得到这六个数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a1[0]=3746099070,</span><br><span class="line">a1[1]=550153460,</span><br><span class="line">a1[2]=3774025685,</span><br><span class="line">a1[3]=1548802262,</span><br><span class="line">a1[4]=2652626477,</span><br><span class="line">a1[5]=2230518816</span><br></pre></td></tr></table></figure>
+
+<p>(据说是可以用py的z3库完成方程式的运算，只不过z3只支持py2，所以手算了一下)</p>
+<p>然后看sub_400686</p>
+<p><img src="C:\Users\HASEE\AppData\Roaming\Typora\typora-user-images\image-20211203162943710.png" alt="image-20211203162943710"></p>
+<p>其实就是对循环内的内容做个逆向了，编写脚本，只不过我对v5这个值等于0但是脚本里没法等于0有些不大理解</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__int64 a[<span class="number">6</span>]=&#123;<span class="number">3746099070</span>,<span class="number">550153460</span>,<span class="number">3774025685</span>,<span class="number">1548802262</span>,<span class="number">2652626477</span>,<span class="number">2230518816</span>&#125;; </span><br><span class="line">  	<span class="type">unsigned</span> <span class="type">int</span> a2[<span class="number">4</span>]=&#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> v3; </span><br><span class="line">  	<span class="type">unsigned</span> <span class="type">int</span> v4; </span><br><span class="line">  	<span class="type">int</span> v5;</span><br><span class="line">  	<span class="keyword">for</span> ( <span class="type">int</span> j = <span class="number">0</span>; j &lt;= <span class="number">4</span>; j += <span class="number">2</span> )</span><br><span class="line">  	&#123;</span><br><span class="line">   		v3 = a[j];</span><br><span class="line">   		v4 = a[j+<span class="number">1</span>];</span><br><span class="line">   		v5 = <span class="number">1166789954</span>*<span class="number">0x40</span>; <span class="comment">//伪代码里这里为0，不知道为什么逆向的时候就要变成这个数;</span></span><br><span class="line">   		<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;= <span class="number">0x3F</span>;i++)</span><br><span class="line">   		&#123;</span><br><span class="line">   			v4 -= (v3 + v5 + <span class="number">20</span>) ^ ((v3 &lt;&lt; <span class="number">6</span>) + a2[<span class="number">2</span>]) ^ ((v3&gt;&gt;<span class="number">9</span>) + a2[<span class="number">3</span>]) ^ <span class="number">0x10</span>;</span><br><span class="line">			v3 -= (v4 + v5 + <span class="number">11</span>) ^ ((v4 &lt;&lt; <span class="number">6</span>) + *a2) ^ ((v4 &gt;&gt; <span class="number">9</span>) + a2[<span class="number">1</span>]) ^ <span class="number">0x20</span>; </span><br><span class="line">			v5 -= <span class="number">1166789954</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		a[j] = v3;</span><br><span class="line">		a[j+<span class="number">1</span>] = v4;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt; *((<span class="type">char</span>*)&amp;a[i] + <span class="number">2</span>) &lt;&lt; *((<span class="type">char</span>*)&amp;a[i] + <span class="number">1</span>) &lt;&lt;  * ((<span class="type">char</span>*)&amp;a[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;PAUSE&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h2 id="MRCTF2020-Xor"><a href="#MRCTF2020-Xor" class="headerlink" title="[MRCTF2020]Xor"></a>[MRCTF2020]Xor</h2><p>将文件拖进IDA，浏览一下，看见start函数但没找到main函数，简单的扫一下start函数，信息量略大，所以还是选择先shift+f12查字符串</p>
+<p><img src="https://s4.ax1x.com/2022/02/21/HjfYWT.png" alt="HjfYWT.png"></p>
+<p>找到一句<strong>Give Me Your Flag String:\n</strong>，双击跟踪一下</p>
+<p><img src="https://s4.ax1x.com/2022/02/21/Hjfay4.png" alt="Hjfay4.png"></p>
+<p>看到Right下方有一串不知名字符串，联想题目是叫Xor，所以异或一下</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flag= <span class="string">&#x27;&#x27;</span></span><br><span class="line">flagXor = <span class="string">&#x27;MSAWB~FXZ:J:`tQJ&quot;N@ bpdd&#125;8g&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span>  <span class="built_in">range</span>(<span class="built_in">len</span>(flagXor)):</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">ord</span>(flagXor[i])^i)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="https://s4.ax1x.com/2022/02/21/HjfJYV.png" alt="HjfJYV.png"></p>
+<p>看了别的大师傅的博客，发现其实有点投机取巧了，详情可见<strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43859686/article/details/112390442">https://blog.csdn.net/weixin_43859686/article/details/112390442</a></strong></p>
+
+        <p class="suffix-end">__END__</p>
+        <div class="suffix-box">
+            <div class="suffix-box-left">
+                <img src="/image/tx.JPG" alt="X06">
+            </div>
+            <div class="suffix-box-right">
+                <span class="suffix-box-title">文章作者</span>：X06
+                <br>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2021/11/30/BUU-Re/" target="_blank">BUU-Re</a>
+                <br>
+                <span class="suffix-box-title">作者签名</span>：爱意东升西落，浪漫至死不渝
+                <br>
+                <span class="suffix-box-title">关于主题</span>：<a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+                <br>
+                <span class="suffix-box-title">版权声明</span>：文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+                <br>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="article-footer">
+        
+        
+            <div class="tag">
+                标签：
+                
+                    <a href="/tag/Re/">Re</a>
+                
+            </div>
+        
+        <div class="article-prev-next">
+            
+            
+                <a href="/2021/11/24/BUU-PWN/" class="next-prefix">» </a> 下一篇：    <a href="/2021/11/24/BUU-PWN/" title="发布于 2021-11-24 04:31">BUU-PWN</a>
+            
+        </div>
+    </div>
+    
+    <div class="article-comments">
+        <div class="comments-title">
+            评论列表
+        </div>
+        <div class="comments-content">
+        </div>
+    </div>
+
+</div>
+
+    </div>
+</div>
+    <div id="footer"></div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar"></div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user"><span></span></div>        
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul></ul> 
+            </div> 
+            <div class="menu-link"></div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/search.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/iscroll.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/APlayer.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/APlayer.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/Meting.min.js"></script>
+        <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+    
+    
+    <div class="wrap-right"></div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : 'X06emmm',
+        GitHubRepositories : 'X06emmm.github.io',
+
+        BlogUser      : 'X06',
+        BlogAvatar    : '/image/tx.JPG',
+        BlogStartDate : '2021-07-14',
+
+        WebsiteTitleBlur         : '(◍´꒳`◍) Hi, Welcome to my blog',
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : '(*´∇｀*) 欢迎回到霍格沃茨!',
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/website/logo.png',
+
+        ProgressBar: {
+            id       : 'topProgressBar',
+            color    : '#77B6FF',
+            height   : '2px',
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound: {
+                tension  : 16,
+                friction : 5
+            },
+            spinner: {
+                id     : 'spinner',
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : '#F0F0F0',
+                    stroke     : '#272633',
+                    base       : '',
+                    child      : '#272633'
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : 'rgba(255, 255, 255, .2)',
+            clearOffset : 0.3
+        },
+
+        ArticleHeaderAnimationRendered : false,
+        ArticleHeaderAnimation         : {
+            triW                  : 14,
+            triH                  : 20,
+            neighbours            : [
+                
+                    'side',
+                
+                    'top',
+                
+                    'bottom',
+                
+            ],
+            speedTrailAppear      : 0.1,
+            speedTrailDisappear   : 0.1,
+            speedTriOpen          : 1,
+            trailMaxLength        : 30,
+            trailIntervalCreation : 100,
+            delayBeforeDisappear  : 2,
+            colors                : [
+                
+                    '#96EDA6',
+                
+                    '#5BC6A9',
+                
+                    '#38668C',
+                
+                    '#374D84',
+                
+                    '#BED5CB',
+                
+                    '#62ADC6',
+                
+                    '#8EE5DE',
+                
+                    '#304E7B',
+                
+            ]
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : '60%',
+            colorBrightness  : '50%',
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : 'random',
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                '/image/hgwc.png',
+            
+                '/image/she.jpg',
+            
+        ],
+        HomeBannerText  : '等太阳落山，就一起做梦',
+
+        ArticleHeaderImage : [
+            
+                'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/header/article.jpg',
+            
+        ],
+
+        OtherBannerText : '你一定能够成为你想要去成为的人',
+
+        MenuList : [
+            
+                {
+                    name   : '首页',
+                    href   : '/',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '标签',
+                    href   : '/tag',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '分类',
+                    href   : '/category',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '归档',
+                    href   : '/archive',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '赞赏',
+                    href   : '/donate',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '关于',
+                    href   : '/about',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '订阅',
+                    href   : '/atom.xml',    
+                    target : '_blank',
+                    class  : ''
+                },
+            
+                {
+                    name   : '搜索',
+                    href   : '',    
+                    target : '',
+                    class  : 'search'
+                },
+            
+                {
+                    name   : '留言板',
+                    href   : '/comment',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '友情链接',
+                    href   : '/friend',    
+                    target : '',
+                    class  : ''
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        icon : 'icon-weibo', 
+                        url  : 'https://weibo.com/u/3199224843'
+                    },
+                
+                    {
+                        icon : 'icon-wechat', 
+                        url  : 'https://u.wechat.com/EDrxqboPxE5-6NrOobNDNwI'
+                    },
+                
+                    {
+                        icon : 'icon-qq', 
+                        url  : ''
+                    },
+                
+                    {
+                        icon : 'icon-github', 
+                        url  : 'https://github.com/X06emmm'
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : {
+            icon    : 'like-fill',
+            left    : '爱意东升西落',
+            right   : '浪漫至死不渝'
+        },
+        ThemeInfo   : true,
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                'Based on cnblogs theme SimpleMemory.',
+                            
+                                '',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'SimpleMemory Author:',
+                            
+                                'BNDong',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'Theme:',
+                            
+                                'LiveForCode',
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : '',
+
+        Donate : {
+            paypal  : '',
+            bitcoin : '',
+            alipay  : '/image/zfb.JPG',
+            wechat  : '/image/wechat.jpg'
+        },
+
+        Code : {
+            style : 'normal'
+        },  
+
+        Search : {
+            applicationID : 'VI4FR31IM5',
+            apiKey        : '3314a8bcb688d0eef926d11b0412c8ef',
+            indexName     : 'abc',
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : '搜索',
+                empty       : '未发现与 「${query}」 相关的内容',
+                stats       : '${hits} 条相关条目，使用了 ${time} 毫秒',
+            }
+        }, 
+
+        Valine : {
+            switch         : true,
+            el             : '.comments-content',
+            appId          : 'O8XdEwFSobGoow13EApTlL5P-gzGzoHsz',
+            appKey         : '2ntSkK2Yha7D9BBVG88AtBBz',
+            placeholder    : '看春风不喜....',
+            avatar         : 'mm',
+            meta           : 'nick,mail,link',
+            requiredFields : 'nick,mail',
+            pageSize       : 5,
+            lang           : 'zh-cn',
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : '.toc',
+            contentSelector       : '.article-body',
+            headingSelector       : 'h1, h2, h3, h4, h5',
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : '.toc',
+            positionFixedClass    : 'toc-fixed',
+            fixedSidebarOffset    : '',
+        },
+
+        Require : {
+            baseUrl     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/',
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : 'Meting'
+        },
+        APlayer : {
+            container : '.aplayer',
+            fixed     : true,
+            autoplay  : false,
+            loop      : 'all',
+            order     : 'random',
+            preload   : 'auto',
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : 'aLIEz',
+                        artist : 'mizuki（瑞葵）',
+                        cover  : '/music/cover/aLIEz.jpg',
+                        url    : '/music/song/aLIEz.mp3',
+                        lrc    : '/music/lrc/aLIEz.lrc'
+                    },
+                
+                    {
+                        name   : 'Endless Tears',
+                        artist : 'CLIFF EDGE',
+                        cover  : '/music/cover/Endless Tears.jpg',
+                        url    : '/music/song/Endless Tears.mp3',
+                        lrc    : '/music/lrc/Endless Tears.lrc'
+                    },
+                
+                    {
+                        name   : 'Miracle',
+                        artist : 'Cascada',
+                        cover  : '/music/cover/Miracle.jpg',
+                        url    : '/music/song/Miracle.mp3',
+                        lrc    : '/music/lrc/Miracle.lrc'
+                    },
+                
+                    {
+                        name   : 'Roll The Dice',
+                        artist : '高珊',
+                        cover  : '/music/cover/Roll The Dice.jpg',
+                        url    : '/music/song/Roll The Dice.mp3',
+                        lrc    : '/music/lrc/Roll The Dice.lrc'
+                    },
+                
+                    {
+                        name   : 'See You Again',
+                        artist : 'Charlie Puth, Wiz Khalifa',
+                        cover  : '/music/cover/See You Again.jpg',
+                        url    : '/music/song/See You Again.mp3',
+                        lrc    : '/music/lrc/See You Again.lrc'
+                    },
+                
+                    {
+                        name   : 'Traveling Light',
+                        artist : 'Joel Hanson, Sara Groves',
+                        cover  : '/music/cover/Traveling Light.jpg',
+                        url    : '/music/song/Traveling Light.mp3',
+                        lrc    : '/music/lrc/Traveling Light.lrc'
+                    },
+                
+                    {
+                        name   : '痴心绝对',
+                        artist : '李圣杰',
+                        cover  : '/music/cover/痴心绝对.jpg',
+                        url    : '/music/song/痴心绝对.mp3',
+                        lrc    : '/music/lrc/痴心绝对.lrc'
+                    },
+                
+                    {
+                        name   : '好想大声说爱你',
+                        artist : 'BAAD（バード）',
+                        cover  : '/music/cover/好想大声说爱你.jpg',
+                        url    : '/music/song/好想大声说爱你.mp3',
+                        lrc    : '/music/lrc/好想大声说爱你.lrc'
+                    },
+                
+            ]
+        },
+        Meting : {
+            id       : '3778678', 
+            lrcshow  : false, 
+            server   : 'netease', 
+            type     : 'playlist', 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : 'all', 
+            order    : 'random', 
+            preload  : 'auto', 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        LazyLoad : {
+            default : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/website/lazyload.svg'
+        },
+  
+        Style : {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/APlayer.css',
+            archive          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/archive.css',
+            donate           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/donate.css',
+            fancybox         : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/jquery.fancybox.css',
+            footer           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/footer.css',
+            iconfont         : 'https://at.alicdn.com/t/font_1546312_l3yohatebw.css',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/index.css',
+            menuBubble       : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/menu-bubble.css',
+            page             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/page.css',
+            post             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/post.css',
+            search           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/search.css',
+            tocbot           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/tocbot.css',
+            normal           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/normal.css',
+            night            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/night.css',
+            clipboard        : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/clipboard.css'
+        },
+
+        Script: {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/APlayer.min.js',
+            config           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/require.config.js',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/index.js',
+            instantSearch    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/instantsearch.min.js',
+            jQuery           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/jquery-3.4.1.min.js',
+            loading          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/loading.js',
+            meting           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/Meting.min.js',
+            iscroll          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/iscroll.js',
+            require          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/require.min.js'
+        },
+
+        Font: {
+            LongCang   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css',
+            Monda      : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css',
+            NotoSansSC : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/NotoSansSC.css',
+            Playball   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Playball.css',
+            PTMono     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/PTMono.css',
+            RobotoSlab : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/RobotoSlab.css',
+            Rosario    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Rosario.css',
+            UbuntuMono : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/UbuntuMono.css'
+        },
+
+        Suffix : {
+            about : '爱意东升西落，浪漫至死不渝'
+        },
+            
+        Theme : {
+            url  : 'https://github.com/first19326/Hexo-LiveForCode',
+            name : 'Hexo - Live For Code'
+        }  
+    };
+</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/index.js"></script>
+</body>
+</html>
