@@ -6,7 +6,7 @@
     <meta name="referrer" content="origin">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>标签 - Re</title>
+    <title>RC4加密学习</title>
 
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css">
@@ -17,111 +17,116 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Rosario.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/UbuntuMono.css">
 
-    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/index.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/post.css">
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/normal.css">
+    
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/jquery-3.4.1.min.js"></script>
+
 <meta name="generator" content="Hexo 6.0.0"></head>
 <body>
     <a id="cover"></a>
     <div id="header">
-    <div class="header" >
+    <div class="header">
         <div class="vertical">
             <div class="inner">
-                <h1 class="header-title"></h1>
-                <h2 class="header-description" id="hitokoto"></h2>
-                <h3 class="header-info" id="hitokotoAuthor"></h3>
-                <!--
-                <h1 class="header-subtitle"></h1>
-                <p class="header-subinfo"></p>
-                -->
+                <h1 class="header-subtitle">RC4加密学习</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2022-03-14
+                        </span>
+                        
+                            <span id="/2022/03/14/RC4加密学习/" class="leancloud_visitors" data-flag-title="RC4加密学习">
+                                <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                            </span>
+                        
+                        <span>
+                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2022/03/14/RC4加密学习/"></span>
+                        </span>  
+                    </p>                 
+                </div>
             </div>
         </div>
-        <a class="scroll-down" href="javascript:;" target="_self" data-offset="-45">
-            <span class="hidden">Scroll Down</span>
-            <i class="scroll-down-icon iconfont icon-return"></i>
-        </a>
+        <canvas id="articleHeaderCanvas"></canvas>
     </div>
 </div>
     <div id="container">
     <div id="content">
-        <div class="articles">
-    
-        <div class="article">
-            <div class="article-title">
-                <a href="/2022/03/14/RC4%E5%8A%A0%E5%AF%86%E5%AD%A6%E4%B9%A0/">RC4加密学习</a>
-                
+        <div id="article">
+    <div class="toc"></div>
+    <div class="article-body">
+        <h1 id="RC4加密学习"><a href="#RC4加密学习" class="headerlink" title="RC4加密学习"></a>RC4加密学习</h1><h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h2><p>RC4是由Rivest于1987年设计的一种序列密码，被普遍应用于Windows和无线通讯系统等；</p>
+<h2 id="关键变量："><a href="#关键变量：" class="headerlink" title="关键变量："></a>关键变量：</h2><p>1、密钥流：RC4算法的关键是根据明文和密钥生成相应的密钥流，密钥流的长度和明文的长度是对应的，也就是说明文的长度是500字节，那么密钥流也是500字节。当然，加密生成的密文也是500字节，因为密文第i字节&#x3D;明文第i字节^密钥流第i字节；</p>
+<p>2、状态向量S：长度为256，S[0],S[1]…..S[255]。每个单元都是一个字节，算法运行的任何时候，S都包括0-255的8比特数的排列组合，只不过值的位置发生了变换；</p>
+<p>   3、临时向量T：长度也为256，每个单元也是一个字节。如果密钥的长度是256字节，就直接把密钥的值赋给T，否则，轮转地将密钥的每个字节赋给T；</p>
+<p>   4、密钥K：长度为1-256字节，注意密钥的长度keylen与明文长度、密钥流的长度没有必然关系，通常密钥的长度趣味16字节（128比特）。</p>
+<h2 id="算法原理："><a href="#算法原理：" class="headerlink" title="算法原理："></a>算法原理：</h2><p>RC4对S表的初始化算法: 两个计数器i和j，i&#x3D;0，j&#x3D;0</p>
+<ol>
+<li>对S表进行线性填充：Si&#x3D;i, 0 ≤i&lt;255</li>
+<li>用密钥填充另外一个256字节的数组K，若是密钥长度小于256字节，则依次重复填充，直至填满这个数组， K0, K1, …, K255</li>
+<li>对于i&#x3D;0到255重复如下步骤：<br>(1) j&#x3D;j+Si+Ki mod 256<br>(2) 交换Si和Sj</li>
+</ol>
+<p>S表的开始256个状态舍弃则更安全</p>
+<p>RC4输出密钥流字节z的算法</p>
+<ol>
+<li>i&#x3D;0，j&#x3D;0</li>
+<li>i&#x3D;i+1 mod 256</li>
+<li>j&#x3D;j+Si mod 256</li>
+<li>交换Si和Sj</li>
+<li>t&#x3D;Si+Sj mod 256</li>
+<li>z&#x3D;St .</li>
+</ol>
+<h2 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="comment">//char -&gt; 16</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">char_2_Hex</span><span class="params">(<span class="type">char</span>* Char, <span class="type">char</span>* Hex)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="built_in">strlen</span>(Char);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> tmp = <span class="built_in">int</span>(Char[i]);</span><br><span class="line">        <span class="keyword">if</span>(Char[i] &lt; <span class="number">0</span>)</span><br><span class="line">        tmp = (<span class="number">-1</span>) * Char[i] + <span class="number">128</span>;</span><br><span class="line">        <span class="type">int</span> high = tmp / <span class="number">16</span>;</span><br><span class="line">        <span class="type">int</span> low = tmp % <span class="number">16</span>;</span><br><span class="line">        <span class="type">char</span> HIHG;</span><br><span class="line">        <span class="type">char</span> LOW;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(high &gt;= <span class="number">10</span>)</span><br><span class="line">            HIHG = <span class="built_in">char</span>(high - <span class="number">10</span> + <span class="number">65</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            HIHG = <span class="built_in">char</span>(high + <span class="number">48</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(low &gt;= <span class="number">10</span>)</span><br><span class="line">            LOW = <span class="built_in">char</span>(low - <span class="number">10</span> + <span class="number">65</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            LOW = <span class="built_in">char</span>(low + <span class="number">48</span>);</span><br><span class="line"></span><br><span class="line">        Hex[<span class="number">2</span>*i] = HIHG;</span><br><span class="line">        Hex[<span class="number">2</span>*i+<span class="number">1</span>] = LOW;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//16 -&gt; char </span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Hex_2_char</span><span class="params">(<span class="type">char</span>*Hex, <span class="type">char</span>* Char)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> length = <span class="built_in">strlen</span>(Hex) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> high;</span><br><span class="line">        <span class="type">int</span> low;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">int</span>(Hex[<span class="number">2</span>*i])&gt;=<span class="number">65</span>)</span><br><span class="line">            high = <span class="built_in">int</span>(Hex[<span class="number">2</span>*i] - <span class="number">65</span> + <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            high = <span class="built_in">int</span>(Hex[<span class="number">2</span>*i]- <span class="number">48</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">int</span>(Hex[<span class="number">2</span>*i+<span class="number">1</span>])&gt;=<span class="number">65</span>)</span><br><span class="line">            low = <span class="built_in">int</span>(Hex[<span class="number">2</span>*i+<span class="number">1</span>] - <span class="number">65</span> + <span class="number">10</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            low = <span class="built_in">int</span>(Hex[<span class="number">2</span>*i+<span class="number">1</span>] - <span class="number">48</span>);</span><br><span class="line"></span><br><span class="line">        Char[i] = <span class="built_in">char</span>(high*<span class="number">16</span> + low);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">char</span>* <span class="title">RC4</span><span class="params">(<span class="type">char</span>* C,<span class="type">char</span>* key)</span>  <span class="comment">//encrypt，再运行一次即可解密</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="type">int</span> S[<span class="number">256</span>];</span><br><span class="line"> <span class="type">int</span> T[<span class="number">256</span>];</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span>  count = <span class="number">0</span>;</span><br><span class="line">count = <span class="built_in">strlen</span>(key);</span><br><span class="line"></span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line"> &#123;</span><br><span class="line">     S[i] = i;</span><br><span class="line">     <span class="type">int</span> tmp = i % count;</span><br><span class="line">     T[i] = key[tmp];</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="type">int</span> j = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span>  i = <span class="number">0</span>; i &lt; <span class="number">256</span>; i++)</span><br><span class="line"> &#123;</span><br><span class="line">    j = (j + S[i] + T[i]) % <span class="number">256</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line">    tmp = S[j];</span><br><span class="line">    S[j] = S[i];</span><br><span class="line">    S[i] = tmp;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="type">int</span> length = <span class="number">0</span>;</span><br><span class="line">length = <span class="built_in">strlen</span>(C);</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">j = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// i=0,j=0;</span></span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="type">int</span> p = <span class="number">0</span>; p &lt; length; p++)</span><br><span class="line"> &#123;</span><br><span class="line"></span><br><span class="line">    i = (i + <span class="number">1</span>) % <span class="number">256</span>;</span><br><span class="line">    j = (j + S[i]) % <span class="number">256</span>;</span><br><span class="line">    <span class="type">int</span> tmp;</span><br><span class="line">    tmp = S[j];</span><br><span class="line">    S[j] = S[i];</span><br><span class="line">    S[i] = tmp;</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> k = S[(S[i] + S[j]) % <span class="number">256</span>];</span><br><span class="line">    C[p]=C[p]^k;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">return</span> C;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> A[<span class="number">1000</span>] = <span class="string">&quot;aaaaaaaaaaa&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;C =&quot;</span> &lt;&lt; A &lt;&lt;endl;</span><br><span class="line">    <span class="type">char</span> key[<span class="number">256</span>] = <span class="string">&quot;abcde&quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;key = &quot;</span> &lt;&lt; key &lt;&lt;endl;</span><br><span class="line">    <span class="type">size_t</span>  count = <span class="number">0</span>;</span><br><span class="line">    count = <span class="built_in">strlen</span>(A);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span>* B = <span class="built_in">RC4</span>(A,key);</span><br><span class="line">    </span><br><span class="line">    <span class="type">char</span>* M = <span class="keyword">new</span> <span class="type">char</span>[<span class="number">2</span>*count]; </span><br><span class="line">    </span><br><span class="line">    <span class="built_in">char_2_Hex</span>(B,M);</span><br><span class="line">    </span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;M = &quot;</span> &lt;&lt; M&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span>* C = <span class="built_in">RC4</span>(B,key);</span><br><span class="line">    </span><br><span class="line">	cout &lt;&lt;<span class="string">&quot;C&#x27; =  &quot;</span>&lt;&lt;C&lt;&lt;endl;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">system</span>(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        <p class="suffix-end">__END__</p>
+        <div class="suffix-box">
+            <div class="suffix-box-left">
+                <img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/41646465847_.pic.jpg" alt="X06">
             </div>
-            <div class="article-abstract">
-                
+            <div class="suffix-box-right">
+                <span class="suffix-box-title">文章作者</span>：X06
+                <br>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2022/03/14/RC4%E5%8A%A0%E5%AF%86%E5%AD%A6%E4%B9%A0/" target="_blank">RC4加密学习</a>
+                <br>
+                <span class="suffix-box-title">作者签名</span>：爱意东升西落，浪漫至死不渝
+                <br>
+                <span class="suffix-box-title">关于主题</span>：<a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+                <br>
+                <span class="suffix-box-title">版权声明</span>：文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+                <br>
             </div>
-            <div class="clear"></div>
-            <div class="article-info">
-                <span>
-                    <i class="iconfont icon-time"></i> 发表时间：2022-03-14
-                </span>
-                
-                    <span id="/2022/03/14/RC4加密学习/" class="leancloud_visitors" data-flag-title="RC4加密学习">
-                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                    </span>
-                
-                <span>
-                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2022/03/14/RC4加密学习/"></span>
-                </span>
-            </div>
-            <div class="clear"></div>     
+            <div style="clear: both;"></div>
         </div>
-    
-        <div class="article">
-            <div class="article-title">
-                <a href="/2022/03/14/TEA%E3%80%81XTEA%E3%80%81XXTEA%E5%8A%A0%E5%AF%86%E5%AD%A6%E4%B9%A0/">TEA、XTEA、XXTEA加密学习</a>
+    </div>
+    <div class="article-footer">
+        
+        
+            <div class="tag">
+                标签：
+                
+                    <a href="/tag/Re/">Re</a>
                 
             </div>
-            <div class="article-abstract">
-                
-            </div>
-            <div class="clear"></div>
-            <div class="article-info">
-                <span>
-                    <i class="iconfont icon-time"></i> 发表时间：2022-03-14
-                </span>
-                
-                    <span id="/2022/03/14/TEA、XTEA、XXTEA加密学习/" class="leancloud_visitors" data-flag-title="TEA、XTEA、XXTEA加密学习">
-                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                    </span>
-                
-                <span>
-                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2022/03/14/TEA、XTEA、XXTEA加密学习/"></span>
-                </span>
-            </div>
-            <div class="clear"></div>     
+        
+        <div class="article-prev-next">
+            
+            
+                <a href="/2022/03/14/TEA%E3%80%81XTEA%E3%80%81XXTEA%E5%8A%A0%E5%AF%86%E5%AD%A6%E4%B9%A0/" class="next-prefix">» </a> 下一篇：    <a href="/2022/03/14/TEA%E3%80%81XTEA%E3%80%81XXTEA%E5%8A%A0%E5%AF%86%E5%AD%A6%E4%B9%A0/" title="发布于 2022-03-14 03:33">TEA、XTEA、XXTEA加密学习</a>
+            
         </div>
+    </div>
     
-        <div class="article">
-            <div class="article-title">
-                <a href="/2021/11/30/BUU-Re/">BUU-Re</a>
-                
-            </div>
-            <div class="article-abstract">
-                
-            </div>
-            <div class="clear"></div>
-            <div class="article-info">
-                <span>
-                    <i class="iconfont icon-time"></i> 发表时间：2021-11-30
-                </span>
-                
-                    <span id="/2021/11/30/BUU-Re/" class="leancloud_visitors" data-flag-title="BUU-Re">
-                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                    </span>
-                
-                <span>
-                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2021/11/30/BUU-Re/"></span>
-                </span>
-            </div>
-            <div class="clear"></div>     
+    <div class="article-comments">
+        <div class="comments-title">
+            评论列表
         </div>
-    
-    
+        <div class="comments-content">
+        </div>
+    </div>
+
 </div>
 
     </div>
