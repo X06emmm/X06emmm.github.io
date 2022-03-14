@@ -244,7 +244,7 @@
 <p>分析代码，大概意思是用</p>
 <p><strong>var rotFlag &#x3D; flag.replace(&#x2F;[a-zA-Z]&#x2F;g, function(c){return String.fromCharCode((c &lt;&#x3D; “Z” ? 90 : 122) &gt;&#x3D; (c &#x3D; c.charCodeAt(0) + 13) ? c : c - 26);});</strong></p>
 <p>进行运算，最后得到</p>
-<p><strong><a href="mailto:&#80;&#x79;&#118;&#x72;&#97;&#103;&#70;&#118;&#113;&#114;&#89;&#x62;&#116;&#118;&#x61;&#102;&#x4e;&#x65;&#114;&#x52;&#110;&#102;&#x6c;&#x40;&#x73;&#121;&#110;&#x65;&#114;&#x2d;&#98;&#x61;&#x2e;&#x70;&#98;&#122;">&#80;&#x79;&#118;&#x72;&#97;&#103;&#70;&#118;&#113;&#114;&#89;&#x62;&#116;&#118;&#x61;&#102;&#x4e;&#x65;&#114;&#x52;&#110;&#102;&#x6c;&#x40;&#x73;&#121;&#110;&#x65;&#114;&#x2d;&#98;&#x61;&#x2e;&#x70;&#98;&#122;</a></strong></p>
+<p><strong><a href="mailto:&#x50;&#x79;&#118;&#x72;&#97;&#x67;&#x46;&#118;&#x71;&#x72;&#x59;&#x62;&#x74;&#x76;&#97;&#102;&#78;&#x65;&#114;&#82;&#x6e;&#x66;&#108;&#64;&#x73;&#121;&#110;&#101;&#x72;&#45;&#98;&#97;&#46;&#x70;&#98;&#x7a;">&#x50;&#x79;&#118;&#x72;&#97;&#x67;&#x46;&#118;&#x71;&#x72;&#x59;&#x62;&#x74;&#x76;&#97;&#102;&#78;&#x65;&#114;&#82;&#x6e;&#x66;&#108;&#64;&#x73;&#121;&#110;&#101;&#x72;&#45;&#98;&#97;&#46;&#x70;&#98;&#x7a;</a></strong></p>
 <p>说实话就是这串代码看得不是很懂，但是之前做东秦的招新赛遇到过类似的东西，那时候知道了一种加密方法叫ROT13，所以找一个ROT13的在线解密工具试一下</p>
 <p><a target="_blank" rel="noopener" href="http://www.ab126.com/goju/10818.html">http://www.ab126.com/goju/10818.html</a></p>
 <p><img src="https://i.loli.net/2021/12/02/YmhUx48ctCf1W9z.png" alt="image-20211109205823291.png"></p>
@@ -583,6 +583,61 @@
 
 <p>网上对此的解释是：<strong>如果某个版本中出现了某个新的功能特性，而且这个特性和当前版本中使用的不兼容，也就是它在该版本中不是语言标准，那么我如果想要使用的话就需要从future模块导入</strong></p>
 <p>最后附上z3的github地址方便后期学习深入：<a target="_blank" rel="noopener" href="https://github.com/Z3Prover/z3">https://github.com/Z3Prover/z3</a></p>
+<h2 id="CFI-CTF-2018-IntroToPE-NET"><a href="#CFI-CTF-2018-IntroToPE-NET" class="headerlink" title="[CFI-CTF 2018]IntroToPE(.NET)"></a>[CFI-CTF 2018]IntroToPE(.NET)</h2><p>18年的题目确实简单啊</p>
+<p>将文件解压后拖入DiE检查</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWem2F.md.png" alt="bWem2F.md.png"></p>
+<p>发现是个.NET文件，所以用DnSpy打开该文件</p>
+<p>找到Form1里的button1_Click</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWeKKJ.png" alt="bWeKKJ.png"></p>
+<p>看一下这个代码，非常简单易懂，就是将一串字符通过verifyPasswd()加密后形成flag</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWee8U.md.jpg" alt="bWee8U.md.jpg"></p>
+<p>所以双击一下这个verifyPasswd()，看一下这个第十九行，就是一个base64加密</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWenv4.md.png" alt="bWenv4.md.png"></p>
+<p>找一个在线网站解密一下，得到flag</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWeZCT.png" alt="bWeZCT.png"></p>
+<h2 id="SWPU2019-ReverseMe"><a href="#SWPU2019-ReverseMe" class="headerlink" title="[SWPU2019]ReverseMe"></a>[SWPU2019]ReverseMe</h2><p>动调真的做的好烂，还是要多做点</p>
+<p>将文件拖进DiE查壳，得知这是个32位的程序，将文件拖进IDA</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWntnH.png" alt="bWntnH.png"></p>
+<p>函数很多，下意识shift+f12搜flag</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWn81O.png" alt="bWn81O.png"></p>
+<p>找到并跟踪这一串字符串，并反编译</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnJje.png" alt="bWnJje.png"></p>
+<p>函数过多，静态分析有难度，所以尝试进行动调，找到程序入口点下断点</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnNBd.png" alt="bWnNBd.png"></p>
+<p>开始f8动调，直到输入点</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnGcD.png" alt="bWnGcD.png"></p>
+<p>可以看到call下面有个cmp比较</p>
+<p>大佬说：输入结束后将 ebp-0x90 处的值跟32比较，更改 ZF 标志位，0xCD28C7 处的 jz 会根据这边的情况进行跳转，如果 ZF 标志位为0，则跳转，否则就会输出 Try again，退出程序。ebp-0x90 处放的是我们输入的字符串的长度，因此我们输入的字符串的长度必须是32</p>
+<p>补充：汇编语言的标志位 ZF:零标志位。相关指令执行后结果为0那么 ZF&#x3D;1,结果不为0则 ZF&#x3D;0；</p>
+<p>所以我们输入32个1，然后继续调试</p>
+<p>来到了第一个对字符串操作的地方</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnUHA.png" alt="bWnUHA.png"></p>
+<p>然后继续往下看</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWndAI.png" alt="bWndAI.png"></p>
+<p>[ecx+edi]中存储的是我们输入的32位字符串，与al进行异或，异或结果存在了ecx中，循环结束后可以双击查看ecx里的存值为：</p>
+<p>[‘0x62’, ‘0x66’, ‘0x61’, ‘0x64’, ‘0x6e’, ‘0x3’, ‘0x1’, ‘0x0’, ‘0x8’, ‘0x6e’, ‘0x72’, ‘0x65’, ‘0x77’, ‘0x62’, ‘0x66’, ‘0x61’, ‘0x64’, ‘0x6e’, ‘0x3’, ‘0x1’, ‘0x0’, ‘0x8’, ‘0x6e’, ‘0x72’, ‘0x65’, ‘0x77’, ‘0x62’, ‘0x66’, ‘0x61’, ‘0x64’, ‘0x6e’, ‘0x3’]</p>
+<p>继续向下调试，来到这个位置，eax和edx进行比较，如果值不相同，则跳转结束</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnwNt.png" alt="bWnwNt.png"></p>
+<p>其中，eax的值为：[0xB3,0x37,0xF,0xF8,0xBC,0xBC,0xAE,0x5D,0xBA,0x5A,0x4D,0x86,0x44,0x97,0x62,0xD3,0x4F,0xBA,0x24,0x16,0xB,0x9F,0x72,0x1A,0x65,0x68,0x6D,0x26,0xBA,0x6B,0xC8,0x67]</p>
+<p>edx的值为：</p>
+<p>[0xE4,0x6A,0x5F,0xAE,0xF6,0xD4,0xAF,0x19,0xEA,0x19,0x19,0xC3,0x1D,0xC3,0x11,0xD1,0xD,0xFF,0x34,0x4,0x7A,0xF1,0x15,0x42,0x26,0x2D,0x29,0x76,0xE7,0x19,0xBA,0x2B]</p>
+<p>而edx的值是从何而来的呢，我们往上看，可以看到刚才经过这个call函数时f8是直接跳过的，所以我们重新调试一下，f7步入一下这个函数，f8看看</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWn04P.png" alt="bWn04P.png"></p>
+<p>然后就找到了这个函数</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnD9f.png" alt="bWnD9f.png"></p>
+<p>这里的ecx的值为：[0x86,0x0C,0x3E,0xCA,0x98,0xd7,0xae,0x19,0xE2,0x77,0x6B,0xA6,0x6A,0xA1,0x77,0xB0,0x69,0x91,0x37,0x05,0x7A,0xF9,0x7B,0x30,0x43,0x5A,0x4B,0x10,0x86,0x7D,0xD4,0x28]</p>
+<p>到这里其实就清楚了，edx的值是由loc_CD2930中的ecx在call sub_CD25C0中异或生成的，   edx^ecx得到一组数temp[]，temp[]的值就是后续loc_CD27D7中的ecx</p>
+<p>整理一下逻辑，我们首先输入了一串长度为32的字符串，和SWPU_2019_CTF进行异或，得到的结果再temp[]进行异或然后与eax进行比较</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">edx = [<span class="number">0xE4</span>,<span class="number">0x6A</span>,<span class="number">0x5F</span>,<span class="number">0xAE</span>,<span class="number">0xF6</span>,<span class="number">0xD4</span>,<span class="number">0xAF</span>,<span class="number">0x19</span>,<span class="number">0xEA</span>,<span class="number">0x19</span>,<span class="number">0x19</span>,<span class="number">0xC3</span>,<span class="number">0x1D</span>,<span class="number">0xC3</span>,<span class="number">0x11</span>,<span class="number">0xD1</span>,<span class="number">0xD</span>,<span class="number">0xFF</span>,<span class="number">0x34</span>,<span class="number">0x4</span>,<span class="number">0x7A</span>,<span class="number">0xF1</span>,<span class="number">0x15</span>,<span class="number">0x42</span>,<span class="number">0x26</span>,<span class="number">0x2D</span>,<span class="number">0x29</span>,<span class="number">0x76</span>,<span class="number">0xE7</span>,<span class="number">0x19</span>,<span class="number">0xBA</span>,<span class="number">0x2B</span>]</span><br><span class="line"></span><br><span class="line">eax = [<span class="number">0xB3</span>,<span class="number">0x37</span>,<span class="number">0xF</span>,<span class="number">0xF8</span>,<span class="number">0xBC</span>,<span class="number">0xBC</span>,<span class="number">0xAE</span>,<span class="number">0x5D</span>,<span class="number">0xBA</span>,<span class="number">0x5A</span>,<span class="number">0x4D</span>,<span class="number">0x86</span>,<span class="number">0x44</span>,<span class="number">0x97</span>,<span class="number">0x62</span>,<span class="number">0xD3</span>,<span class="number">0x4F</span>,<span class="number">0xBA</span>,<span class="number">0x24</span>,<span class="number">0x16</span>,<span class="number">0xB</span>,<span class="number">0x9F</span>,<span class="number">0x72</span>,<span class="number">0x1A</span>,<span class="number">0x65</span>,<span class="number">0x68</span>,<span class="number">0x6D</span>,<span class="number">0x26</span>,<span class="number">0xBA</span>,<span class="number">0x6B</span>,<span class="number">0xC8</span>,<span class="number">0x67</span>]</span><br><span class="line"></span><br><span class="line">ecx = [<span class="number">0x86</span>,<span class="number">0x0C</span>,<span class="number">0x3E</span>,<span class="number">0xCA</span>,<span class="number">0x98</span>,<span class="number">0xd7</span>,<span class="number">0xae</span>,<span class="number">0x19</span>,<span class="number">0xE2</span>,<span class="number">0x77</span>,<span class="number">0x6B</span>,<span class="number">0xA6</span>,<span class="number">0x6A</span>,<span class="number">0xA1</span>,<span class="number">0x77</span>,<span class="number">0xB0</span>,<span class="number">0x69</span>,<span class="number">0x91</span>,<span class="number">0x37</span>,<span class="number">0x05</span>,<span class="number">0x7A</span>,<span class="number">0xF9</span>,<span class="number">0x7B</span>,<span class="number">0x30</span>,<span class="number">0x43</span>,<span class="number">0x5A</span>,<span class="number">0x4B</span>,<span class="number">0x10</span>,<span class="number">0x86</span>,<span class="number">0x7D</span>,<span class="number">0xD4</span>,<span class="number">0x28</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">str</span>=<span class="string">&quot;SWPU_2019_CTF&quot;</span></span><br><span class="line">b = [<span class="number">0</span>]*<span class="number">32</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">    b[i] = ecx[i] ^ eax[i]</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">    flag += <span class="built_in">chr</span>(b[i] ^ <span class="built_in">ord</span>(<span class="built_in">str</span>[i%<span class="built_in">len</span>(<span class="built_in">str</span>)]))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<h3 id="关于动态调试"><a href="#关于动态调试" class="headerlink" title="关于动态调试"></a>关于动态调试</h3><p>不知道为什么我的IDA里没有remote Linux debugger，所以我使用的是remote windows debugger</p>
+<p>打开IDA文件夹中dbgsrv文件夹，打开 win32_remote.exe 或 win64_remote.exe，根据打开的IDA版本进行选择</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnr38.png" alt="bWnr38.png"></p>
+<p>然后在[Debugger] 中选择 [start process]，在参数设置框中将 Hostname 设置为 127.0.0.1</p>
+<p>然后在下图位置选择remote windows debugger，打下断点，按下绿色开始调试键，即可开始进行动态调试</p>
+<p><img src="https://s1.ax1x.com/2022/03/09/bWnsgS.png" alt="bWnsgS.png"></p>
 
         <p class="suffix-end">__END__</p>
         <div class="suffix-box">

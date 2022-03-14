@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>TEA、XTEA、XXTEA加密学习</title>
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/post.css">
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/normal.css">
+    
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/jquery-3.4.1.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <a id="cover"></a>
+    <div id="header">
+    <div class="header">
+        <div class="vertical">
+            <div class="inner">
+                <h1 class="header-subtitle">TEA、XTEA、XXTEA加密学习</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2022-03-14
+                        </span>
+                        
+                            <span id="/2022/03/14/TEA、XTEA、XXTEA加密学习/" class="leancloud_visitors" data-flag-title="TEA、XTEA、XXTEA加密学习">
+                                <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                            </span>
+                        
+                        <span>
+                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2022/03/14/TEA、XTEA、XXTEA加密学习/"></span>
+                        </span>  
+                    </p>                 
+                </div>
+            </div>
+        </div>
+        <canvas id="articleHeaderCanvas"></canvas>
+    </div>
+</div>
+    <div id="container">
+    <div id="content">
+        <div id="article">
+    <div class="toc"></div>
+    <div class="article-body">
+        <h1 id="TEA、XTEA、XXTEA加密学习"><a href="#TEA、XTEA、XXTEA加密学习" class="headerlink" title="TEA、XTEA、XXTEA加密学习"></a>TEA、XTEA、XXTEA加密学习</h1><h2 id="TEA加密学习"><a href="#TEA加密学习" class="headerlink" title="TEA加密学习"></a>TEA加密学习</h2><p>在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AF%86%E7%A0%81%E5%AD%A6">密码学</a>中，<strong>微型加密算法</strong>（Tiny Encryption Algorithm，TEA）是一种易于描述和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E6%89%A7%E8%A1%8C&action=edit&redlink=1">执行</a>的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%A1%8A%E5%AF%86%E7%A2%BC">块密码</a>，通常只需要很少的代码就可实现。其设计者是<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%89%91%E6%A1%A5%E5%A4%A7%E5%AD%A6">剑桥大学计算机实验室</a>的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E5%A4%A7%E5%8D%AB%C2%B7%E6%83%A0%E5%8B%92&action=edit&redlink=1">大卫 · 惠勒</a>与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E7%BD%97%E6%9D%B0%C2%B7%E5%B0%BC%E8%BE%BE%E5%A7%86&action=edit&redlink=1">罗杰 · 尼达姆</a>。</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="comment">//#include&lt;iostream&gt;</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DELTA 0x9e3779b9</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tea_encrypt</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span>* v, <span class="type">unsigned</span> <span class="type">int</span>* key)</span> </span>&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> l = v[<span class="number">0</span>], r = v[<span class="number">1</span>], sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123; <span class="comment">//进行32次迭代加密，Tea算法作者的建议迭代次数</span></span><br><span class="line">    l += (((r &lt;&lt; <span class="number">4</span>) ^ (r &gt;&gt; <span class="number">5</span>)) + r) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">    sum += DELTA; <span class="comment">//累加Delta的值</span></span><br><span class="line">    r += (((l &lt;&lt; <span class="number">4</span>) ^ (l &gt;&gt; <span class="number">5</span>)) + l) ^ (sum + key[(sum &gt;&gt; <span class="number">11</span>) &amp; <span class="number">3</span>]); <span class="comment">//利用多次双位移和异或将明文与密钥扩散混乱，并将两个明文互相加密</span></span><br><span class="line">  &#125;</span><br><span class="line">  v[<span class="number">0</span>] = l;</span><br><span class="line">  v[<span class="number">1</span>] = r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用可逆性将加密过程逆转</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tea_decrypt</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span>* v, <span class="type">unsigned</span> <span class="type">int</span>* key)</span> </span>&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> l = v[<span class="number">0</span>], r = v[<span class="number">1</span>], sum = <span class="number">0</span>;</span><br><span class="line">  sum = DELTA * <span class="number">32</span>; <span class="comment">//32次迭代累加后delta的值</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">    r -= (((l &lt;&lt; <span class="number">4</span>) ^ (l &gt;&gt; <span class="number">5</span>)) + l) ^ (sum + key[(sum &gt;&gt; <span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">    sum -= DELTA;</span><br><span class="line">    l -= (((r &lt;&lt; <span class="number">4</span>) ^ (r &gt;&gt; <span class="number">5</span>)) + r) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">  &#125;</span><br><span class="line">  v[<span class="number">0</span>] = l;</span><br><span class="line">  v[<span class="number">1</span>] = r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> v[<span class="number">2</span>]=&#123;<span class="number">123</span>,<span class="number">456</span>&#125;,key[<span class="number">4</span>]=&#123;<span class="number">0x11</span>,<span class="number">0x22</span>,<span class="number">0x33</span>,<span class="number">0x44</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%u,%u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">tea_encrypt</span>(v,key);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%u,%u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">tea_decrypt</span>(v,key);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%u,%u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关于c语言中-lt-lt-和-gt-gt-符号"><a href="#关于c语言中-lt-lt-和-gt-gt-符号" class="headerlink" title="关于c语言中 &lt;&lt; 和 &gt;&gt; 符号"></a>关于c语言中 &lt;&lt; 和 &gt;&gt; 符号</h3><p>&lt;&lt;代表算数左移,&gt;&gt;代表算数右移</p>
+<p>同时需要理解算数左移和逻辑左移以及算数右移和逻辑右移之间的异同</p>
+<p><strong>以下所提到的例子中的二进制数均为补码，因为计算机是用补码进行运算，切记将补码转换成原码才能转换成十进制，尤其是负数</strong></p>
+<h4 id="算数左移逻辑左移："><a href="#算数左移逻辑左移：" class="headerlink" title="算数左移逻辑左移："></a>算数左移逻辑左移：</h4><p>算数左移和逻辑左移都是整体左移，右边补0</p>
+<p>例如：00101011</p>
+<p>算数左移一位：01010110</p>
+<p>逻辑左移一位：01010110</p>
+<p>对于二进制数来说，左移n位等于原数值乘以2的n次方</p>
+<p>比如00011010十进制为26，左移两位后是01101000，转化为十进制是104，是26的四倍</p>
+<p><u>ps：这种倍数关系只适用于左移后被舍弃的高位不含1的情况，否则会溢出。</u></p>
+<h4 id="算数右移和逻辑右移："><a href="#算数右移和逻辑右移：" class="headerlink" title="算数右移和逻辑右移："></a>算数右移和逻辑右移：</h4><p>算数右移符号位要一起移动，并且在左边补上符号位。也就是如果符号位是1就补1，是0就补0</p>
+<p>比如：11100算数右移一位结果为11110</p>
+<p>对于二进制数来说，算术右移n位等于换算成的十进制数除以2的n次方</p>
+<p>比如：10110100十进制数是76(需要先将补码转换成原码后再转换为十进制)，右移两位后是11101101转化为十进制是19，是76的1&#x2F;4倍</p>
+<p><u>ps：这种倍数关系只适用于右移后被舍弃的低位不含1的情况，否则每舍一次1则代表余数被舍去，保留整数部分</u></p>
+<p>逻辑右移是将二进制数整体右移，左边补0即可</p>
+<p>比如：10101101逻辑右移一位是01010110</p>
+<h3 id="关于unsigned"><a href="#关于unsigned" class="headerlink" title="关于unsigned"></a>关于unsigned</h3><p>unsigned在c语言中的意思是无符号字符型，其实就是长度为1个字节的整数，从本质上说也是整数类型，通常用来存放ASCII码。</p>
+<p>无符号整型和有符号整型的区别在于无符号类型可以存放的正数范围比有符号整型中的范围大一倍，因为有符号类型将最高位储存符号，而无符号类型全都储存数字。</p>
+<hr>
+<h2 id="XTEA加密学习"><a href="#XTEA加密学习" class="headerlink" title="XTEA加密学习"></a>XTEA加密学习</h2><p>XTEA是TEA的扩展，也称做TEAN，它使用与TEA相同的简单运算，同样是一个64位块的Feistel密码，使用128位密钥，建议64轮, 但四个子密钥采取不正规的方式进行混合以阻止密钥表攻击，增加了更多的密钥表，移位和异或操作等等，设计者是Roger Needham, David Wheeler</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* take 64 bits of data in v[0] and v[1] and 128 bits of key[0] - key[3] */</span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">encipher</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> num_rounds, <span class="type">uint32_t</span> v[<span class="number">2</span>], <span class="type">uint32_t</span> <span class="type">const</span> key[<span class="number">4</span>])</span> </span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">    <span class="type">uint32_t</span> v0=v[<span class="number">0</span>], v1=v[<span class="number">1</span>], sum=<span class="number">0</span>, delta=<span class="number">0x9E3779B9</span>;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i &lt; num_rounds; i++) &#123;</span><br><span class="line">        v0 += (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">        sum += delta;</span><br><span class="line">        v1 += (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + key[(sum&gt;&gt;<span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    v[<span class="number">0</span>]=v0; v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">decipher</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> num_rounds, <span class="type">uint32_t</span> v[<span class="number">2</span>], <span class="type">uint32_t</span> <span class="type">const</span> key[<span class="number">4</span>])</span> </span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> i;</span><br><span class="line">    <span class="type">uint32_t</span> v0=v[<span class="number">0</span>], v1=v[<span class="number">1</span>], delta=<span class="number">0x9E3779B9</span>, sum=delta*num_rounds;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i &lt; num_rounds; i++) &#123;</span><br><span class="line">        v1 -= (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + key[(sum&gt;&gt;<span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">        sum -= delta;</span><br><span class="line">        v0 -= (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + key[sum &amp; <span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    v[<span class="number">0</span>]=v0; v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> v[<span class="number">2</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line">    <span class="type">uint32_t</span> <span class="type">const</span> k[<span class="number">4</span>]=&#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> r=<span class="number">32</span>;<span class="comment">//num_rounds建议取值为32</span></span><br><span class="line">    <span class="comment">// v为要加密的数据是两个32位无符号整数</span></span><br><span class="line">    <span class="comment">// k为加密解密密钥，为4个32位无符号整数，即密钥长度为128位</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;加密前原始数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">encipher</span>(r, v, k);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;加密后的数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">decipher</span>(r, v, k);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;解密后的数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="XXTEA加密学习"><a href="#XXTEA加密学习" class="headerlink" title="XXTEA加密学习"></a>XXTEA加密学习</h2><p>XXTEA，又称Corrected Block TEA，是XTEA的升级版 ，设计者是Roger Needham, David Wheeler</p>
+<p>XXTEA是一个非平衡Feistel网络分组密码，在可变长度块上运行，这些块是32位大小的任意倍数（最小64位），使用128位密钥, 是目前TEA系列中最安全的算法，但性能较上两种有所降低。</p>
+<p><strong>参考代码：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MX (((z &gt;&gt; 5) ^ (y <span class="string">&lt;&lt; 2)) + ((y &gt;</span>&gt; 3) ^ (z &lt;&lt; 4))) ^ ((sum ^ y) + (key[(p &amp; 3) ^ e] ^ z))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DELTA 0x9e3779b9</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//XXTEA 加密，在处理数据流中每个数据时利用了相邻数据，使用MX函数计算加密值</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">uint32_t</span> * <span class="title">xxtea_uint_encrypt</span><span class="params">(<span class="type">uint32_t</span> * data, <span class="type">size_t</span> len, <span class="type">uint32_t</span> * key)</span> </span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> n = (<span class="type">uint32_t</span>)len - <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="type">uint32_t</span> z = data[n], y, p, rounds = <span class="number">6</span> + <span class="number">52</span> / (n + <span class="number">1</span>), sum = <span class="number">0</span>, e;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">1</span>) <span class="keyword">return</span> data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> &lt; rounds--) &#123;</span><br><span class="line">        sum += DELTA;</span><br><span class="line">        <span class="comment">// 根据sum 计算得出0~3中的某一个数值, 用于MX中与p共同作用选择key数组中某个秘钥值</span></span><br><span class="line">        e = sum &gt;&gt; <span class="number">2</span> &amp; <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历每个待加密的数据</span></span><br><span class="line">        <span class="keyword">for</span> (p = <span class="number">0</span>; p &lt; n; p++) &#123;</span><br><span class="line">            <span class="comment">//z的初值为data[len - 1]，即将数据数组当做是环形队列来处理的，首尾相连，当加密data[0]时，需要用到data[len - 1]，data[0]，data[0 + 1]，以及MX计算返回的的一个加密值，加密值与data[0]相加后达到加密的效果</span></span><br><span class="line">            y = data[p + <span class="number">1</span>];</span><br><span class="line">            z = data[p] += MX;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//当加密data[len-1]时，需要用到data[len - 2]，data[len-1]，data[0]，以及MX计算返回的的一个加密值，加密值与data[len-1]相加后达到加密的效果</span></span><br><span class="line">        y = data[<span class="number">0</span>];</span><br><span class="line">        z = data[n] += MX;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//XXTEA 解密，把加密的步骤反过来即可得到解密的方法</span></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="type">uint32_t</span> * <span class="title">xxtea_uint_decrypt</span><span class="params">(<span class="type">uint32_t</span> * data, <span class="type">size_t</span> len, <span class="type">uint32_t</span> * key)</span> </span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> n = (<span class="type">uint32_t</span>)len - <span class="number">1</span>;</span><br><span class="line">    <span class="type">uint32_t</span> z, y = data[<span class="number">0</span>], p, rounds = <span class="number">6</span> + <span class="number">52</span> / (n + <span class="number">1</span>), sum = rounds * DELTA, e;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">1</span>) <span class="keyword">return</span> data;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (sum != <span class="number">0</span>) &#123;</span><br><span class="line">        e = sum &gt;&gt; <span class="number">2</span> &amp; <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (p = n; p &gt; <span class="number">0</span>; p--) &#123;</span><br><span class="line">            z = data[p - <span class="number">1</span>];</span><br><span class="line">            y = data[p] -= MX;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        z = data[n];</span><br><span class="line">        y = data[<span class="number">0</span>] -= MX;</span><br><span class="line">        sum -= DELTA;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> <span class="type">const</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> v[<span class="number">2</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,key[<span class="number">4</span>]=&#123;<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;;</span><br><span class="line">    <span class="comment">//uint32_t v[2]=&#123;123,456&#125;,key[4]=&#123;0x11,0x22,0x33,0x44&#125;;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;加密前原始数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">xxtea_uint_encrypt</span>(v,<span class="number">2</span>,key);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;加密后的数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">xxtea_uint_decrypt</span>(v,<span class="number">2</span>,key);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;解密后的数据：%u %u\n&quot;</span>,v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>rounds的值中的6+52没有找到详细解释，应该是个固定值</p>
+
+        <p class="suffix-end">__END__</p>
+        <div class="suffix-box">
+            <div class="suffix-box-left">
+                <img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/41646465847_.pic.jpg" alt="X06">
+            </div>
+            <div class="suffix-box-right">
+                <span class="suffix-box-title">文章作者</span>：X06
+                <br>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2022/03/14/TEA%E3%80%81XTEA%E3%80%81XXTEA%E5%8A%A0%E5%AF%86%E5%AD%A6%E4%B9%A0/" target="_blank">TEA、XTEA、XXTEA加密学习</a>
+                <br>
+                <span class="suffix-box-title">作者签名</span>：爱意东升西落，浪漫至死不渝
+                <br>
+                <span class="suffix-box-title">关于主题</span>：<a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+                <br>
+                <span class="suffix-box-title">版权声明</span>：文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+                <br>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="article-footer">
+        
+        
+            <div class="tag">
+                标签：
+                
+                    <a href="/tag/Re/">Re</a>
+                
+            </div>
+        
+        <div class="article-prev-next">
+            
+            
+                <a href="/2022/03/06/MacBook%20vscode%E4%B8%8B%E9%85%8D%E7%BD%AECC++%E7%8E%AF%E5%A2%83(m1)/" class="next-prefix">» </a> 下一篇：    <a href="/2022/03/06/MacBook%20vscode%E4%B8%8B%E9%85%8D%E7%BD%AECC++%E7%8E%AF%E5%A2%83(m1)/" title="发布于 2022-03-06 07:34">MacBook vscode下配置C/C++环境(m1)</a>
+            
+        </div>
+    </div>
+    
+    <div class="article-comments">
+        <div class="comments-title">
+            评论列表
+        </div>
+        <div class="comments-content">
+        </div>
+    </div>
+
+</div>
+
+    </div>
+</div>
+    <div id="footer"></div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar"></div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user"><span></span></div>        
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul></ul> 
+            </div> 
+            <div class="menu-link"></div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/search.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/iscroll.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/APlayer.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/APlayer.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/Meting.min.js"></script>
+        <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+    
+    
+    <div class="wrap-right"></div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : 'X06emmm',
+        GitHubRepositories : 'X06emmm.github.io',
+
+        BlogUser      : 'X06',
+        BlogAvatar    : 'https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/41646465847_.pic.jpg',
+        BlogStartDate : '2021-07-14',
+
+        WebsiteTitleBlur         : '(◍´꒳`◍) Hi, Welcome to my blog',
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : '(*´∇｀*) 欢迎回到霍格沃茨!',
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/website/logo.png',
+
+        ProgressBar: {
+            id       : 'topProgressBar',
+            color    : '#77B6FF',
+            height   : '2px',
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound: {
+                tension  : 16,
+                friction : 5
+            },
+            spinner: {
+                id     : 'spinner',
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : '#F0F0F0',
+                    stroke     : '#272633',
+                    base       : '',
+                    child      : '#272633'
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : 'rgba(255, 255, 255, .2)',
+            clearOffset : 0.3
+        },
+
+        ArticleHeaderAnimationRendered : false,
+        ArticleHeaderAnimation         : {
+            triW                  : 14,
+            triH                  : 20,
+            neighbours            : [
+                
+                    'side',
+                
+                    'top',
+                
+                    'bottom',
+                
+            ],
+            speedTrailAppear      : 0.1,
+            speedTrailDisappear   : 0.1,
+            speedTriOpen          : 1,
+            trailMaxLength        : 30,
+            trailIntervalCreation : 100,
+            delayBeforeDisappear  : 2,
+            colors                : [
+                
+                    '#96EDA6',
+                
+                    '#5BC6A9',
+                
+                    '#38668C',
+                
+                    '#374D84',
+                
+                    '#BED5CB',
+                
+                    '#62ADC6',
+                
+                    '#8EE5DE',
+                
+                    '#304E7B',
+                
+            ]
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : '60%',
+            colorBrightness  : '50%',
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : 'random',
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                'https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/%E5%A3%81%E7%BA%B8.jpg',
+            
+                'https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/%E5%A3%81%E7%BA%B8.jpg',
+            
+        ],
+        HomeBannerText  : '等太阳落山，就一起做梦',
+
+        ArticleHeaderImage : [
+            
+                'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/header/article.jpg',
+            
+        ],
+
+        OtherBannerText : '你一定能够成为你想要去成为的人',
+
+        MenuList : [
+            
+                {
+                    name   : '首页',
+                    href   : '/',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '标签',
+                    href   : '/tag',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '分类',
+                    href   : '/category',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '归档',
+                    href   : '/archive',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '赞赏',
+                    href   : '/donate',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '关于',
+                    href   : '/about',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '订阅',
+                    href   : '/atom.xml',    
+                    target : '_blank',
+                    class  : ''
+                },
+            
+                {
+                    name   : '搜索',
+                    href   : '',    
+                    target : '',
+                    class  : 'search'
+                },
+            
+                {
+                    name   : '留言板',
+                    href   : '/comment',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '友情链接',
+                    href   : '/friend',    
+                    target : '',
+                    class  : ''
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        icon : 'icon-weibo', 
+                        url  : 'https://weibo.com/u/3199224843'
+                    },
+                
+                    {
+                        icon : 'icon-wechat', 
+                        url  : 'https://u.wechat.com/EDrxqboPxE5-6NrOobNDNwI'
+                    },
+                
+                    {
+                        icon : 'icon-qq', 
+                        url  : ''
+                    },
+                
+                    {
+                        icon : 'icon-github', 
+                        url  : 'https://github.com/X06emmm'
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : {
+            icon    : 'like-fill',
+            left    : '爱意东升西落',
+            right   : '浪漫至死不渝'
+        },
+        ThemeInfo   : true,
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                'Based on cnblogs theme SimpleMemory.',
+                            
+                                '',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'SimpleMemory Author:',
+                            
+                                'BNDong',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'Theme:',
+                            
+                                'LiveForCode',
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : '',
+
+        Donate : {
+            paypal  : '',
+            bitcoin : '',
+            alipay  : '/image/zfb.JPG',
+            wechat  : '/image/wechat.jpg'
+        },
+
+        Code : {
+            style : 'normal'
+        },  
+
+        Search : {
+            applicationID : 'VI4FR31IM5',
+            apiKey        : '3314a8bcb688d0eef926d11b0412c8ef',
+            indexName     : 'abc',
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : '搜索',
+                empty       : '未发现与 「${query}」 相关的内容',
+                stats       : '${hits} 条相关条目，使用了 ${time} 毫秒',
+            }
+        }, 
+
+        Valine : {
+            switch         : true,
+            el             : '.comments-content',
+            appId          : 'O8XdEwFSobGoow13EApTlL5P-gzGzoHsz',
+            appKey         : '2ntSkK2Yha7D9BBVG88AtBBz',
+            placeholder    : '看春风不喜....',
+            avatar         : 'mm',
+            meta           : 'nick,mail,link',
+            requiredFields : 'nick,mail',
+            pageSize       : 5,
+            lang           : 'zh-cn',
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : '.toc',
+            contentSelector       : '.article-body',
+            headingSelector       : 'h1, h2, h3, h4, h5',
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : '.toc',
+            positionFixedClass    : 'toc-fixed',
+            fixedSidebarOffset    : '',
+        },
+
+        Require : {
+            baseUrl     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/',
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : 'Meting'
+        },
+        APlayer : {
+            container : '.aplayer',
+            fixed     : true,
+            autoplay  : false,
+            loop      : 'all',
+            order     : 'random',
+            preload   : 'auto',
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : 'aLIEz',
+                        artist : 'mizuki（瑞葵）',
+                        cover  : '/music/cover/aLIEz.jpg',
+                        url    : '/music/song/aLIEz.mp3',
+                        lrc    : '/music/lrc/aLIEz.lrc'
+                    },
+                
+                    {
+                        name   : 'Endless Tears',
+                        artist : 'CLIFF EDGE',
+                        cover  : '/music/cover/Endless Tears.jpg',
+                        url    : '/music/song/Endless Tears.mp3',
+                        lrc    : '/music/lrc/Endless Tears.lrc'
+                    },
+                
+                    {
+                        name   : 'Miracle',
+                        artist : 'Cascada',
+                        cover  : '/music/cover/Miracle.jpg',
+                        url    : '/music/song/Miracle.mp3',
+                        lrc    : '/music/lrc/Miracle.lrc'
+                    },
+                
+                    {
+                        name   : 'Roll The Dice',
+                        artist : '高珊',
+                        cover  : '/music/cover/Roll The Dice.jpg',
+                        url    : '/music/song/Roll The Dice.mp3',
+                        lrc    : '/music/lrc/Roll The Dice.lrc'
+                    },
+                
+                    {
+                        name   : 'See You Again',
+                        artist : 'Charlie Puth, Wiz Khalifa',
+                        cover  : '/music/cover/See You Again.jpg',
+                        url    : '/music/song/See You Again.mp3',
+                        lrc    : '/music/lrc/See You Again.lrc'
+                    },
+                
+                    {
+                        name   : 'Traveling Light',
+                        artist : 'Joel Hanson, Sara Groves',
+                        cover  : '/music/cover/Traveling Light.jpg',
+                        url    : '/music/song/Traveling Light.mp3',
+                        lrc    : '/music/lrc/Traveling Light.lrc'
+                    },
+                
+                    {
+                        name   : '痴心绝对',
+                        artist : '李圣杰',
+                        cover  : '/music/cover/痴心绝对.jpg',
+                        url    : '/music/song/痴心绝对.mp3',
+                        lrc    : '/music/lrc/痴心绝对.lrc'
+                    },
+                
+                    {
+                        name   : '好想大声说爱你',
+                        artist : 'BAAD（バード）',
+                        cover  : '/music/cover/好想大声说爱你.jpg',
+                        url    : '/music/song/好想大声说爱你.mp3',
+                        lrc    : '/music/lrc/好想大声说爱你.lrc'
+                    },
+                
+            ]
+        },
+        Meting : {
+            id       : '3778678', 
+            lrcshow  : false, 
+            server   : 'netease', 
+            type     : 'playlist', 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : 'all', 
+            order    : 'random', 
+            preload  : 'auto', 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        LazyLoad : {
+            default : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/image/website/lazyload.svg'
+        },
+  
+        Style : {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/APlayer.css',
+            archive          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/archive.css',
+            donate           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/donate.css',
+            fancybox         : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/jquery.fancybox.css',
+            footer           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/footer.css',
+            iconfont         : 'https://at.alicdn.com/t/font_1546312_l3yohatebw.css',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/index.css',
+            menuBubble       : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/menu-bubble.css',
+            page             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/page.css',
+            post             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/post.css',
+            search           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/search.css',
+            tocbot           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/tocbot.css',
+            normal           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/normal.css',
+            night            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/night.css',
+            clipboard        : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/css/clipboard.css'
+        },
+
+        Script: {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/APlayer.min.js',
+            config           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/require.config.js',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/index.js',
+            instantSearch    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/instantsearch.min.js',
+            jQuery           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/jquery-3.4.1.min.js',
+            loading          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/loading.js',
+            meting           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/Meting.min.js',
+            iscroll          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/iscroll.js',
+            require          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/require.min.js'
+        },
+
+        Font: {
+            LongCang   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css',
+            Monda      : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css',
+            NotoSansSC : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/NotoSansSC.css',
+            Playball   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Playball.css',
+            PTMono     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/PTMono.css',
+            RobotoSlab : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/RobotoSlab.css',
+            Rosario    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Rosario.css',
+            UbuntuMono : 'https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/UbuntuMono.css'
+        },
+
+        Suffix : {
+            about : '爱意东升西落，浪漫至死不渝'
+        },
+            
+        Theme : {
+            url  : 'https://github.com/first19326/Hexo-LiveForCode',
+            name : 'Hexo - Live For Code'
+        }  
+    };
+</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/js/index.js"></script>
+</body>
+</html>
