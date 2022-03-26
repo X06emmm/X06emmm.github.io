@@ -244,7 +244,7 @@
 <p>分析代码，大概意思是用</p>
 <p><strong>var rotFlag &#x3D; flag.replace(&#x2F;[a-zA-Z]&#x2F;g, function(c){return String.fromCharCode((c &lt;&#x3D; “Z” ? 90 : 122) &gt;&#x3D; (c &#x3D; c.charCodeAt(0) + 13) ? c : c - 26);});</strong></p>
 <p>进行运算，最后得到</p>
-<p><strong><a href="mailto:&#x50;&#x79;&#118;&#x72;&#97;&#x67;&#x46;&#118;&#x71;&#x72;&#x59;&#x62;&#x74;&#x76;&#97;&#102;&#78;&#x65;&#114;&#82;&#x6e;&#x66;&#108;&#64;&#x73;&#121;&#110;&#101;&#x72;&#45;&#98;&#97;&#46;&#x70;&#98;&#x7a;">&#x50;&#x79;&#118;&#x72;&#97;&#x67;&#x46;&#118;&#x71;&#x72;&#x59;&#x62;&#x74;&#x76;&#97;&#102;&#78;&#x65;&#114;&#82;&#x6e;&#x66;&#108;&#64;&#x73;&#121;&#110;&#101;&#x72;&#45;&#98;&#97;&#46;&#x70;&#98;&#x7a;</a></strong></p>
+<p><strong><a href="mailto:&#80;&#121;&#x76;&#x72;&#x61;&#x67;&#x46;&#118;&#x71;&#114;&#89;&#x62;&#x74;&#x76;&#97;&#x66;&#x4e;&#x65;&#x72;&#82;&#110;&#102;&#x6c;&#x40;&#115;&#x79;&#110;&#101;&#114;&#45;&#x62;&#x61;&#x2e;&#x70;&#98;&#122;">&#80;&#121;&#x76;&#x72;&#x61;&#x67;&#x46;&#118;&#x71;&#114;&#89;&#x62;&#x74;&#x76;&#97;&#x66;&#x4e;&#x65;&#x72;&#82;&#110;&#102;&#x6c;&#x40;&#115;&#x79;&#110;&#101;&#114;&#45;&#x62;&#x61;&#x2e;&#x70;&#98;&#122;</a></strong></p>
 <p>说实话就是这串代码看得不是很懂，但是之前做东秦的招新赛遇到过类似的东西，那时候知道了一种加密方法叫ROT13，所以找一个ROT13的在线解密工具试一下</p>
 <p><a target="_blank" rel="noopener" href="http://www.ab126.com/goju/10818.html">http://www.ab126.com/goju/10818.html</a></p>
 <p><img src="https://i.loli.net/2021/12/02/YmhUx48ctCf1W9z.png" alt="image-20211109205823291.png"></p>
@@ -638,6 +638,27 @@
 <p>然后在[Debugger] 中选择 [start process]，在参数设置框中将 Hostname 设置为 127.0.0.1</p>
 <p>然后在下图位置选择remote windows debugger，打下断点，按下绿色开始调试键，即可开始进行动态调试</p>
 <p><img src="https://s1.ax1x.com/2022/03/09/bWnsgS.png" alt="bWnsgS.png"></p>
+<h2 id="WMCTF2020-easy-re"><a href="#WMCTF2020-easy-re" class="headerlink" title="[WMCTF2020]easy_re"></a>[WMCTF2020]easy_re</h2><p>常规DiE查壳和ida静态分析，除了是个64位程序啥都没分析出来，动调也不知道从何下手</p>
+<p>看大佬的文章，都是用xdbg64，下载一个，下载过程中对perl进行一个了解，主要还是看看雪上一篇大佬的文章：<a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-67651.htm">https://bbs.pediy.com/thread-67651.htm</a></p>
+<p>然后下完xdbg，将文件拖进去，和IDA的操作一样，F8单步调试，F7步入</p>
+<p>F8疯狂调试到这一步，发现这一步是输入，不知道输入什么，所以F7步入</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220309211101013.png"></p>
+<p>然后到这一步，还是会变成输入，所以再次选择步入</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220309211238145.png"></p>
+<p>然后一直F8到下图这一步，得到flag!<img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220309205711084.png"></p>
+<h2 id="GKCTF-2021-QQQQT"><a href="#GKCTF-2021-QQQQT" class="headerlink" title="[GKCTF 2021]QQQQT"></a>[GKCTF 2021]QQQQT</h2><p>惯例文件拖进DiE分析一下，看到Enigma Vitual Box，搜一下，发现这是一个QT封装的exe</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324163122766.png"></p>
+<p>用EnigmaVBUnpacker解包</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324163148317.png"></p>
+<p>然后再放进DiE分析一下</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324163213637.png"></p>
+<p>这下子就正常多了，拖进IDA，main函数里没看到什么有价值的东西，所以查一下字符串，看了一圈也就这行字符不大对劲，跟踪一下</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324163249230.png"></p>
+<p>找到了关键函数，发现这是个base58的编码</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324163312649.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324163329415.png"></p>
+<p>在线解密一下，得到flag</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324164942848.png"></p>
 
         <p class="suffix-end">__END__</p>
         <div class="suffix-box">
