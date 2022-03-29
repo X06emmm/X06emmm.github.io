@@ -6,7 +6,7 @@
     <meta name="referrer" content="origin">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>BUU-Re</title>
+    <title>BUU-Re(持续更新)</title>
 
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css">
@@ -31,14 +31,14 @@
     <div class="header">
         <div class="vertical">
             <div class="inner">
-                <h1 class="header-subtitle">BUU-Re</h1>
+                <h1 class="header-subtitle">BUU-Re(持续更新)</h1>
                 <div class="header-subinfo">
                     <p class="article-info-text">
                         <span>
                             <i class="iconfont icon-time"></i> 发表时间：2021-11-30
                         </span>
                         
-                            <span id="/2021/11/30/BUU-Re/" class="leancloud_visitors" data-flag-title="BUU-Re">
+                            <span id="/2021/11/30/BUU-Re/" class="leancloud_visitors" data-flag-title="BUU-Re(持续更新)">
                                 <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
                             </span>
                         
@@ -57,7 +57,7 @@
         <div id="article">
     <div class="toc"></div>
     <div class="article-body">
-        <h1 id="BUU-RE"><a href="#BUU-RE" class="headerlink" title="BUU-RE"></a>BUU-RE</h1><p>所有题目均来自<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges">https://buuoj.cn/challenges</a></p>
+        <h1 id="BUU-RE-持续更新"><a href="#BUU-RE-持续更新" class="headerlink" title="BUU-RE(持续更新)"></a>BUU-RE(持续更新)</h1><p>所有题目均来自<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges">https://buuoj.cn/challenges</a></p>
 <h2 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h2><p>没啥好说，将文件拖进IDA找到main函数F5反编译得到flag</p>
 <h2 id="reverse1"><a href="#reverse1" class="headerlink" title="reverse1"></a>reverse1</h2><p>先将文件拖进IDA，找了一下发现没有main函数，shift+f12查一下字符串，发现一个字符串可能有问题</p>
 <p><img src="https://i.loli.net/2021/11/30/GHWSIrqXTyjn1Ax.png" alt="image-20211104152105305.png">)</p>
@@ -244,7 +244,7 @@
 <p>分析代码，大概意思是用</p>
 <p><strong>var rotFlag &#x3D; flag.replace(&#x2F;[a-zA-Z]&#x2F;g, function(c){return String.fromCharCode((c &lt;&#x3D; “Z” ? 90 : 122) &gt;&#x3D; (c &#x3D; c.charCodeAt(0) + 13) ? c : c - 26);});</strong></p>
 <p>进行运算，最后得到</p>
-<p><strong><a href="mailto:&#80;&#121;&#x76;&#x72;&#x61;&#x67;&#x46;&#118;&#x71;&#114;&#89;&#x62;&#x74;&#x76;&#97;&#x66;&#x4e;&#x65;&#x72;&#82;&#110;&#102;&#x6c;&#x40;&#115;&#x79;&#110;&#101;&#114;&#45;&#x62;&#x61;&#x2e;&#x70;&#98;&#122;">&#80;&#121;&#x76;&#x72;&#x61;&#x67;&#x46;&#118;&#x71;&#114;&#89;&#x62;&#x74;&#x76;&#97;&#x66;&#x4e;&#x65;&#x72;&#82;&#110;&#102;&#x6c;&#x40;&#115;&#x79;&#110;&#101;&#114;&#45;&#x62;&#x61;&#x2e;&#x70;&#98;&#122;</a></strong></p>
+<p><strong><a href="mailto:&#80;&#121;&#x76;&#x72;&#97;&#103;&#x46;&#118;&#x71;&#114;&#89;&#x62;&#x74;&#118;&#97;&#102;&#x4e;&#101;&#x72;&#x52;&#x6e;&#x66;&#108;&#64;&#115;&#121;&#x6e;&#x65;&#114;&#45;&#98;&#x61;&#46;&#x70;&#x62;&#122;">&#80;&#121;&#x76;&#x72;&#97;&#103;&#x46;&#118;&#x71;&#114;&#89;&#x62;&#x74;&#118;&#97;&#102;&#x4e;&#101;&#x72;&#x52;&#x6e;&#x66;&#108;&#64;&#115;&#121;&#x6e;&#x65;&#114;&#45;&#98;&#x61;&#46;&#x70;&#x62;&#122;</a></strong></p>
 <p>说实话就是这串代码看得不是很懂，但是之前做东秦的招新赛遇到过类似的东西，那时候知道了一种加密方法叫ROT13，所以找一个ROT13的在线解密工具试一下</p>
 <p><a target="_blank" rel="noopener" href="http://www.ab126.com/goju/10818.html">http://www.ab126.com/goju/10818.html</a></p>
 <p><img src="https://i.loli.net/2021/12/02/YmhUx48ctCf1W9z.png" alt="image-20211109205823291.png"></p>
@@ -659,6 +659,50 @@
 <p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324163329415.png"></p>
 <p>在线解密一下，得到flag</p>
 <p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220324164942848.png"></p>
+<h2 id="FlareOn2-very-success"><a href="#FlareOn2-very-success" class="headerlink" title="[FlareOn2]very_success"></a>[FlareOn2]very_success</h2><p>拖进DiE判断，是个三十二位程序，将文件拖进IDA，就只有三个函数</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329170637408.png"></p>
+<p>一个一个看一下</p>
+<p>start</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329170714243.png"></p>
+<p>sub_401000</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329170746964.png"></p>
+<p>start函数没什么好看，sub_401000是个读取输入的函数，十九行的判断进入sub_401084，判断返回值是否非0，所以我们这边重点看一下sub_401084</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329171318613.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329171330746.png"></p>
+<p>分析一下这个函数，第十七行的判断，应该是判断输入的长度要大等于37；v7是要比较的值，从最上方的定义当中也可以看出，v7的值存在edi当中；第二十八行应该是一个关键运算,其中v11是个进位标志；第三十行的指针v7依次读取值</p>
+<p>这么说其实也很模糊，所以还是动调一下，在十九行和二十八行下断点，我输入了三十七个1，然后往下运行了几步，很简单就找到了v7的值</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329172437109.png"></p>
+<p>数据明显是不够的，但是做过FlareOn的题目就不难知道，这个比赛的flag最后几位都是一样的，所以写个exp解一下，不够再补</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">v7=[<span class="number">0xAA</span>, <span class="number">0xEC</span>, <span class="number">0xA4</span>,<span class="number">0xBA</span>,<span class="number">0xAF</span>,<span class="number">0xAE</span>,<span class="number">0xAA</span>, <span class="number">0x8A</span>,<span class="number">0xC0</span>,<span class="number">0xA7</span>,<span class="number">0xB0</span>, <span class="number">0xBC</span>,<span class="number">0x9A</span>,<span class="number">0xBA</span>,<span class="number">0xA5</span>, <span class="number">0xA5</span>, <span class="number">0xBA</span>,<span class="number">0xAF</span>,<span class="number">0xB8</span>,<span class="number">0x9D</span>,<span class="number">0xB8</span>,<span class="number">0xF9</span>,<span class="number">0xAE</span>, <span class="number">0x9D</span>,<span class="number">0xAB</span>,<span class="number">0xB4</span>,<span class="number">0xBC</span>,<span class="number">0xB6</span>,<span class="number">0xB3</span>,<span class="number">0x90</span>,<span class="number">0x9A</span>, <span class="number">0xA8</span>]</span><br><span class="line">v7 = v7[::-<span class="number">1</span>]</span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line">v4 = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(v7)):</span><br><span class="line">    rol = (<span class="number">1</span>&lt;&lt;(v4 &amp; <span class="number">0x3</span>))</span><br><span class="line">    flag  += <span class="built_in">chr</span>((v7[i] - rol -<span class="number">1</span>)^<span class="number">0xc7</span>)</span><br><span class="line">    v4 += v7[i]</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h3><p>ROL是汇编语言里的一个指令</p>
+<p>例子：ROL AL, 1：AL循环左移一位，82H-&gt;05H</p>
+<p>题中v11是进位标志是因为ida中鼠标放在v11上可以看到下图中的CF，CF在汇编中象征着进位</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329173611805.png"></p>
+<h2 id="QCTF2018-Xman-babymips"><a href="#QCTF2018-Xman-babymips" class="headerlink" title="[QCTF2018]Xman-babymips"></a>[QCTF2018]Xman-babymips</h2><p>先看了一下这个名字，搜了一下什么叫mips，是一个采取精简指令集的处理器架构</p>
+<p>将文件拖进DiE分析，是个三十二位程序，拖进IDA打开，看一下main函数</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329195407338.png"></p>
+<p>mian函数其实很简单明了，重点让我关注到的点就是十三行的fdata和十四行的sub_4007F0函数，一个个来看</p>
+<p>fdata</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329195749789.png"></p>
+<p>这五个字符应该就是main函数中第十一行开始的循环所加密后的结果，然后十三行的比较函数，对其进行比较</p>
+<p>sub_4007F0</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329200037687.png"></p>
+<p>这边也是同样的一个加密加上一个比较，我们先从十五行的off_410D04中提取出我们需要的加密后字符串</p>
+<img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/image-20220329200236860.png" style="zoom: 50%;" />
+
+<p>然后根据这个加密后的字符串和上方的加密就可以写脚本</p>
+<p>这题看上去不难，但是写脚本的属实有被难到，后来上网找了大佬的脚本，才知道这边要防止位移过程中的溢出</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fdata = <span class="string">&#x27;Q|j&#123;g&#x27;</span></span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span> (<span class="built_in">len</span>(fdata)):</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">ord</span>(fdata[i]) ^ <span class="number">32</span> - i)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"></span><br><span class="line">off_410D04 = [<span class="number">0x52</span>,<span class="number">0xFD</span>,<span class="number">0x16</span>,<span class="number">0xA4</span>,<span class="number">0x89</span>,<span class="number">0xBD</span>,<span class="number">0x92</span>,<span class="number">0x80</span>,<span class="number">0x13</span>,<span class="number">0x41</span>,<span class="number">0x54</span>,<span class="number">0xA0</span>,<span class="number">0x8D</span>,<span class="number">0x45</span>,<span class="number">0x18</span>,<span class="number">0x81</span>,<span class="number">0xDE</span>,<span class="number">0xFC</span>,<span class="number">0x95</span>,<span class="number">0xF0</span>,<span class="number">0x16</span>,<span class="number">0x79</span>,<span class="number">0x1A</span>,<span class="number">0x15</span>,<span class="number">0x5B</span>,<span class="number">0x75</span>,<span class="number">0x1F</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span> , <span class="built_in">len</span>(off_410D04)):</span><br><span class="line">    <span class="keyword">if</span> i % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">        off_410D04[i] = (off_410D04[i]&amp;<span class="number">0x3f</span>) &lt;&lt; <span class="number">2</span> | (off_410D04[i]&amp;<span class="number">0xc0</span>) &gt;&gt;<span class="number">6</span></span><br><span class="line">        flag += <span class="built_in">chr</span>(off_410D04[i] ^ <span class="number">0x20</span> - i - <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        off_410D04[i] = (off_410D04[i]&amp;<span class="number">0xfc</span>) &gt;&gt; <span class="number">2</span> | (off_410D04[i]&amp;<span class="number">0x3</span>) &lt;&lt; <span class="number">6</span></span><br><span class="line">        flag += <span class="built_in">chr</span>(off_410D04[i] ^ <span class="number">0x20</span> - i - <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>不过还有更为简单的办法，就是爆破，不过同样也要防止溢出</p>
+<p>爆破exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">flag = <span class="string">&quot;qctf&#123;&quot;</span></span><br><span class="line">keys = [<span class="number">0x52</span>, <span class="number">0xFD</span>, <span class="number">0x16</span>, <span class="number">0xA4</span>, <span class="number">0x89</span>, <span class="number">0xBD</span>, <span class="number">0x92</span>, <span class="number">0x80</span>,</span><br><span class="line"><span class="number">0x13</span>, <span class="number">0x41</span>, <span class="number">0x54</span>, <span class="number">0xA0</span>, <span class="number">0x8D</span>, <span class="number">0x45</span>, <span class="number">0x18</span>, <span class="number">0x81</span>,  <span class="number">0xDE</span>, <span class="number">0xFC</span>, <span class="number">0x95</span>, <span class="number">0xF0</span>, <span class="number">0x16</span>, <span class="number">0x79</span>, <span class="number">0x1A</span>, <span class="number">0x15</span>,</span><br><span class="line"><span class="number">0x5B</span>, <span class="number">0x75</span>, <span class="number">0x1F</span>]</span><br><span class="line"><span class="built_in">print</span> <span class="built_in">len</span>(keys)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">5</span>,<span class="number">0x20</span>):</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> xrange(<span class="number">0</span>,<span class="number">0x100</span>):</span><br><span class="line">        fst = (c ^ ((<span class="number">0x20</span>-i)))</span><br><span class="line">        <span class="keyword">if</span> (i % <span class="number">2</span>) == <span class="number">0</span>:</span><br><span class="line">            res = ((fst &lt;&lt; <span class="number">2</span>) % <span class="number">0x100</span>) | (fst &gt;&gt; <span class="number">6</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = (fst &gt;&gt; <span class="number">2</span>) | ((fst &lt;&lt; <span class="number">6</span>) % <span class="number">0x100</span>)</span><br><span class="line">        <span class="keyword">if</span> (res == keys[i-<span class="number">5</span>]):</span><br><span class="line">            flag += <span class="built_in">chr</span>(c)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
 
         <p class="suffix-end">__END__</p>
         <div class="suffix-box">
@@ -668,7 +712,7 @@
             <div class="suffix-box-right">
                 <span class="suffix-box-title">文章作者</span>：X06
                 <br>
-                <span class="suffix-box-title">文章出处</span>：<a href="/2021/11/30/BUU-Re/" target="_blank">BUU-Re</a>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2021/11/30/BUU-Re/" target="_blank">BUU-Re(持续更新)</a>
                 <br>
                 <span class="suffix-box-title">作者签名</span>：爱意东升西落，浪漫至死不渝
                 <br>
