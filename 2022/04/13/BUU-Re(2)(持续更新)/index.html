@@ -364,7 +364,36 @@
 <p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220412184742.png"></p>
 <p>得到flag</p>
 <p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220412184805.png"></p>
+<h2 id="FlareOn2-starter"><a href="#FlareOn2-starter" class="headerlink" title="[FlareOn2]starter"></a>[FlareOn2]starter</h2><p>下载文件解压之后得到一个exe文件，惯例放进DiE里查一下</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413153647.png"></p>
+<p>打开来看看，发现好像是个安装程序，让我选择一个地方安装</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413153744.png"></p>
+<p>安装之后又出现了一个exe文件，还是DiE查一下</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413153837.png"></p>
+<p>32位程序，拖进IDA反编译一下，就只有一个函数</p>
+<p>![image-20220413153932061](&#x2F;Users&#x2F;xulingrui&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220413153932061.png)</p>
+<p>这个while应该就是关键点，就是一个简单异或，跟踪一下byte_402140，找到一组字符和0x7d异或</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413154059.png"></p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s1 = [<span class="number">0x1F</span>,<span class="number">0x8</span>,<span class="number">0x13</span>,<span class="number">0x13</span>,<span class="number">0x4</span>,<span class="number">0x22</span>,<span class="number">0x0E</span>,<span class="number">0x11</span>,<span class="number">0x4D</span>,<span class="number">0x0D</span>,<span class="number">0x18</span>,<span class="number">0x3D</span>,<span class="number">0x1B</span>,<span class="number">0x11</span>,<span class="number">0x1C</span>,<span class="number">0x0F</span>,<span class="number">0x18</span>,<span class="number">0x50</span>,<span class="number">0x12</span>,<span class="number">0x13</span>,<span class="number">0x53</span>,<span class="number">0x1E</span>,<span class="number">0x12</span>,<span class="number">0x10</span>]</span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(s1)):</span><br><span class="line">  flag += <span class="built_in">chr</span>(s1[i] ^ <span class="number">0x7d</span>)</span><br><span class="line"><span class="built_in">print</span>(flag,end = <span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
 
+<p>得到flag</p>
+<h2 id="FlareOn6-FlareBear"><a href="#FlareOn6-FlareBear" class="headerlink" title="[FlareOn6]FlareBear"></a>[FlareOn6]FlareBear</h2><p>将apk文件用jadx打开，不得不说jadx是真好用啊</p>
+<p>找到com.fireeye.flarebear -&gt; FlareBearActivity，看看这底下的函数，不难找到一个danceWithFlag函数</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413183552.png"></p>
+<p>同时可以看到，上方if语句对这个函数进行了调用，所以继续跟踪这个if语句的条件</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413183721.png"></p>
+<p>可以看到，这个函数的返回值是mass &#x3D;&#x3D;72，happy &#x3D;&#x3D; 30，clean &#x3D;&#x3D; 0</p>
+<p>所以搜索一下这三个值，发现会被以下三个条件影响</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413183852.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413184019.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413183955.png"></p>
+<p>然后就可以通过z3方程去组合这几个数，以得到正确的答案</p>
+<p>exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> z3 <span class="keyword">import</span> *</span><br><span class="line">feed = Int(<span class="string">&#x27;feed&#x27;</span>)</span><br><span class="line">clean = Int(<span class="string">&#x27;clean&#x27;</span>)</span><br><span class="line">play = Int(<span class="string">&#x27;play&#x27;</span>)</span><br><span class="line">s = Solver()</span><br><span class="line">s.add(<span class="number">10</span> * feed + <span class="number">0</span> * clean + (-<span class="number">2</span>) * play == <span class="number">72</span>)</span><br><span class="line">s.add(<span class="number">2</span> * feed + (-<span class="number">1</span>) * clean + <span class="number">4</span> * play == <span class="number">30</span>)</span><br><span class="line">s.add((-<span class="number">1</span>) * feed + <span class="number">6</span> * clean + (-<span class="number">1</span>) * play == <span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> s.check():</span><br><span class="line">    <span class="built_in">print</span>(s.model())</span><br><span class="line"><span class="comment">#[play = 4, clean = 2, feed = 8]</span></span><br></pre></td></tr></table></figure>
+
+<p>将apk在手机&#x2F;模拟器上打开，按次数完成任务，即可得到flag</p>
+<img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220413183040.png" style="zoom: 33%;" />
         <p class="suffix-end">__END__</p>
         <div class="suffix-box">
             <div class="suffix-box-left">
