@@ -6,7 +6,7 @@
     <meta name="referrer" content="origin">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>StarCTF2022 赛后复现WP</title>
+    <title>2022DASCTF X SU 三月春季挑战赛赛后复现WP</title>
 
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/LongCang.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@master/static/font/Monda.css">
@@ -31,19 +31,19 @@
     <div class="header">
         <div class="vertical">
             <div class="inner">
-                <h1 class="header-subtitle">StarCTF2022 赛后复现WP</h1>
+                <h1 class="header-subtitle">2022DASCTF X SU 三月春季挑战赛赛后复现WP</h1>
                 <div class="header-subinfo">
                     <p class="article-info-text">
                         <span>
-                            <i class="iconfont icon-time"></i> 发表时间：2022-04-21
+                            <i class="iconfont icon-time"></i> 发表时间：2022-04-27
                         </span>
                         
-                            <span id="/2022/04/21/StarCTF 赛后复现WP/" class="leancloud_visitors" data-flag-title="StarCTF2022 赛后复现WP">
+                            <span id="/2022/04/27/2022DASCTFXSU三月春季挑战赛赛后复现WP/" class="leancloud_visitors" data-flag-title="2022DASCTF X SU 三月春季挑战赛赛后复现WP">
                                 <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
                             </span>
                         
                         <span>
-                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2022/04/21/StarCTF 赛后复现WP/"></span>
+                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2022/04/27/2022DASCTFXSU三月春季挑战赛赛后复现WP/"></span>
                         </span>  
                     </p>                 
                 </div>
@@ -57,47 +57,50 @@
         <div id="article">
     <div class="toc"></div>
     <div class="article-body">
-        <h1 id="StarCTF2022-赛后复现WP"><a href="#StarCTF2022-赛后复现WP" class="headerlink" title="StarCTF2022 赛后复现WP"></a>StarCTF2022 赛后复现WP</h1><hr>
-<h2 id="Simple-File-System"><a href="#Simple-File-System" class="headerlink" title="Simple File System"></a>Simple File System</h2><p>解压文件，看一下里面包含的几个文件，flag是一个flag的格式，instruction.txt是运行指令</p>
-<p>用DiE查一下，只有simplefs可以查的出来</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421144459.png"></p>
-<p>用IDA打开simplefs，没有main函数，star函数里的内容感觉也不是很有用，搜一下字符串flag</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421145339.png"></p>
-<p>看到这个plantflag是instruction.txt里提到过的，跟一下，跟到了sub_1488函数</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421145829.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421145851.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421145957.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421150040.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421150142.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421150119.png"></p>
-<p>这就是simplefs的操作指令函数，仔细看可以发现，关键点在150行到177行</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421150611.png"></p>
-<p>分析一下这段程序，根据time生成一个数v8，v21和v22都是随机数，sub_216是creat inode</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421150801.png"></p>
-<p>那所以关键就是sub_1E16，同时要注意sub_1E16的第三个参数输入1和2的区别</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421151646.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421151707.png"></p>
-<p>先看第三个参数，也是就是a3 &#x3D; 2时，下面的sub_2305函数，又是和随机数相关</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421151856.png"></p>
-<p>所以看看a3 &#x3D; 1时的函数sub_21B2，就很像个加密，所以暂定这个就是一个加密</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421151959.png"></p>
-<p>返回上一层做些注释</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421162544.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421162653.png"></p>
-<p>这样子看上去就清楚很多，然后在第八行下断点动调一下，按照instructions里的操作指令输入</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421163657.png"></p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421163812.png"></p>
-<p>再循环中多跑几趟就不难发现，只有下图框出的四个值是不变的，联想到flag格式是” *ctf{xxxxxx} “,所以很有可能是” *ctf “</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421164035.png"></p>
-<p>然后按按d，就可以看到下图几个值，值从哪来的呢，只有可能是从image.flag的文件中来</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421164718.png"></p>
-<p>所以将image.flag拖到010editor里找一下这几个值，搜到了这一段，很有可能就是flag，将这一段提取出来，将其他的删除</p>
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421165226.png"></p>
-<p>根据上面IDA里的循环，逆向写出exp</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">def Decrypt(enflag):</span><br><span class="line">    flag = &quot;&quot;</span><br><span class="line">    for i in range(len(enflag)):</span><br><span class="line">        v5 = enflag[i]</span><br><span class="line">        v5 = (v5 &gt;&gt; 3) | (v5 &lt;&lt; 5) &amp; 0xFF</span><br><span class="line">        v5 ^= 0xDE</span><br><span class="line">        v5 = (v5 &gt;&gt; 4) | (v5 &lt;&lt; 4) &amp; 0xFF</span><br><span class="line">        v5 ^= 0xED</span><br><span class="line">        v5 = (v5 &gt;&gt; 5) | (v5 &lt;&lt; 3) &amp; 0xFF</span><br><span class="line">        v5 ^= 0xBE</span><br><span class="line">        v5 = (v5 &gt;&gt; 6) | (v5 &lt;&lt; 2) &amp; 0xFF</span><br><span class="line">        v5 ^= 0xEF</span><br><span class="line">        v5 = (v5 &gt;&gt; 7) | (v5 &lt;&lt; 1) &amp; 0xFF</span><br><span class="line">        flag += chr(v5)</span><br><span class="line">    return flag</span><br><span class="line"></span><br><span class="line">enflags = open(&#x27;image.flag.bak&#x27;,&#x27;rb&#x27;).read()</span><br><span class="line">print(Decrypt(enflags))</span><br></pre></td></tr></table></figure>
+        <h1 id="2022DASCTF-X-SU-三月春季挑战赛赛后复现WP"><a href="#2022DASCTF-X-SU-三月春季挑战赛赛后复现WP" class="headerlink" title="2022DASCTF X SU 三月春季挑战赛赛后复现WP"></a>2022DASCTF X SU 三月春季挑战赛赛后复现WP</h1><hr>
+<h2 id="easyre"><a href="#easyre" class="headerlink" title="easyre"></a>easyre</h2><p>用DiE查壳，发现是个ASP壳</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427143017.png"></p>
+<p>试着用esp脱壳定律去脱壳，将文件用od打开</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427143433.png"></p>
+<p>push压栈，F7前进一步到call，发现只有ESP和EIP是红的</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427143652.png"></p>
+<p>数据窗口中跟随</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427143811.png"></p>
+<p>选中第一个数据下断点</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427143904.png"></p>
+<p>run一下就运行到了下图位置</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427143945.png"></p>
+<p>继续F7，发现一个pop出栈，以及一个大跳转</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427145229.png"></p>
+<p>进行到下图位置，说明我们找到了oep，就可以dump一下了</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427150815.png"></p>
+<p>先用LordPE修正一下大小</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427151405.png"></p>
+<p>再dump一下</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427151500.png"></p>
+<p>再用ImportREC修复一下，输入OEP-&gt;自动搜索-&gt;获取输入表-&gt;修复转存文件（选择上面dump出的文件）</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427170841.png"></p>
+<p>然后就发生了一件蛮离谱的事情，用DiE查壳，发现还是有壳，但是感觉壳脱的没什么毛病，所以用IDA打开，发现已经没有壳了，函数都正常了，先看main函数</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427171454.png"></p>
+<p>重点应该是在if函数往下的代码中，所以看一下sub_4019BE，很明显的一个base58，但是解出来是this is a fake flag</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427171616.png"></p>
+<p>再看一下sub_401771，好像是个关键函数</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427171740.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427171757.png"></p>
+<p>但是我们并不知道dword_492940数组的值，所以在15行打下断点，动态调试一下</p>
+<p>根据下方v2有42位可知，flag的长度应该也是42位，所以我们构建一个42位的flag</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427172214.png"></p>
+<p>跟踪一下这个dword_492940，可以看到下图这些数值</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427172949.png"></p>
+<p>选中内容shift+E查看export data</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427173157.png"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> <span class="type">char</span> ida_chars[] =</span><br><span class="line">&#123;</span><br><span class="line">   <span class="number">56</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">120</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">221</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>, <span class="number">232</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">  <span class="number">175</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">191</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">58</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>, <span class="number">107</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">251</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">  <span class="number">184</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">12</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">133</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">53</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">92</span>,   <span class="number">1</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">  <span class="number">173</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">230</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>, <span class="number">224</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">138</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">   <span class="number">29</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">189</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">70</span>,   <span class="number">1</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>, <span class="number">210</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>,  <span class="number">43</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">21</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">36</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>, <span class="number">198</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">173</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">  <span class="number">161</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">201</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">123</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">18</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">40</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">5</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">    <span class="number">0</span>,   <span class="number">0</span>, <span class="number">114</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>,  <span class="number">62</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, </span><br><span class="line">   <span class="number">16</span>,   <span class="number">0</span>,   <span class="number">0</span>,   <span class="number">0</span>, <span class="number">161</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220421165718.png"></p>
-<p>思路及脚本参考：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1D541127ug/?spm_id_from=333.788">https://www.bilibili.com/video/BV1D541127ug/?spm_id_from=333.788</a></p>
+<p>对这个数组进行处理，再根据sub_401771函数中的内容，编写exp</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> v2[<span class="number">42</span>];</span><br><span class="line">    v2[<span class="number">0</span>] = <span class="number">-61</span>;</span><br><span class="line">    v2[<span class="number">1</span>] = <span class="number">-128</span>;</span><br><span class="line">    v2[<span class="number">2</span>] = <span class="number">-43</span>;</span><br><span class="line">    v2[<span class="number">3</span>] = <span class="number">-14</span>;</span><br><span class="line">    v2[<span class="number">4</span>] = <span class="number">-101</span>;</span><br><span class="line">    v2[<span class="number">5</span>] = <span class="number">48</span>;</span><br><span class="line">    v2[<span class="number">6</span>] = <span class="number">11</span>;</span><br><span class="line">    v2[<span class="number">7</span>] = <span class="number">-76</span>;</span><br><span class="line">    v2[<span class="number">8</span>] = <span class="number">85</span>;</span><br><span class="line">    v2[<span class="number">9</span>] = <span class="number">-34</span>;</span><br><span class="line">    v2[<span class="number">10</span>] = <span class="number">34</span>;</span><br><span class="line">    v2[<span class="number">11</span>] = <span class="number">-125</span>;</span><br><span class="line">    v2[<span class="number">12</span>] = <span class="number">47</span>;</span><br><span class="line">    v2[<span class="number">13</span>] = <span class="number">-105</span>;</span><br><span class="line">    v2[<span class="number">14</span>] = <span class="number">-72</span>;</span><br><span class="line">    v2[<span class="number">15</span>] = <span class="number">32</span>;</span><br><span class="line">    v2[<span class="number">16</span>] = <span class="number">29</span>;</span><br><span class="line">    v2[<span class="number">17</span>] = <span class="number">116</span>;</span><br><span class="line">    v2[<span class="number">18</span>] = <span class="number">-47</span>;</span><br><span class="line">    v2[<span class="number">19</span>] = <span class="number">1</span>;</span><br><span class="line">    v2[<span class="number">20</span>] = <span class="number">115</span>;</span><br><span class="line">    v2[<span class="number">21</span>] = <span class="number">26</span>;</span><br><span class="line">    v2[<span class="number">22</span>] = <span class="number">-78</span>;</span><br><span class="line">    v2[<span class="number">23</span>] = <span class="number">-56</span>;</span><br><span class="line">    v2[<span class="number">24</span>] = <span class="number">-59</span>;</span><br><span class="line">    v2[<span class="number">25</span>] = <span class="number">116</span>;</span><br><span class="line">    v2[<span class="number">26</span>] = <span class="number">-64</span>;</span><br><span class="line">    v2[<span class="number">27</span>] = <span class="number">91</span>;</span><br><span class="line">    v2[<span class="number">28</span>] = <span class="number">-9</span>;</span><br><span class="line">    v2[<span class="number">29</span>] = <span class="number">15</span>;</span><br><span class="line">    v2[<span class="number">30</span>] = <span class="number">-45</span>;</span><br><span class="line">    v2[<span class="number">31</span>] = <span class="number">1</span>;</span><br><span class="line">    v2[<span class="number">32</span>] = <span class="number">85</span>;</span><br><span class="line">    v2[<span class="number">33</span>] = <span class="number">-78</span>;</span><br><span class="line">    v2[<span class="number">34</span>] = <span class="number">-92</span>;</span><br><span class="line">    v2[<span class="number">35</span>] = <span class="number">-82</span>;</span><br><span class="line">    v2[<span class="number">36</span>] = <span class="number">123</span>;</span><br><span class="line">    v2[<span class="number">37</span>] = <span class="number">-84</span>;</span><br><span class="line">    v2[<span class="number">38</span>] = <span class="number">92</span>;</span><br><span class="line">    v2[<span class="number">39</span>] = <span class="number">86</span>;</span><br><span class="line">    v2[<span class="number">40</span>] = <span class="number">-68</span>;</span><br><span class="line">    v2[<span class="number">41</span>] = <span class="number">35</span>;</span><br><span class="line">    <span class="type">int</span> v3[<span class="number">42</span>]=&#123;<span class="number">56</span>,<span class="number">120</span>, <span class="number">221</span> ,<span class="number">232</span> ,<span class="number">0</span> ,<span class="number">175</span>,<span class="number">191</span>,<span class="number">58</span>,<span class="number">107</span> , <span class="number">251</span> , <span class="number">184</span> , <span class="number">12</span> , <span class="number">133</span> , <span class="number">53</span> , <span class="number">92</span> , <span class="number">173</span> , <span class="number">230</span> , <span class="number">0</span> , <span class="number">224</span> , <span class="number">138</span> , <span class="number">29</span> , <span class="number">189</span> , <span class="number">70</span>,<span class="number">210</span>,  <span class="number">43</span>,   <span class="number">0</span>,  <span class="number">21</span>,  <span class="number">36</span>,  <span class="number">198</span>,  <span class="number">173</span>, <span class="number">161</span>,  <span class="number">201</span>,  <span class="number">123</span>,  <span class="number">18</span>,  <span class="number">40</span>, <span class="number">0</span>,  <span class="number">5</span>,  <span class="number">0</span>, <span class="number">114</span>, <span class="number">62</span>,  <span class="number">16</span>, <span class="number">161</span>&#125;;</span><br><span class="line">    <span class="type">char</span> flag[<span class="number">42</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">42</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        flag[i] = (v2[i] - <span class="number">71</span>) ^ v3[i];</span><br><span class="line">        cout&lt;&lt;flag[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220427174219.png"></p>
 
         <p class="suffix-end">__END__</p>
         <div class="suffix-box">
@@ -107,7 +110,7 @@
             <div class="suffix-box-right">
                 <span class="suffix-box-title">文章作者</span>：X06
                 <br>
-                <span class="suffix-box-title">文章出处</span>：<a href="/2022/04/21/StarCTF%20%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0WP/" target="_blank">StarCTF2022 赛后复现WP</a>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2022/04/27/2022DASCTFXSU%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9B%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0WP/" target="_blank">2022DASCTF X SU 三月春季挑战赛赛后复现WP</a>
                 <br>
                 <span class="suffix-box-title">作者签名</span>：爱意东升西落，浪漫至死不渝
                 <br>
@@ -131,11 +134,8 @@
         
         <div class="article-prev-next">
             
-                <a href="/2022/04/27/2022DASCTFXSU%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9B%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0WP/" class="prev-prefix">« </a> 上一篇：    <a href="/2022/04/27/2022DASCTFXSU%E4%B8%89%E6%9C%88%E6%98%A5%E5%AD%A3%E6%8C%91%E6%88%98%E8%B5%9B%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0WP/" title="发布于 2022-04-27 02:26">2022DASCTF X SU 三月春季挑战赛赛后复现WP</a>
-                <br>
             
-            
-                <a href="/2022/04/13/BUU-Re(2)(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0)/" class="next-prefix">» </a> 下一篇：    <a href="/2022/04/13/BUU-Re(2)(%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0)/" title="发布于 2022-04-13 02:35">BUU-Re(2)(持续更新)</a>
+                <a href="/2022/04/21/StarCTF%20%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0WP/" class="next-prefix">» </a> 下一篇：    <a href="/2022/04/21/StarCTF%20%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0WP/" title="发布于 2022-04-21 05:06">StarCTF2022 赛后复现WP</a>
             
         </div>
     </div>
