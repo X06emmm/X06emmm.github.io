@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>2022网鼎杯赛后复现WP</title>
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/LongCang.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/Monda.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/NotoSansSC.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/Playball.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/PTMono.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/RobotoSlab.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/Rosario.css">
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/UbuntuMono.css">
+
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/post.css">
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/normal.css">
+    
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/jquery-3.4.1.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<body>
+    <a id="cover"></a>
+    <div id="header">
+    <div class="header">
+        <div class="vertical">
+            <div class="inner">
+                <h1 class="header-subtitle">2022网鼎杯赛后复现WP</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2022-09-06
+                        </span>
+                        
+                            <span id="/2022/09/06/网鼎杯赛后复现WP/" class="leancloud_visitors" data-flag-title="2022网鼎杯赛后复现WP">
+                                <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                            </span>
+                        
+                        <span>
+                            <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2022/09/06/网鼎杯赛后复现WP/"></span>
+                        </span>  
+                    </p>                 
+                </div>
+            </div>
+        </div>
+        <canvas id="articleHeaderCanvas"></canvas>
+    </div>
+</div>
+    <div id="container">
+    <div id="content">
+        <div id="article">
+    <div class="toc"></div>
+    <div class="article-body">
+        <h1 id="网鼎杯赛后复现WP"><a href="#网鼎杯赛后复现WP" class="headerlink" title="网鼎杯赛后复现WP"></a>网鼎杯赛后复现WP</h1><h2 id="re693"><a href="#re693" class="headerlink" title="re693"></a>re693</h2><p>vscode打开，判断是go语言代码，所以放进goland中</p>
+<p>审计代码，看到最后有主函数，所有尝试一下能不能运行</p>
+<p>得到如下两行提示</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220905193801.png"></p>
+<p>意思是</p>
+<p>输入第一个函数，它有六个参数，第三个函数为<strong>gLIhR</strong>，可以找到符合条件的函数为<strong>ZlXDJkH3OZN4Mayd</strong></p>
+<p>输入第二个函数，它被三次调用，调用函数为<strong>cHZv5op8rOmlAkb6</strong></p>
+<p>所以我们去找一下这两个函数</p>
+<p>直接搜索得到</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220905194302.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220905194539.png"></p>
+<p>第二个有点难找，<strong>UhnCm82SDGE0zLYO</strong>这个函数满足条件被三次调用</p>
+<p>然后就可以看一下main函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> nFAzj, CuSkl <span class="type">string</span></span><br><span class="line">	jjxXf := []<span class="type">byte</span>&#123;</span><br><span class="line">		<span class="number">37</span>, <span class="number">73</span>, <span class="number">151</span>, <span class="number">135</span>, <span class="number">65</span>, <span class="number">58</span>, <span class="number">241</span>, <span class="number">90</span>, <span class="number">33</span>, <span class="number">86</span>, <span class="number">71</span>, <span class="number">41</span>, <span class="number">102</span>, <span class="number">241</span>, <span class="number">213</span>, <span class="number">234</span>, <span class="number">67</span>, <span class="number">144</span>, <span class="number">139</span>, <span class="number">20</span>, <span class="number">112</span>, <span class="number">150</span>, <span class="number">41</span>, <span class="number">7</span>, <span class="number">158</span>, <span class="number">251</span>, <span class="number">167</span>, <span class="number">249</span>, <span class="number">24</span>, <span class="number">129</span>, <span class="number">72</span>, <span class="number">64</span>, <span class="number">83</span>, <span class="number">142</span>, <span class="number">166</span>, <span class="number">236</span>, <span class="number">67</span>, <span class="number">18</span>, <span class="number">211</span>, <span class="number">100</span>, <span class="number">91</span>, <span class="number">38</span>, <span class="number">83</span>, <span class="number">147</span>, <span class="number">40</span>, <span class="number">78</span>, <span class="number">239</span>, <span class="number">113</span>, <span class="number">232</span>, <span class="number">83</span>, <span class="number">227</span>, <span class="number">47</span>, <span class="number">192</span>, <span class="number">227</span>, <span class="number">70</span>, <span class="number">167</span>, <span class="number">201</span>, <span class="number">249</span>, <span class="number">156</span>, <span class="number">101</span>, <span class="number">216</span>, <span class="number">159</span>, <span class="number">116</span>, <span class="number">210</span>, <span class="number">152</span>, <span class="number">234</span>, <span class="number">38</span>, <span class="number">145</span>, <span class="number">198</span>, <span class="number">58</span>, <span class="number">24</span>, <span class="number">183</span>, <span class="number">72</span>, <span class="number">143</span>, <span class="number">136</span>, <span class="number">234</span>, <span class="number">246</span>&#125;</span><br><span class="line">	KdlaH := []<span class="type">byte</span>&#123;</span><br><span class="line">		<span class="number">191</span>, <span class="number">140</span>, <span class="number">114</span>, <span class="number">245</span>, <span class="number">142</span>, <span class="number">55</span>, <span class="number">190</span>, <span class="number">30</span>, <span class="number">161</span>, <span class="number">18</span>, <span class="number">200</span>, <span class="number">7</span>, <span class="number">21</span>, <span class="number">59</span>, <span class="number">17</span>, <span class="number">44</span>, <span class="number">34</span>, <span class="number">181</span>, <span class="number">109</span>, <span class="number">116</span>, <span class="number">146</span>, <span class="number">145</span>, <span class="number">189</span>, <span class="number">68</span>, <span class="number">142</span>, <span class="number">113</span>, <span class="number">0</span>, <span class="number">33</span>, <span class="number">46</span>, <span class="number">184</span>, <span class="number">21</span>, <span class="number">33</span>, <span class="number">66</span>, <span class="number">99</span>, <span class="number">124</span>, <span class="number">167</span>, <span class="number">201</span>, <span class="number">88</span>, <span class="number">133</span>, <span class="number">20</span>, <span class="number">211</span>, <span class="number">67</span>, <span class="number">133</span>, <span class="number">250</span>, <span class="number">62</span>, <span class="number">28</span>, <span class="number">138</span>, <span class="number">229</span>, <span class="number">105</span>, <span class="number">102</span>, <span class="number">125</span>, <span class="number">124</span>, <span class="number">208</span>, <span class="number">180</span>, <span class="number">50</span>, <span class="number">146</span>, <span class="number">67</span>, <span class="number">39</span>, <span class="number">55</span>, <span class="number">240</span>, <span class="number">239</span>, <span class="number">203</span>, <span class="number">230</span>, <span class="number">142</span>, <span class="number">20</span>, <span class="number">90</span>, <span class="number">205</span>, <span class="number">27</span>, <span class="number">128</span>, <span class="number">136</span>, <span class="number">151</span>, <span class="number">140</span>, <span class="number">222</span>, <span class="number">92</span>, <span class="number">152</span>, <span class="number">1</span>, <span class="number">222</span>, <span class="number">138</span>, <span class="number">254</span>, <span class="number">246</span>, <span class="number">223</span>, <span class="number">224</span>, <span class="number">236</span>, <span class="number">33</span>, <span class="number">60</span>, <span class="number">170</span>, <span class="number">189</span>, <span class="number">77</span>, <span class="number">124</span>, <span class="number">72</span>, <span class="number">135</span>, <span class="number">46</span>, <span class="number">235</span>, <span class="number">17</span>, <span class="number">32</span>, <span class="number">28</span>, <span class="number">245</span>&#125;</span><br><span class="line">	fmt.Print(MPyt9GWTRfAFNvb1(jjxXf))</span><br><span class="line">	fmt.Scanf(<span class="string">&quot;%20s&quot;</span>, &amp;nFAzj)</span><br><span class="line">	fmt.Print(kZ2BFvOxepd5ALDR(KdlaH))</span><br><span class="line">	fmt.Scanf(<span class="string">&quot;%20s&quot;</span>, &amp;CuSkl)</span><br><span class="line">	vNvUO := GwSqNHQ7dPXpIG64(nFAzj)</span><br><span class="line">	YJCya := <span class="string">&quot;&quot;</span></span><br><span class="line">	mvOxK := YI3z8ZxOKhfLmTPC(CuSkl)</span><br><span class="line">	<span class="keyword">if</span> mvOxK != <span class="literal">nil</span> &#123;</span><br><span class="line">		YJCya = mvOxK()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> YJCya != <span class="string">&quot;&quot;</span> &amp;&amp; vNvUO != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">		fmt.Printf(<span class="string">&quot;flag&#123;%s%s&#125;\n&quot;</span>, vNvUO, YJCya)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到flag是由vNvUO, YJCya两段组合而成</p>
+<p>所以重点关注一下</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vNvUO := GwSqNHQ7dPXpIG64(nFAzj)</span><br><span class="line">YJCya := <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>搜索一下<strong>GwSqNHQ7dPXpIG64</strong>这个函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GwSqNHQ7dPXpIG64</span><span class="params">(cJPTR <span class="type">string</span>)</span></span> <span class="type">string</span> &#123;</span><br><span class="line">	YrXQd := hex.EncodeToString([]<span class="type">byte</span>(cJPTR))</span><br><span class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">&quot;%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c&quot;</span>, YrXQd[<span class="number">22</span>], YrXQd[<span class="number">19</span>], YrXQd[<span class="number">20</span>], YrXQd[<span class="number">21</span>], YrXQd[<span class="number">28</span>], YrXQd[<span class="number">10</span>], YrXQd[<span class="number">20</span>], YrXQd[<span class="number">7</span>], YrXQd[<span class="number">29</span>], YrXQd[<span class="number">14</span>], YrXQd[<span class="number">0</span>], YrXQd[<span class="number">18</span>], YrXQd[<span class="number">3</span>], YrXQd[<span class="number">24</span>], YrXQd[<span class="number">27</span>], YrXQd[<span class="number">31</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到是对刚才提示中的第一个函数ZlXDJkH3OZN4Mayd转换为hex后即为YrXQd</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">YrXQd=<span class="string">&quot;ZlXDJkH3OZN4Mayd&quot;</span>.encode()</span><br><span class="line"><span class="built_in">print</span>(YrXQd.<span class="built_in">hex</span>())</span><br><span class="line"><span class="comment">#5a6c58444a6b48334f5a4e344d617964</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后是第二段，去看一下UhnCm82SDGE0zLYO以及它的调用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">UhnCm82SDGE0zLYO</span><span class="params">()</span></span> <span class="type">string</span> &#123;</span><br><span class="line">	SythK := []<span class="type">byte</span>&#123;</span><br><span class="line">		<span class="number">159</span>, <span class="number">141</span>, <span class="number">72</span>, <span class="number">106</span>, <span class="number">196</span>, <span class="number">62</span>, <span class="number">16</span>, <span class="number">205</span>, <span class="number">170</span>, <span class="number">159</span>, <span class="number">36</span>, <span class="number">232</span>, <span class="number">125</span>, <span class="number">239</span>, <span class="number">208</span>, <span class="number">3</span>&#125;</span><br><span class="line">	<span class="keyword">var</span> Vw2mJ, Nij87, zVclR <span class="type">string</span></span><br><span class="line">	<span class="keyword">return</span> cHZv5op8rOmlAkb6(SythK, Vw2mJ, Nij87, zVclR)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">cHZv5op8rOmlAkb6</span><span class="params">(HIGXt []<span class="type">byte</span>, VGvny <span class="type">string</span>, ZOkKV <span class="type">string</span>, eU0uD <span class="type">string</span>)</span></span> <span class="type">string</span> &#123;</span><br><span class="line">	QTk4l := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">20</span>)</span><br><span class="line">	Ek08m := [<span class="number">16</span>]<span class="type">byte</span>&#123;</span><br><span class="line">		<span class="number">167</span>, <span class="number">238</span>, <span class="number">45</span>, <span class="number">89</span>, <span class="number">160</span>, <span class="number">95</span>, <span class="number">34</span>, <span class="number">175</span>, <span class="number">158</span>, <span class="number">169</span>, <span class="number">20</span>, <span class="number">217</span>, <span class="number">68</span>, <span class="number">137</span>, <span class="number">231</span>, <span class="number">54</span>&#125;</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">16</span>; i++ &#123;</span><br><span class="line">		QTk4l[i] += Ek08m[i] ^ HIGXt[i]</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="type">string</span>(QTk4l)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>逻辑很简单，就是两个数组的异或</p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flag1[<span class="number">16</span>] = &#123;<span class="number">167</span>, <span class="number">238</span>, <span class="number">45</span>, <span class="number">89</span>, <span class="number">160</span>, <span class="number">95</span>, <span class="number">34</span>, <span class="number">175</span>, <span class="number">158</span>, <span class="number">169</span>, <span class="number">20</span>, <span class="number">217</span>, <span class="number">68</span>, <span class="number">137</span>, <span class="number">231</span>, <span class="number">54</span>&#125;;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flag2[<span class="number">16</span>] = &#123;<span class="number">159</span>, <span class="number">141</span>, <span class="number">72</span>, <span class="number">106</span>, <span class="number">196</span>, <span class="number">62</span>, <span class="number">16</span>, <span class="number">205</span>, <span class="number">170</span>, <span class="number">159</span>, <span class="number">36</span>, <span class="number">232</span>, <span class="number">125</span>, <span class="number">239</span>, <span class="number">208</span>, <span class="number">3</span>&#125;;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> flag[<span class="number">16</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">16</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        flag[i] = flag1[i] ^ flag2[i];</span><br><span class="line">        cout&lt;&lt;flag[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line">    <span class="type">char</span> YrXQd[] = <span class="string">&quot;5a6c58444a6b48334f5a4e344d617964&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c&quot;</span>, YrXQd[<span class="number">22</span>], YrXQd[<span class="number">19</span>], YrXQd[<span class="number">20</span>], YrXQd[<span class="number">21</span>], YrXQd[<span class="number">28</span>], YrXQd[<span class="number">10</span>], YrXQd[<span class="number">20</span>], YrXQd[<span class="number">7</span>], YrXQd[<span class="number">29</span>], YrXQd[<span class="number">14</span>], YrXQd[<span class="number">0</span>], YrXQd[<span class="number">18</span>], YrXQd[<span class="number">3</span>], YrXQd[<span class="number">24</span>], YrXQd[<span class="number">27</span>], YrXQd[<span class="number">31</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="re694"><a href="#re694" class="headerlink" title="re694"></a>re694</h2><p>放进DiE查壳，发现是UPX壳</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906193438.png"></p>
+<p>用upx shell脱壳发现没办法脱，参考一下吾爱破解的文章<a target="_blank" rel="noopener" href="https://www.52pojie.cn/thread-326995-1-1.html%EF%BC%8C%E7%8C%9C%E6%B5%8B%E5%8F%AF%E8%83%BD%E6%98%AF%E5%8C%BA%E6%AE%B5%E5%90%8D%E9%94%99%E8%AF%AF%E5%AF%BC%E8%87%B4%E7%9A%84%E8%84%B1%E5%A3%B3%E5%A4%B1%E8%B4%A5%EF%BC%8C%E7%94%A8010editor%E6%90%9C%E7%B4%A2%E4%B8%80%E4%B8%8B%E5%8F%91%E7%8E%B0%E7%A1%AE%E5%AE%9E%E6%98%AFUPX%E8%A2%AB%E6%94%B9%E6%88%90%E4%BA%86FUK%EF%BC%8C%E6%94%B9%E5%9B%9E%E6%9D%A5">https://www.52pojie.cn/thread-326995-1-1.html，猜测可能是区段名错误导致的脱壳失败，用010editor搜索一下发现确实是UPX被改成了FUK，改回来</a></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906193739.png"></p>
+<p>再对该文件进行脱壳，还是不大行，很怪</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906193840.png"></p>
+<p>尝试用IDA打开，发现壳已经脱了，搜索main函数无果后发现了关键字符串并跟踪</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906194026.png"></p>
+<p>找到关键函数</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906194059.png"></p>
+<p>审计代码可以发现，代码要求我们输入字符串，然后18行和24行的if语句进行了一个判断操作，所以着重关注这两句里的函数</p>
+<p>先看<strong>sub_140011235</strong>，找到关键点跟踪进去，不难看出这个函数是先判断长度是否为20，再将输入值异或0x66</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906194503.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906194518.png"></p>
+<p>再看<strong>sub_1400111E5</strong>，是将上一步的值+10之后再异或0x50</p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906194819.png"></p>
+<p>再跟踪一下这个<strong>sub_140011276</strong>函数，可以发现最后的结果应该就是这个<strong>dword_14001D000</strong></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906194927.png"></p>
+<p><img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/20220906195022.png"></p>
+<p>然后思路就很清晰了，就是把这个最后的结果逆向回去</p>
+<h3 id="exp-1"><a href="#exp-1" class="headerlink" title="exp"></a>exp</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deword = [<span class="number">0x4B</span>, <span class="number">0x48</span>, <span class="number">0x79</span>, <span class="number">0x13</span>, <span class="number">0x45</span>, <span class="number">0x30</span>, <span class="number">0x5C</span>, <span class="number">0x49</span>, <span class="number">0x5A</span>, <span class="number">0x79</span>, <span class="number">0x13</span>, <span class="number">0x70</span>, <span class="number">0x6D</span>, <span class="number">0x78</span>, <span class="number">0x13</span>, <span class="number">0x6F</span>, <span class="number">0x48</span>, <span class="number">0x5D</span>, <span class="number">0x64</span>, <span class="number">0x64</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(deword)):</span><br><span class="line">    deword[i] =((deword[i] ^<span class="number">0x50</span>) - <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(deword)):</span><br><span class="line">    x = <span class="built_in">chr</span>(deword[j] ^ <span class="number">0x66</span>)</span><br><span class="line">    <span class="built_in">print</span>(x,end=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="re696"><a href="#re696" class="headerlink" title="re696"></a>re696</h2><p>安卓逆向做的太烂了，先欠着吧有空再补上</p>
+
+        <p class="suffix-end">__END__</p>
+        <div class="suffix-box">
+            <div class="suffix-box-left">
+                <img src="https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/41646465847_.pic.jpg" alt="X06">
+            </div>
+            <div class="suffix-box-right">
+                <span class="suffix-box-title">文章作者</span>：X06
+                <br>
+                <span class="suffix-box-title">文章出处</span>：<a href="/2022/09/06/%E7%BD%91%E9%BC%8E%E6%9D%AF%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0WP/" target="_blank">2022网鼎杯赛后复现WP</a>
+                <br>
+                <span class="suffix-box-title">作者签名</span>：爱意东升西落，浪漫至死不渝
+                <br>
+                <span class="suffix-box-title">关于主题</span>：<a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+                <br>
+                <span class="suffix-box-title">版权声明</span>：文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+                <br>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+    <div class="article-footer">
+        
+        
+            <div class="tag">
+                标签：
+                
+                    <a href="/tag/Re/">Re</a>
+                
+            </div>
+        
+        <div class="article-prev-next">
+            
+            
+                <a href="/2022/09/02/%E5%BC%BA%E7%BD%91%E6%9D%AF%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0wp/" class="next-prefix">» </a> 下一篇：    <a href="/2022/09/02/%E5%BC%BA%E7%BD%91%E6%9D%AF%E8%B5%9B%E5%90%8E%E5%A4%8D%E7%8E%B0wp/" title="发布于 2022-09-02 05:06">2022强网杯 赛后复现WP</a>
+            
+        </div>
+    </div>
+    
+    <div class="article-comments">
+        <div class="comments-title">
+            评论列表
+        </div>
+        <div class="comments-content">
+        </div>
+    </div>
+
+</div>
+
+    </div>
+</div>
+    <div id="footer"></div>
+    <div id="sidebar">
+    <div class="menu-wrap" style="display:none;">
+        <nav class="menu">
+            <div class="menu-introduce"> 
+                <div class="introduce-avatar"></div> 
+                <div class="introduce-info"> 
+                    <div class="introduce-user"><span></span></div>        
+                </div> 
+            </div> 
+            <div class="menu-list">
+                <ul></ul> 
+            </div> 
+            <div class="menu-link"></div> 
+        </nav>
+        <button class="menu-button-close"></button>
+        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
+            </svg>
+        </div>
+    </div>
+    <button class="menu-button-open">MENU</button>
+    <div class="menu-cover"></div>
+</div>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/search.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/iscroll.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/instantsearch.min.js"></script>
+<div class="search-window">
+    <div class="search-content">
+        <div class="search-content-icon">
+            <i class="iconfont icon-search"></i>
+        </div>
+        <div id="search-input" class="search-input"></div>
+    </div>
+
+    <div class="search-scroll">
+        <div class="search-result">
+            <div id="search-stats" class="search-stats"></div>
+            <div id="search-hits"></div>
+            <div id="search-pagination" class="search-pagination"></div>
+        </div>
+    </div>
+
+    <span class="search-close-icon">
+        <i class="iconfont icon-close"></i>
+    </span>
+</div>
+    <div id="tools">
+    <div class="progressbar-top"></div>
+
+    
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/APlayer.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/APlayer.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/Meting.min.js"></script>
+        <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
+    
+    
+    <div class="wrap-right"></div>
+    <div class="loading"></div>
+</div>
+    <script>
+    window.config = {
+        GitHubUserName     : 'X06emmm',
+        GitHubRepositories : 'X06emmm.github.io',
+
+        BlogUser      : 'X06',
+        BlogAvatar    : 'https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/41646465847_.pic.jpg',
+        BlogStartDate : '2021-07-14',
+
+        WebsiteTitleBlur         : '(◍´꒳`◍) Hi, Welcome to my blog',
+        WebsiteTitleBlurTimeOut  : 500,
+        WebsiteTitleFocus        : '(*´∇｀*) 欢迎回到霍格沃茨!',
+        WebsiteTitleFocusTimeOut : 1000,
+        WebsiteFavicon           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/image/website/logo.png',
+
+        ProgressBar: {
+            id       : 'topProgressBar',
+            color    : '#77B6FF',
+            height   : '2px',
+            duration : 0.2
+        },
+
+        Loading: {
+            rebound: {
+                tension  : 16,
+                friction : 5
+            },
+            spinner: {
+                id     : 'spinner',
+                radius : 90,
+                sides  : 3,
+                depth  : 4,
+                colors : {
+                    background : '#F0F0F0',
+                    stroke     : '#272633',
+                    base       : '',
+                    child      : '#272633'
+                },
+                alwaysForward : true,
+                restAt        : 0.5,
+                renderBase    : false
+            }
+        },
+
+        HomeHeaderAnimationRendered : true,
+        HomeHeaderAnimation         : {
+            radius      : 15,
+            density     : 0.2,
+            color       : 'rgba(255, 255, 255, .2)',
+            clearOffset : 0.3
+        },
+
+        ArticleHeaderAnimationRendered : false,
+        ArticleHeaderAnimation         : {
+            triW                  : 14,
+            triH                  : 20,
+            neighbours            : [
+                
+                    'side',
+                
+                    'top',
+                
+                    'bottom',
+                
+            ],
+            speedTrailAppear      : 0.1,
+            speedTrailDisappear   : 0.1,
+            speedTriOpen          : 1,
+            trailMaxLength        : 30,
+            trailIntervalCreation : 100,
+            delayBeforeDisappear  : 2,
+            colors                : [
+                
+                    '#96EDA6',
+                
+                    '#5BC6A9',
+                
+                    '#38668C',
+                
+                    '#374D84',
+                
+                    '#BED5CB',
+                
+                    '#62ADC6',
+                
+                    '#8EE5DE',
+                
+                    '#304E7B',
+                
+            ]
+        },
+
+        BackAnimationRendered          : true,
+        IEBrowserBackAnimationRendered : false,
+        BackAnimation                  : {
+            colorSaturation  : '60%',
+            colorBrightness  : '50%',
+            colorAlpha       : 0.5,
+            colorCycleSpeed  : 5,
+            verticalPosition : 'random',
+            horizontalSpeed  : 200,
+            ribbonCount      : 3,
+            strokeSize       : 0,
+            parallaxAmount   : -0.2,
+            animateSections  : true
+        },
+
+        HomeHeaderImage : [
+            
+                'https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/%E5%A3%81%E7%BA%B8.jpg',
+            
+                'https://x06hexo-1309964958.cos.ap-nanjing.myqcloud.com/img/wallhaven-qd218r_1920x1080.png',
+            
+        ],
+        HomeBannerText  : '等太阳落山，就一起做梦',
+
+        ArticleHeaderImage : [
+            
+                'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/image/header/article.jpg',
+            
+        ],
+
+        OtherBannerText : '你一定能够成为你想要去成为的人',
+
+        MenuList : [
+            
+                {
+                    name   : '首页',
+                    href   : '/',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '标签',
+                    href   : '/tag',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '分类',
+                    href   : '/category',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '归档',
+                    href   : '/archive',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '赞赏',
+                    href   : '/donate',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '关于',
+                    href   : '/about',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '订阅',
+                    href   : '/atom.xml',    
+                    target : '_blank',
+                    class  : ''
+                },
+            
+                {
+                    name   : '搜索',
+                    href   : '',    
+                    target : '',
+                    class  : 'search'
+                },
+            
+                {
+                    name   : '留言板',
+                    href   : '/comment',    
+                    target : '',
+                    class  : ''
+                },
+            
+                {
+                    name   : '友情链接',
+                    href   : '/friend',    
+                    target : '',
+                    class  : ''
+                },
+            
+        ],
+        MenuLink : [
+            
+                
+                    {
+                        icon : 'icon-weibo', 
+                        url  : 'https://weibo.com/u/3199224843'
+                    },
+                
+                    {
+                        icon : 'icon-wechat', 
+                        url  : 'https://u.wechat.com/EDrxqboPxE5-6NrOobNDNwI'
+                    },
+                
+                    {
+                        icon : 'icon-qq', 
+                        url  : ''
+                    },
+                
+                    {
+                        icon : 'icon-github', 
+                        url  : 'https://github.com/X06emmm'
+                    },
+                
+            
+        ],
+
+        FooterStyle : 2,
+        BottomText  : {
+            icon    : 'like-fill',
+            left    : '爱意东升西落',
+            right   : '浪漫至死不渝'
+        },
+        ThemeInfo   : true,
+
+        ConsoleList : [
+            
+                
+                    [
+                        
+                            
+                                'Based on cnblogs theme SimpleMemory.',
+                            
+                                '',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'SimpleMemory Author:',
+                            
+                                'BNDong',
+                            
+                        
+                    ],
+                
+                    [
+                        
+                            
+                                'Theme:',
+                            
+                                'LiveForCode',
+                            
+                        
+                    ],
+                
+            
+        ],
+
+        FontIconExtend : '',
+
+        Donate : {
+            paypal  : '',
+            bitcoin : '',
+            alipay  : '/image/zfb.JPG',
+            wechat  : '/image/wechat.jpg'
+        },
+
+        Code : {
+            style : 'normal'
+        },  
+
+        Search : {
+            applicationID : 'VI4FR31IM5',
+            apiKey        : '3314a8bcb688d0eef926d11b0412c8ef',
+            indexName     : 'abc',
+            hits          : {
+                page : 10
+            },
+            labels        : {
+                placeholder : '搜索',
+                empty       : '未发现与 「${query}」 相关的内容',
+                stats       : '${hits} 条相关条目，使用了 ${time} 毫秒',
+            }
+        }, 
+
+        Valine : {
+            switch         : true,
+            el             : '.comments-content',
+            appId          : 'O8XdEwFSobGoow13EApTlL5P-gzGzoHsz',
+            appKey         : '2ntSkK2Yha7D9BBVG88AtBBz',
+            placeholder    : '看春风不喜....',
+            avatar         : 'mm',
+            meta           : 'nick,mail,link',
+            requiredFields : 'nick,mail',
+            pageSize       : 5,
+            lang           : 'zh-cn',
+            visitor        : true,
+            enableQQ       : true
+        },
+
+        Tocbot : {
+            switch                : true,
+            tocSelector           : '.toc',
+            contentSelector       : '.article-body',
+            headingSelector       : 'h1, h2, h3, h4, h5',
+            headingsOffset        : 0,
+            scrollSmooth          : true,
+            scrollSmoothOffset    : -5,
+            positionFixedSelector : '.toc',
+            positionFixedClass    : 'toc-fixed',
+            fixedSidebarOffset    : '',
+        },
+
+        Require : {
+            baseUrl     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/',
+            waitSeconds : 100
+        },
+
+        Music : {
+            type : 'Meting'
+        },
+        APlayer : {
+            container : '.aplayer',
+            fixed     : true,
+            autoplay  : false,
+            loop      : 'all',
+            order     : 'random',
+            preload   : 'auto',
+            volume    : 0.67,
+            mutex     : true,
+            lrcType   : 3,
+            audio     : [
+                
+                    {
+                        name   : 'aLIEz',
+                        artist : 'mizuki（瑞葵）',
+                        cover  : '/music/cover/aLIEz.jpg',
+                        url    : '/music/song/aLIEz.mp3',
+                        lrc    : '/music/lrc/aLIEz.lrc'
+                    },
+                
+                    {
+                        name   : 'Endless Tears',
+                        artist : 'CLIFF EDGE',
+                        cover  : '/music/cover/Endless Tears.jpg',
+                        url    : '/music/song/Endless Tears.mp3',
+                        lrc    : '/music/lrc/Endless Tears.lrc'
+                    },
+                
+                    {
+                        name   : 'Miracle',
+                        artist : 'Cascada',
+                        cover  : '/music/cover/Miracle.jpg',
+                        url    : '/music/song/Miracle.mp3',
+                        lrc    : '/music/lrc/Miracle.lrc'
+                    },
+                
+                    {
+                        name   : 'Roll The Dice',
+                        artist : '高珊',
+                        cover  : '/music/cover/Roll The Dice.jpg',
+                        url    : '/music/song/Roll The Dice.mp3',
+                        lrc    : '/music/lrc/Roll The Dice.lrc'
+                    },
+                
+                    {
+                        name   : 'See You Again',
+                        artist : 'Charlie Puth, Wiz Khalifa',
+                        cover  : '/music/cover/See You Again.jpg',
+                        url    : '/music/song/See You Again.mp3',
+                        lrc    : '/music/lrc/See You Again.lrc'
+                    },
+                
+                    {
+                        name   : 'Traveling Light',
+                        artist : 'Joel Hanson, Sara Groves',
+                        cover  : '/music/cover/Traveling Light.jpg',
+                        url    : '/music/song/Traveling Light.mp3',
+                        lrc    : '/music/lrc/Traveling Light.lrc'
+                    },
+                
+                    {
+                        name   : '痴心绝对',
+                        artist : '李圣杰',
+                        cover  : '/music/cover/痴心绝对.jpg',
+                        url    : '/music/song/痴心绝对.mp3',
+                        lrc    : '/music/lrc/痴心绝对.lrc'
+                    },
+                
+                    {
+                        name   : '好想大声说爱你',
+                        artist : 'BAAD（バード）',
+                        cover  : '/music/cover/好想大声说爱你.jpg',
+                        url    : '/music/song/好想大声说爱你.mp3',
+                        lrc    : '/music/lrc/好想大声说爱你.lrc'
+                    },
+                
+            ]
+        },
+        Meting : {
+            id       : '3778678', 
+            lrcshow  : false, 
+            server   : 'netease', 
+            type     : 'playlist', 
+            fixed    : true, 
+            autoplay : false, 
+            loop     : 'all', 
+            order    : 'random', 
+            preload  : 'auto', 
+            volume   : 0.67, 
+            mutex    : true
+        },
+
+        LazyLoad : {
+            default : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/image/website/lazyload.svg'
+        },
+  
+        Style : {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/APlayer.css',
+            archive          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/archive.css',
+            donate           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/donate.css',
+            fancybox         : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/jquery.fancybox.css',
+            footer           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/footer.css',
+            iconfont         : 'https://at.alicdn.com/t/font_1546312_l3yohatebw.css',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/index.css',
+            menuBubble       : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/menu-bubble.css',
+            page             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/page.css',
+            post             : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/post.css',
+            search           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/search.css',
+            tocbot           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/tocbot.css',
+            normal           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/normal.css',
+            night            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/night.css',
+            clipboard        : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/css/clipboard.css'
+        },
+
+        Script: {
+            aplayer          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/APlayer.min.js',
+            config           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/require.config.js',
+            index            : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/index.js',
+            instantSearch    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/instantsearch.min.js',
+            jQuery           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/jquery-3.4.1.min.js',
+            loading          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/loading.js',
+            meting           : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/Meting.min.js',
+            iscroll          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/iscroll.js',
+            require          : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/require.min.js'
+        },
+
+        Font: {
+            LongCang   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/LongCang.css',
+            Monda      : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/Monda.css',
+            NotoSansSC : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/NotoSansSC.css',
+            Playball   : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/Playball.css',
+            PTMono     : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/PTMono.css',
+            RobotoSlab : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/RobotoSlab.css',
+            Rosario    : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/Rosario.css',
+            UbuntuMono : 'https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/font/UbuntuMono.css'
+        },
+
+        Suffix : {
+            about : '爱意东升西落，浪漫至死不渝'
+        },
+            
+        Theme : {
+            url  : 'https://github.com/first19326/Hexo-LiveForCode',
+            name : 'Hexo - Live For Code'
+        }  
+    };
+</script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/first19326/cdn@release-1.0.0/static/js/index.js"></script>
+</body>
+</html>
